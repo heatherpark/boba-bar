@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const drinkOptions= {
+export const drinkOptions= {
   bases: {
     milkTea: [
       {
@@ -59,21 +59,41 @@ class DrinkCustomizer extends Component {
     }
   };
 
-  renderBases(bases) {
+  handleBaseClick(base) {
+    const drinkOrder = {
+      ...this.state.drinkOrder,
+      base
+    };
+
+    this.setState({ 
+      drinkOrder
+    }, () => console.log(this.state));
+  }
+
+  renderBases = (bases) => {
     const baseTypes = []; 
     
     for (let type in bases) {
-      baseTypes.push(<li data-type="type">
-        {type} <ul>{renderBaseFlavors(bases[type])}</ul>
+      baseTypes.push(<li>
+        {type} <ul>{this.renderBaseFlavors(bases[type])}</ul>
       </li>);
     }
 
     return <ul>{baseTypes}</ul>;
+  }
 
-    function renderBaseFlavors(flavors) {
-      const baseFlavors = flavors.map(flavor => <li>{flavor.flavor}</li>);
-      return <ul>{baseFlavors}</ul>;
-    }
+  renderBaseFlavors = (flavors) => {
+    const baseFlavors = flavors.map(
+      flavor => (
+        <li 
+          className="base-option"
+          onClick={() => {this.handleBaseClick(flavor.flavor)}}>
+          {flavor.flavor}
+        </li>
+      )
+    );
+
+    return <ul>{baseFlavors}</ul>;
   }
   
   renderToppings(toppings) {
