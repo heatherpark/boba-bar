@@ -56,27 +56,34 @@ class DrinkCustomizer extends Component {
       },
       ice: 0,
       sugar: 0
-    }
+    },
+    price: 0
   };
 
-  handleBaseClick(base) {
-    const drinkOrder = {
-      ...this.state.drinkOrder,
-      base
-    };
+  handleBaseClick(base, price) {
+    this.setState(prevState => {
+      const drinkOrder = {
+        ...prevState.drinkOrder,
+        base
+      };
 
-    this.setState({ 
-      drinkOrder
-    }, () => console.log(this.state));
+      return { 
+        ...prevState,
+        drinkOrder,
+        price: prevState.price + price
+      };
+    });
   }
 
   renderBases = (bases) => {
     const baseTypes = []; 
     
     for (let type in bases) {
-      baseTypes.push(<li>
-        {type} <ul>{this.renderBaseFlavors(bases[type])}</ul>
-      </li>);
+      baseTypes.push(
+        <li key={type}>
+          {type} <ul>{this.renderBaseFlavors(bases[type])}</ul>
+        </li>
+      );
     }
 
     return <ul>{baseTypes}</ul>;
@@ -86,8 +93,9 @@ class DrinkCustomizer extends Component {
     const baseFlavors = flavors.map(
       flavor => (
         <li 
+          key={flavor.flavor}
           className="base-option"
-          onClick={() => {this.handleBaseClick(flavor.flavor)}}>
+          onClick={() => {this.handleBaseClick(flavor.flavor, flavor.price)}}>
           {flavor.flavor}
         </li>
       )
@@ -98,7 +106,7 @@ class DrinkCustomizer extends Component {
   
   renderToppings(toppings) {
     const toppingElements = toppings.map(topping => (
-      <li>{topping.name} {topping.price}</li>
+      <li key={topping.name}>{topping.name} {topping.price}</li>
     ));
 
     return <ul>{toppingElements}</ul>;
@@ -117,11 +125,17 @@ class DrinkCustomizer extends Component {
         </div>
         <div>
           <p>ice:</p>
-          {drinkOptions.ice.map(level => <li>{level}</li>)}
+          {drinkOptions.ice.map(
+            level => 
+              <li key={level}>{level}</li>
+          )}
         </div>
         <div>
           <p>sugar:</p>
-          {drinkOptions.sugar.map(level => <li>{level}</li>)}
+          {drinkOptions.sugar.map(
+            level => 
+              <li key={level}>{level}</li>
+          )}
         </div>
       </div>
     );  
