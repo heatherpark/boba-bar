@@ -14,6 +14,10 @@ describe('<DrinkCustomizer />', () => {
     wrapper = shallow(<DrinkCustomizer />);
   });
 
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
   it('should render all options as unordered lists', () => {
     const countBases = (baseTypes) => {
       let total = 0;
@@ -40,15 +44,31 @@ describe('<DrinkCustomizer />', () => {
     expect(listLength).toEqual(expectedListLength);
   });
 
-  it('clicking base option should update base in drink order', () => {
-    const baseOption = wrapper.find('.base-option').first();
-    const expectedValue = 'green';
+  describe('clicking base option', () => {
+    let baseOption;
 
-    baseOption.simulate('click');
-    const chosenBase = wrapper.state().drinkOrder.base;
+    beforeEach(() => {
+      baseOption = wrapper.find('.base-option').first();
+      baseOption.simulate('click');
+    });
+    
+    it(' should update base in drink order', () => {
+      const chosenBase = wrapper.state().drinkOrder.base;
+      const expectedBase = 'green';
+      console.log(wrapper.state());
+  
+      expect(chosenBase).toEqual(expectedBase);
+    });
 
-    expect(chosenBase).toEqual(expectedValue);
+    it('should update total price', () => {
+      const updatedPrice = wrapper.state().price;
+      const expectedPrice = 2;
+      console.log(wrapper.state());
+      expect(updatedPrice).toEqual(expectedPrice);
+    });
   });
+
+  
 
   it('clicking "more" or "less" buttons for topping should increment topping quantity in drink order', () => {
 
