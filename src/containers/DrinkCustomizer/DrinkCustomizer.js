@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Drink from '../../components/Drink/Drink';
+import * as actions from '../../store/actions';
 
 export const drinkOptions = {
   bases: {
@@ -67,16 +68,7 @@ export class DrinkCustomizer extends Component {
   };
 
   handleBaseClick(base, price) {
-    this.setState(prevState => {
-      return { 
-        ...prevState,
-        drinkOrder: {
-          ...prevState.drinkOrder,
-          base
-        },
-        price: prevState.price + price
-      };
-    });
+    this.props.onChooseBase(base, price);
   }
 
   handleIncrementTopping(toppingName, price) {
@@ -182,7 +174,7 @@ export class DrinkCustomizer extends Component {
   }
   
   render() {
-    console.log('props: ', this.props);
+    console.log(this.props);
     return (
       <div>
         <Drink 
@@ -217,4 +209,13 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(DrinkCustomizer);
+const mapDispatchToProps = dispatch => {
+  return {
+    onChooseBase: (base) => dispatch(actions.chooseBase(base)),
+    onAddTopping: (name, price) => dispatch(),
+    onRemoveTopping: (name, price) => dispatch(),
+    onChooseIceOrSugarLevel: () => dispatch()
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrinkCustomizer);
