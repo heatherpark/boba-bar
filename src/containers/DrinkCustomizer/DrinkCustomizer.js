@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Drink from '../../components/Drink/Drink';
+
 export const drinkOptions= {
   bases: {
     milkTea: [
@@ -187,6 +189,9 @@ class DrinkCustomizer extends Component {
   render() {
     return (
       <div>
+        <Drink 
+          price={this.state.price}
+          drinkOrder={this.state.drinkOrder} />
         <div className="bases">
           <p>bases:</p>
           {this.renderBases(drinkOptions.bases)}
