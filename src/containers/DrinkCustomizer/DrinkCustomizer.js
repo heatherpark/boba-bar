@@ -18,7 +18,7 @@ export const drinkOptions= {
     ],
     slush: [  
       {
-        flavor: 'passionfruit',
+        flavor: 'passion fruit',
         price: 2
       },
       {
@@ -29,15 +29,18 @@ export const drinkOptions= {
   },
   toppings: [
     {
-      name: 'boba',
+      displayName: 'boba',
+      value: 'boba',
       price: 0.5
     },
     {
-      name: 'egg pudding',
+      displayName: 'egg pudding',
+      value: 'eggPudding',
       price: 0.75
     },
     {
-      name: 'grass jelly',
+      displayName: 'grass jelly',
+      value: 'grassJelly',
       price: 0.8
     },
   ],
@@ -51,7 +54,7 @@ class DrinkCustomizer extends Component {
       base: '',
       toppings: {
         boba: 0,
-        pudding: 0,
+        eggPudding: 0,
         grassJelly: 0
       },
       ice: 0,
@@ -71,6 +74,46 @@ class DrinkCustomizer extends Component {
         ...prevState,
         drinkOrder,
         price: prevState.price + price
+      };
+    });
+  }
+
+  handleIncrementTopping(name, price) {
+    this.setState(prevState => {
+      const updatedToppings = {...prevState.drinkOrder.toppings};
+      updatedToppings[name] = updatedToppings[name] + 1;
+
+      const updatedDrinkOrder = {
+        ...prevState.drinkOrder,
+        toppings: updatedToppings
+      };
+
+      const updatedPrice = prevState.totalPrice + price;
+
+      return {
+        ...prevState,
+        drinkOrder: updatedDrinkOrder,
+        price: updatedPrice
+      };
+    });
+  }
+
+  handleDecrementTopping(name, price) {
+    this.setState(prevState => {
+      const updatedToppings = {...prevState.drinkOrder.toppings};
+      updatedToppings[name] = updatedToppings[name] - 1;
+      console.log('moo: ', updatedToppings);
+      const updatedDrinkOrder = {
+        ...prevState.drinkOrder,
+        toppings: updatedToppings
+      };
+
+      const updatedPrice = prevState.totalPrice - price;
+
+      return {
+        ...prevState,
+        drinkOrder: updatedDrinkOrder,
+        price: updatedPrice
       };
     });
   }
@@ -105,11 +148,15 @@ class DrinkCustomizer extends Component {
   }
   
   renderToppings(toppings) {
-    const toppingElements = toppings.map(topping => (
-      <li key={topping.name}>
-        {topping.name} {topping.price} 
-        <span className="more">+</span>
-        <span className="less">-</span>
+    const toppingElements = toppings.map((topping, index) => (
+      <li key={topping.displayName}>
+        {topping.displayName} {topping.price} 
+        <span 
+          onClick={() => this.handleIncrementTopping(topping.value, topping.price)}
+          className="more">+</span>
+        <span 
+          onClick={() => this.handleDecrementTopping(topping.value, topping.price)}
+          className="less">-</span>
       </li>
     ));
 

@@ -25,6 +25,7 @@ describe('<DrinkCustomizer />', () => {
       for (let type in baseTypes) {
         total += baseTypes[type].length;
       }
+
       return total;
     };
     // TODO: refactor so all below variables contain lengths
@@ -44,7 +45,16 @@ describe('<DrinkCustomizer />', () => {
     expect(listLength).toEqual(expectedListLength);
   });
 
-  describe('clicking base option', () => {
+  it('should render more and less buttons for each topping', () => {
+    const moreButtons = wrapper.find('.more');
+    const lessButtons = wrapper.find('.more');
+    const toppings = drinkOptions.toppings;
+
+    expect(moreButtons.length).toEqual(toppings.length);
+    expect(lessButtons.length).toEqual(toppings.length);
+  });
+
+  describe('choosing a base', () => {
     let baseOption;
 
     beforeEach(() => {
@@ -62,19 +72,60 @@ describe('<DrinkCustomizer />', () => {
     it('should update total price', () => {
       const updatedPrice = wrapper.state().price;
       const expectedPrice = 2;
+
       expect(updatedPrice).toEqual(expectedPrice);
+    });
+  });
+
+  describe('choosing toppings', () => {
+    let moreButton
+    let lessButton;
+    let chosenTopping;
+
+    beforeEach(() => {
+      chosenTopping = 'boba';
+      moreButton = wrapper.find('.more').first();
+      lessButton = wrapper.find('.less').first();
+    });
+    
+    it('choosing more of a topping should increment topping quantity in drink order', () => {
+      const expectedQuantity = 1;
+
+      moreButton.simulate('click');
+      const updatedQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
+
+      expect(updatedQuantity).toEqual(expectedQuantity);
+    });
+
+    it('choosing less of a topping should decrement topping quantity in drink order', () => {
+      const updatedDrinkOrder = wrapper.state().drinkOrder;
+      updatedDrinkOrder.toppings[chosenTopping] = updatedDrinkOrder.toppings[chosenTopping] + 1;
+      
+      wrapper.setState({  
+        ...wrapper.state(),
+        drinkOrder: updatedDrinkOrder
+      });
+      
+      const expectedQuantity = 0
+      
+      lessButton.simulate('click');
+      const updatedQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
+
+      expect(updatedQuantity).toEqual(expectedQuantity);
+    });
+
+    it('adjusting topping quantity should adjust total price accordingly', () => {
+
+    });
+
+    it('topping quantities should never fall below zero', () => {
+
     });
   });
 
   
 
-  it('clicking "more" or "less" buttons for topping should increment topping quantity in drink order', () => {
-
-  });
-
-  it('topping quantities should never fall below zero', () => {
-
-  });
+  
 
   it('choosing ice dropdown option should update ice quantity in drink order', () => {
 
