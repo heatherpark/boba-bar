@@ -88,7 +88,7 @@ class DrinkCustomizer extends Component {
         toppings: updatedToppings
       };
 
-      const updatedPrice = prevState.totalPrice + price;
+      const updatedPrice = prevState.price + price;
 
       return {
         ...prevState,
@@ -101,14 +101,13 @@ class DrinkCustomizer extends Component {
   handleDecrementTopping(name, price) {
     this.setState(prevState => {
       const updatedToppings = {...prevState.drinkOrder.toppings};
-      updatedToppings[name] = updatedToppings[name] - 1;
-      console.log('moo: ', updatedToppings);
+      updatedToppings[name] = updatedToppings[name] <= 0 ? 0 : updatedToppings[name] - 1;
+
       const updatedDrinkOrder = {
         ...prevState.drinkOrder,
         toppings: updatedToppings
       };
-
-      const updatedPrice = prevState.totalPrice - price;
+      const updatedPrice = updatedToppings[name] > 0 ? prevState.price - price : prevState.price;
 
       return {
         ...prevState,
