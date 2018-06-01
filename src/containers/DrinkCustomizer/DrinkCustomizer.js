@@ -75,7 +75,7 @@ export class DrinkCustomizer extends Component {
     this.props.onAddTopping(topping, price);
   }
 
-  handleDecrementTopping(topping, price) {
+  handleRemoveTopping(topping, price) {
     if (this.props.drinkOrder.toppings[topping] > 0) {
       this.props.onRemoveTopping(topping, price);
     }
@@ -130,10 +130,10 @@ export class DrinkCustomizer extends Component {
         {topping.displayName} {topping.price} 
         <span 
           onClick={() => this.handleAddTopping(topping.value, topping.price)}
-          className="more">+</span>
+          className="add">+</span>
         <span 
-          onClick={() => this.handleDecrementTopping(topping.value, topping.price)}
-          className="less">-</span>
+          onClick={() => this.handleRemoveTopping(topping.value, topping.price)}
+          className="remove">-</span>
       </li>
     ));
 
