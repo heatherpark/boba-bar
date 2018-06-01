@@ -30,13 +30,38 @@ export const setDrinkOptions = drinkOptions => {
     type: actionTypes.SET_OPTIONS,
     drinkOptions
   }
-};  
+};
 
-export const initDrinkOptions = () => {
+export const defaultDrinkOrder = drinkOptions => {
+  const toppings = {};
+
+  drinkOptions.toppings.forEach(topping => {
+    toppings[topping.value] = 0;
+  });
+
+  return {
+    base: '',
+    toppings,
+    ice: drinkOptions.ice[0],
+    sugar: drinkOptions.sugar[0],
+  };
+};
+
+export const setDrinkOrderDefault = drinkOptions => {
+  return {
+    type: actionTypes.SET_DRINK_ORDER_DEFAULT,
+    drinkOrder: defaultDrinkOrder(drinkOptions)
+  }
+};
+
+export const initDrinkCustomizer = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get('/drink-options.json');
-      dispatch(setDrinkOptions(response.data));
+      const drinkOptions = response.data;
+
+      dispatch(setDrinkOptions(drinkOptions));
+      dispatch(setDrinkOrderDefault(drinkOptions));
     } catch (error) {
       // TODO:  Set up error handling
     }

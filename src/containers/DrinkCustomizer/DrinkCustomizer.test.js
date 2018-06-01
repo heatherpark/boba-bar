@@ -15,7 +15,7 @@ describe('<DrinkCustomizer />', () => {
   beforeEach(() => {
     wrapper = shallow(<DrinkCustomizer
       drinkOptions={drinkOptions}
-      initDrinkOptions={jest.fn()} />);
+      initDrinkCustomizer={jest.fn()} />);
   });
 
   afterEach(() => {

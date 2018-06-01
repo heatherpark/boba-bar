@@ -53,36 +53,26 @@ export const drinkOptions = {
 };
 
 export class DrinkCustomizer extends Component {
-  state = {
-    drinkOrder: {
-      base: '',
-      toppings: {
-        boba: 0,
-        eggPudding: 0,
-        grassJelly: 0
-      },
-      ice: 0,
-      sugar: 0
-    },
-    price: 0
-  };
+  componentDidMount() {
+    this.props.initDrinkCustomizer();
+  }
 
   handleBaseClick(base, price) {
-    this.props.onChooseBase(base, price);
+    this.props.chooseBase(base, price);
   }
 
   handleAddTopping(topping, price) {
-    this.props.onAddTopping(topping, price);
+    this.props.addTopping(topping, price);
   }
 
   handleRemoveTopping(topping, price) {
     if (this.props.drinkOrder.toppings[topping] > 0) {
-      this.props.onRemoveTopping(topping, price);
+      this.props.removeTopping(topping, price);
     }
   }
 
   handleIceAndSugarLevelClick = (item, level) => {
-    this.props.onChooseIceOrSugarLevel(item, level);
+    this.props.chooseIceOrSugarLevel(item, level);
   };
 
   renderBases = bases => {
@@ -175,10 +165,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
-    onAddTopping: (topping, price) => dispatch(actions.addTopping(topping, price)),
-    onRemoveTopping: (topping, price) => dispatch(actions.removeTopping(topping, price)),
-    onChooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level))
+    chooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
+    addTopping: (topping, price) => dispatch(actions.addTopping(topping, price)),
+    removeTopping: (topping, price) => dispatch(actions.removeTopping(topping, price)),
+    chooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
+    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
   }
 };
 
