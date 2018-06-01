@@ -62,8 +62,8 @@ describe('<DrinkCustomizer />', () => {
     expect(lessButtons.length).toEqual(toppings.length);
   });
 
-  describe('clicking a base', () => {
-    it('should call `handleBaseClick`', () => {
+  describe('choosing a base', () => {
+    it('clicking a base should call `handleBaseClick`', () => {
       wrapper.instance().handleBaseClick = jest.fn();
 
       let handleBaseClick = wrapper.instance().handleBaseClick;
@@ -77,8 +77,8 @@ describe('<DrinkCustomizer />', () => {
     });
   });
 
-  describe('clicking a button next to a topping', () => {
-    it('should call `handleAddTopping` if add button', () => {
+  describe('choosing toppings', () => {
+    it('clicking the add button next to a topping should call `handleAddTopping`', () => {
       wrapper.instance().handleAddTopping = jest.fn();
 
       let handleAddTopping = wrapper.instance().handleAddTopping;
@@ -91,7 +91,7 @@ describe('<DrinkCustomizer />', () => {
       expect(actualCalls).toBe(expectedCalls);
     });
 
-    it('should call `handleRemoveTopping` if remove button', () => {
+    it('clicking a remove button next to a topping should call `handleRemoveTopping`', () => {
       wrapper.instance().handleRemoveTopping = jest.fn();
 
       let handleRemoveTopping = wrapper.instance().handleRemoveTopping;
@@ -103,111 +103,28 @@ describe('<DrinkCustomizer />', () => {
 
       expect(actualCalls).toBe(expectedCalls);
     });
-
-    
-    // let chosenTopping;
-    // let moreButton
-    // let lessButton;
-    // let currentState;
-
-    // beforeEach(() => {
-    //   chosenTopping = 'boba';
-
-    //   moreButton = wrapper.find('.more').first();
-    //   lessButton = wrapper.find('.less').first();
-
-    //   const toppings = {
-    //     boba: 1,
-    //     eggPudding: 0,
-    //     grassJelly: 0
-    //   };
-
-    //   currentState = wrapper.setState({
-    //     ...wrapper.state(),
-    //     drinkOrder: {
-    //       ...wrapper.state().drinkOrder,
-    //       toppings
-    //     },
-    //     price: 0.5
-    //   });
-    // });
-
-    // it('clicking more of a topping should increment topping quantity in drink order', () => {
-    //   const expectedQuantity = 2;
-
-    //   moreButton.simulate('click');
-    //   const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
-
-    //   expect(actualQuantity).toEqual(expectedQuantity);
-    // });
-
-    // it('clicking less of a topping should decrement topping quantity in drink order', () => {
-    //   const expectedQuantity = 0
-
-    //   lessButton.simulate('click');
-    //   const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
-
-    //   expect(actualQuantity).toEqual(expectedQuantity);
-    // });
-
-    // it('adjusting topping quantity should adjust total price accordingly', () => {
-    //   let expectedPrice = 1;
-
-    //   moreButton.simulate('click');
-    //   let updatedPrice = wrapper.update().state().price;
-
-    //   expect(updatedPrice).toEqual(expectedPrice);
-
-    //   expectedPrice = 0.5;
-
-    //   lessButton.simulate('click');
-    //   updatedPrice = wrapper.update().state().price;
-
-    //   expect(updatedPrice).toEqual(expectedPrice);
-    // });
-
-    // it('topping quantities should never fall below zero', () => {
-    //   chosenTopping = 'eggPudding';
-    //   let secondLessButton = wrapper.find('.less').at(1);
-    //   const expectedQuantity = 0;
-
-    //   secondLessButton.simulate('click');
-    //   const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
-
-    //   expect(actualQuantity).toEqual(expectedQuantity);
-    // });
-
-    // it('price should not be decreased if topping quantity is zero', () => {
-    //   const expectedPrice = 0.5
-
-    //   let secondLessButton = wrapper.find('.less').at(1);
-    //   secondLessButton.simulate('click');
-
-    //   const actualPrice = wrapper.update().state().price;
-
-    //   expect(actualPrice).toEqual(expectedPrice);
-    // });
   });
 
-  // describe('adjusting sugar and ice levels', () => {
-  //   it('clicking ice option should update ice quantity in drink order', () => {
-  //     const iceOption = wrapper.find('.ice-option').at(1);
-  //     const expectedValue = '25%';
+  describe('choosing sugar or ice levels', () => {
+    it('clicking a level should call `handleIceAndSugarLevelClick`', () => {
+      wrapper.instance().handleIceAndSugarLevelClick = jest.fn();
 
-  //     iceOption.simulate('click');
-  //     const actualValue = wrapper.update().state().drinkOrder.ice;
+      let handleIceAndSugarLevelClick = wrapper.instance().handleIceAndSugarLevelClick;
+      let levelOption = wrapper.find('.ice-option').first();
+      let expctedCalls = 1;
 
-  //     expect(actualValue).toEqual(expectedValue);
-  //   });
+      levelOption.simulate('click');
+      let actualCalls = handleIceAndSugarLevelClick.mock.calls.length;
+      
+      expect(actualCalls).toBe(actualCalls);
+      
+      handleIceAndSugarLevelClick.mockReset();
+      levelOption = wrapper.find('.sugar-option').first();
+      
+      levelOption.simulate('click');
+      actualCalls = handleIceAndSugarLevelClick.mock.calls.length;
 
-  //   it('clicking sugar option should update sugar quantity in drink order', () => {
-  //     const sugarOption = wrapper.find('.sugar-option').at(1);
-  //     const expectedValue = '25%';
-
-  //     sugarOption.simulate('click');
-  //     const actualValue = wrapper.update().state().drinkOrder.sugar;
-
-  //     expect(actualValue).toEqual(expectedValue);
-  //   });
-  // });
+      expect(actualCalls).toBe(actualCalls);
+    });
+  });
 });
