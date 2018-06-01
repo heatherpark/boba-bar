@@ -44,8 +44,8 @@ export const drinkOptions= {
       price: 0.8
     },
   ],
-  ice: [0, 0.25, .5, .75, 1],
-  sugar: [0, 0.25, .5, .75, 1]
+  ice: ['0', '25%', '50%', '75%', '100%'],
+  sugar: ['0', '25%', '50%', '75%', '100%']
 };
 
 class DrinkCustomizer extends Component {
@@ -117,6 +117,28 @@ class DrinkCustomizer extends Component {
     });
   }
 
+  handleIceLevelClick = level => {
+    this.setState(prevState => {
+      return {
+        drinkOrder: {
+          ...prevState.drinkOrder,
+          ice: level
+        }
+      };
+    });
+  };
+
+  handleSugarLevelClick = level => {
+    this.setState(prevState => {
+      return {
+        drinkOrder: {
+          ...prevState.drinkOrder,
+          sugar: level
+        }
+      };
+    });
+  };
+
   renderBases = (bases) => {
     const baseTypes = []; 
     
@@ -177,15 +199,19 @@ class DrinkCustomizer extends Component {
           <p>ice:</p>
           {drinkOptions.ice.map(
             level => 
-              <li key={level}>{level}</li>
-          )}
+              <li 
+                className="ice-option"
+                onClick={() => {this.handleIceLevelClick(level)}}
+                key={level}>{level}</li>)}
         </div>
         <div>
           <p>sugar:</p>
           {drinkOptions.sugar.map(
             level => 
-              <li key={level}>{level}</li>
-          )}
+              <li 
+                className="sugar-option"
+                onClick={() => {this.handleSugarLevelClick(level)}}
+                key={level}>{level}</li>)}
         </div>
       </div>
     );  
