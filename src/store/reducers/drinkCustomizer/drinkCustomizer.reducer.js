@@ -1,10 +1,66 @@
 import * as actionTypes from '../../actions/actionTypes';
 
+const DRINK_OPTIONS = {
+  bases: {
+    milkTea: [
+      {
+        flavor: 'green',
+        price: 2
+      },
+      {
+        flavor: 'black',
+        price: 2
+      },
+      {
+        flavor: 'oolong',
+        price: 2
+      }
+    ],
+    slush: [  
+      {
+        flavor: 'passion fruit',
+        price: 3
+      },
+      {
+        flavor: 'green apple',
+        price: 3
+      }
+    ]
+  },
+  toppings: [
+    {
+      displayName: 'boba',
+      value: 'boba',
+      price: 0.5
+    },
+    {
+      displayName: 'egg pudding',
+      value: 'eggPudding',
+      price: 0.75
+    },
+    {
+      displayName: 'grass jelly',
+      value: 'grassJelly',
+      price: 0.8
+    },
+  ],
+  ice: ['0%', '25%', '50%', '75%', '100%'],
+  sugar: ['0%', '25%', '50%', '75%', '100%']
+};
+
 const initialState = {
-  drinkOptions: {},
+  drinkOptions: DRINK_OPTIONS,
   drinkOrder: {
-    base: ''
-  }
+    base: '',
+    toppings: {
+      boba: 0,
+      eggPudding: 1,
+      grassJelly: 0
+    },
+    ice: '0%',
+    sugar: '0%'
+  },
+  price: 0
 };
 
 const reducer = (state = initialState, action) => {
