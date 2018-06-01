@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import DrinkCustomizer from './DrinkCustomizer';
+import { DrinkCustomizer } from './DrinkCustomizer';
 import Drink from '../../components/Drink/Drink';
 import { drinkOptions } from './DrinkCustomizer';
 
