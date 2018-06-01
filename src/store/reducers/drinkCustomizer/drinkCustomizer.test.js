@@ -106,7 +106,7 @@ describe('drinkCustomizer reducer', () => {
   it('handles ADD_TOPPING', () => {
     const action = {
       type: 'ADD_TOPPING',
-      name: 'eggPudding',
+      topping: 'eggPudding',
       price: 0.75
     };
     const nextState = reducer(initialState, action);
@@ -117,7 +117,7 @@ describe('drinkCustomizer reducer', () => {
         ...initialState.drinkOrder,
         toppings: {
           ...initialState.drinkOrder.toppings,
-          [action.name]: initialState.drinkOrder.toppings[action.name] + 1
+          [action.topping]: initialState.drinkOrder.toppings[action.topping] + 1
         }
       },
       price: initialState.price + action.price
@@ -129,7 +129,7 @@ describe('drinkCustomizer reducer', () => {
   it('handles REMOVE_TOPPING', () => {
     const action = {
       type: 'REMOVE_TOPPING',
-      name: 'eggPudding',
+      topping: 'eggPudding',
       price: 0.75
     };
     const nextState = reducer(initialState, action);
@@ -140,7 +140,7 @@ describe('drinkCustomizer reducer', () => {
         ...initialState.drinkOrder,
         toppings: {
           ...initialState.drinkOrder.toppings,
-          [action.name]: initialState.drinkOrder.toppings[action.name] - 1
+          [action.topping]: initialState.drinkOrder.toppings[action.topping] - 1
         }
       },
       price: initialState.price - action.price

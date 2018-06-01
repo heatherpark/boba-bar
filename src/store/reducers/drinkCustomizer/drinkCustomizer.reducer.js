@@ -88,7 +88,7 @@ const reducer = (state = initialState, action) => {
           ...state.drinkOrder,
           toppings: {
             ...state.drinkOrder.toppings,
-            [action.name]: state.drinkOrder.toppings[action.name] + 1
+            [action.topping]: state.drinkOrder.toppings[action.topping] + 1
           },
         },
         price: state.price + action.price
@@ -101,7 +101,7 @@ const reducer = (state = initialState, action) => {
           ...state.drinkOrder,
           toppings: {
             ...state.drinkOrder.toppings,
-            [action.name]: state.drinkOrder.toppings[action.name] - 1
+            [action.topping]: state.drinkOrder.toppings[action.topping] - 1
           }
         },
         price: state.price - action.price
