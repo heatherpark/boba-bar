@@ -71,40 +71,14 @@ export class DrinkCustomizer extends Component {
     this.props.onChooseBase(base, price);
   }
 
-  handleIncrementTopping(toppingName, price) {
-    this.setState(prevState => {
-      const { drinkOrder } = prevState;
-
-      return {
-        ...prevState,
-        drinkOrder: {
-          ...drinkOrder,
-          toppings: {
-            ...drinkOrder.toppings,
-            [toppingName]: drinkOrder.toppings[toppingName] + 1  
-          }
-        },
-        price: prevState.price + price
-      };
-    });
+  handleAddTopping(topping, price) {
+    this.props.onAddTopping(topping, price);
   }
 
-  handleDecrementTopping(toppingName, price) {
-    this.setState(prevState => {
-      const { toppings }  = prevState.drinkOrder;
-
-      return {
-        ...prevState,
-        drinkOrder: {
-          ...prevState.drinkOrder,
-          toppings: {
-            ...toppings,
-            [toppingName]: toppings[toppingName] <= 0 ? 0 : toppings[toppingName] - 1
-          }
-        },
-        price: toppings[toppingName] > 0 ? prevState.price - price : prevState.price
-      };
-    });
+  handleDecrementTopping(topping, price) {
+    if (this.props.drinkOrder.toppings[topping] > 0) {
+      this.props.onRemoveTopping(topping, price);
+    }
   }
 
   handleIceAndSugarLevelClick = (item, level) => {
@@ -162,7 +136,7 @@ export class DrinkCustomizer extends Component {
       <li key={topping.displayName}>
         {topping.displayName} {topping.price} 
         <span 
-          onClick={() => this.handleIncrementTopping(topping.value, topping.price)}
+          onClick={() => this.handleAddTopping(topping.value, topping.price)}
           className="more">+</span>
         <span 
           onClick={() => this.handleDecrementTopping(topping.value, topping.price)}
@@ -174,7 +148,6 @@ export class DrinkCustomizer extends Component {
   }
   
   render() {
-    console.log(this.props);
     return (
       <div>
         <Drink 
@@ -212,8 +185,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onChooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
-    onAddTopping: (name, price) => dispatch(),
-    onRemoveTopping: (name, price) => dispatch(),
+    onAddTopping: (topping, price) => dispatch(actions.addTopping(topping, price)),
+    onRemoveTopping: (topping, price) => dispatch(actions.removeTopping(topping, price)),
     onChooseIceOrSugarLevel: () => dispatch()
   }
 };
