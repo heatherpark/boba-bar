@@ -32,13 +32,14 @@ export const setDrinkOptions = drinkOptions => {
   }
 };  
 
-export const initOptions = () => {
+export const initDrinkOptions = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get('/drink-options');
+      const response = await axios.get('/drink-options.json');
       dispatch(setDrinkOptions(response.data));
     } catch (error) {
       // TODO:  Set up error handling
     }
   };
+
 };

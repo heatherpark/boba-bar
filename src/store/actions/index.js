@@ -2,5 +2,6 @@ export {
   chooseBase,
   addTopping,
   removeTopping,
-  chooseIceOrSugarLevel
+  chooseIceOrSugarLevel,
+  initDrinkOptions
 } from './drinkCustomizer.actions';
