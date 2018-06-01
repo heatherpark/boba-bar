@@ -58,7 +58,7 @@ describe('drinkCustomizer reducer', () => {
         base: '',
         toppings: {
           boba: 0,
-          eggPudding: 0,
+          eggPudding: 1,
           grassJelly: 0
         },
         ice: '0%',
@@ -120,10 +120,31 @@ describe('drinkCustomizer reducer', () => {
           [action.name]: initialState.drinkOrder.toppings[action.name] + 1
         }
       },
-      price: action.price
+      price: initialState.price + action.price
     };
 
     expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles REMOVE_TOPPING', () => {
+    const action = {
+      type: 'REMOVE_TOPPING',
+      name: 'eggPudding',
+      price: 0.75
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      ...initialState,
+      drinkOrder: {
+        ...initialState.drinkOrder,
+        toppings: {
+          ...initialState.drinkOrder.toppings,
+          [action.name]: initialState.drinkOrder.toppings[action.name] - 1
+        }
+      },
+      price: initialState.price - action.price
+    };
   });
 });
 
