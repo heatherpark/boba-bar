@@ -21,11 +21,11 @@ export const drinkOptions= {
     slush: [  
       {
         flavor: 'passion fruit',
-        price: 2
+        price: 3
       },
       {
         flavor: 'green apple',
-        price: 2
+        price: 3
       }
     ]
   },
@@ -46,8 +46,8 @@ export const drinkOptions= {
       price: 0.8
     },
   ],
-  ice: ['0', '25%', '50%', '75%', '100%'],
-  sugar: ['0', '25%', '50%', '75%', '100%']
+  ice: ['0%', '25%', '50%', '75%', '100%'],
+  sugar: ['0%', '25%', '50%', '75%', '100%']
 };
 
 class DrinkCustomizer extends Component {
@@ -67,81 +67,65 @@ class DrinkCustomizer extends Component {
 
   handleBaseClick(base, price) {
     this.setState(prevState => {
-      const drinkOrder = {
-        ...prevState.drinkOrder,
-        base
-      };
-
       return { 
         ...prevState,
-        drinkOrder,
+        drinkOrder: {
+          ...prevState.drinkOrder,
+          base
+        },
         price: prevState.price + price
       };
     });
   }
 
-  handleIncrementTopping(name, price) {
+  handleIncrementTopping(toppingName, price) {
     this.setState(prevState => {
-      const updatedToppings = {...prevState.drinkOrder.toppings};
-      updatedToppings[name] = updatedToppings[name] + 1;
-
-      const updatedDrinkOrder = {
-        ...prevState.drinkOrder,
-        toppings: updatedToppings
-      };
-
-      const updatedPrice = prevState.price + price;
+      const { drinkOrder } = prevState;
 
       return {
         ...prevState,
-        drinkOrder: updatedDrinkOrder,
-        price: updatedPrice
+        drinkOrder: {
+          ...drinkOrder,
+          toppings: {
+            ...drinkOrder.toppings,
+            [toppingName]: drinkOrder.toppings[toppingName] + 1  
+          }
+        },
+        price: prevState.price + price
       };
     });
   }
 
-  handleDecrementTopping(name, price) {
+  handleDecrementTopping(toppingName, price) {
     this.setState(prevState => {
-      const updatedToppings = {...prevState.drinkOrder.toppings};
-      updatedToppings[name] = updatedToppings[name] <= 0 ? 0 : updatedToppings[name] - 1;
-
-      const updatedDrinkOrder = {
-        ...prevState.drinkOrder,
-        toppings: updatedToppings
-      };
-      const updatedPrice = updatedToppings[name] > 0 ? prevState.price - price : prevState.price;
+      const { toppings }  = prevState.drinkOrder;
 
       return {
         ...prevState,
-        drinkOrder: updatedDrinkOrder,
-        price: updatedPrice
+        drinkOrder: {
+          ...prevState.drinkOrder,
+          toppings: {
+            ...toppings,
+            [toppingName]: toppings[toppingName] <= 0 ? 0 : toppings[toppingName] - 1
+          }
+        },
+        price: toppings[toppingName] > 0 ? prevState.price - price : prevState.price
       };
     });
   }
 
-  handleIceLevelClick = level => {
+  handleIceAndSugarLevelClick = (item, level) => {
     this.setState(prevState => {
       return {
         drinkOrder: {
           ...prevState.drinkOrder,
-          ice: level
+          [item]: level
         }
       };
     });
   };
 
-  handleSugarLevelClick = level => {
-    this.setState(prevState => {
-      return {
-        drinkOrder: {
-          ...prevState.drinkOrder,
-          sugar: level
-        }
-      };
-    });
-  };
-
-  renderBases = (bases) => {
+  renderBases = bases => {
     const baseTypes = []; 
     
     for (let type in bases) {
@@ -155,9 +139,8 @@ class DrinkCustomizer extends Component {
     return <ul>{baseTypes}</ul>;
   }
 
-  renderBaseFlavors = (flavors) => {
-    const baseFlavors = flavors.map(
-      flavor => (
+  renderBaseFlavors = flavors => {
+    const baseFlavors = flavors.map(flavor => (
         <li 
           key={flavor.flavor}
           className="base-option"
@@ -169,6 +152,17 @@ class DrinkCustomizer extends Component {
 
     return <ul>{baseFlavors}</ul>;
   }
+
+  renderIceAndSugarLevels = (item, levels) => {
+    const levelElements = levels.map(level => 
+        <li 
+          className={`${item}-option`}
+          onClick={() => this.handleIceAndSugarLevelClick(item, level)}
+          key={level}>{level}</li>
+      );
+
+    return <ul>{levelElements}</ul>;
+  };
   
   renderToppings(toppings) {
     const toppingElements = toppings.map((topping, index) => (
@@ -192,7 +186,7 @@ class DrinkCustomizer extends Component {
         <Drink 
           price={this.state.price}
           drinkOrder={this.state.drinkOrder} />
-        <div className="bases">
+        <div>
           <p>bases:</p>
           {this.renderBases(drinkOptions.bases)}
         </div>
@@ -202,27 +196,15 @@ class DrinkCustomizer extends Component {
         </div>
         <div>
           <p>ice:</p>
-          {drinkOptions.ice.map(
-            level => 
-              <li 
-                className="ice-option"
-                onClick={() => {this.handleIceLevelClick(level)}}
-                key={level}>{level}</li>)}
+          {this.renderIceAndSugarLevels('ice', drinkOptions.ice)}
         </div>
         <div>
           <p>sugar:</p>
-          {drinkOptions.sugar.map(
-            level => 
-              <li 
-                className="sugar-option"
-                onClick={() => {this.handleSugarLevelClick(level)}}
-                key={level}>{level}</li>)}
+          {this.renderIceAndSugarLevels('sugar', drinkOptions.sugar)}
         </div>
       </div>
     );  
   }
 }
-
-
 
 export default DrinkCustomizer;
