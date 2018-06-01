@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Drink = props => {
+export const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
     const elements = [];
 
