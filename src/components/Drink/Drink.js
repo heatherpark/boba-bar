@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
@@ -41,9 +41,8 @@ const Drink = props => {
   );  
 };
 
-Drink.propTypes = {
-  drinkOrder: PropTypes.object.isRequired,
-  price: PropTypes.number.isRequired
-};
+const matchStateToProps = state => ({
+  drinkOrder: state.drinkOrder
+});
 
-export default Drink;
+export default connect(matchStateToProps)(Drink);
