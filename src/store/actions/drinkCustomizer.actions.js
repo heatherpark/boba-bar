@@ -17,3 +17,9 @@ export const removeTopping = (topping, price) => ({
   topping,
   price
 });
+
+export const chooseIceOrSugarLevel = (item, level) => ({
+  type: actionTypes.CHOOSE_ICE_OR_SUGAR_LEVEL,
+  item,
+  level
+});

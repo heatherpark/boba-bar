@@ -82,14 +82,7 @@ export class DrinkCustomizer extends Component {
   }
 
   handleIceAndSugarLevelClick = (item, level) => {
-    this.setState(prevState => {
-      return {
-        drinkOrder: {
-          ...prevState.drinkOrder,
-          [item]: level
-        }
-      };
-    });
+    this.props.onChooseIceOrSugarLevel(item, level);
   };
 
   renderBases = bases => {
@@ -187,7 +180,7 @@ const mapDispatchToProps = dispatch => {
     onChooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
     onAddTopping: (topping, price) => dispatch(actions.addTopping(topping, price)),
     onRemoveTopping: (topping, price) => dispatch(actions.removeTopping(topping, price)),
-    onChooseIceOrSugarLevel: () => dispatch()
+    onChooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level))
   }
 };
 
