@@ -48,24 +48,32 @@ const DRINK_OPTIONS = {
   sugar: ['0%', '25%', '50%', '75%', '100%']
 };
 
+const DRINK_ORDER_DEFAULT = {
+  base: '',
+  toppings: {
+    boba: 0,
+    eggPudding: 0,
+    grassJelly: 0
+  },
+  ice: '0%',
+  sugar: '0%'
+};
+
 describe('drinkCustomizer reducer', () => {
   let initialState;
+  let stateWithDrinkOrder;
 
   beforeEach(() => {
     initialState = {
       drinkOptions: {},
-      drinkOrder: {
-        base: '',
-        toppings: {
-          boba: 0,
-          eggPudding: 1,
-          grassJelly: 0
-        },
-        ice: '0%',
-        sugar: '0%'
-      },
+      drinkOrder: {},
       price: 0
     };
+
+    stateWithDrinkOrder = {
+      ...initialState,
+      drinkOrder: DRINK_ORDER_DEFAULT
+    }
   });
 
   it('handles SET_OPTIONS', () => {
@@ -78,6 +86,21 @@ describe('drinkCustomizer reducer', () => {
     const expectedState = {
       ...initialState,
       drinkOptions: DRINK_OPTIONS
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles SET_DRINK_ORDER_DEFAULT', () => {
+    const action = {
+      type: 'SET_DRINK_ORDER_DEFAULT',
+      drinkOrder: DRINK_ORDER_DEFAULT
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      ...initialState,
+      drinkOrder: DRINK_ORDER_DEFAULT
     };
 
     expect(nextState).toEqual(expectedState);
@@ -109,15 +132,15 @@ describe('drinkCustomizer reducer', () => {
       topping: 'eggPudding',
       price: 0.75
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(stateWithDrinkOrder, action);
 
     const expectedState = {
-      ...initialState,
+      ...stateWithDrinkOrder,
       drinkOrder: {
-        ...initialState.drinkOrder,
+        ...stateWithDrinkOrder.drinkOrder,
         toppings: {
-          ...initialState.drinkOrder.toppings,
-          [action.topping]: initialState.drinkOrder.toppings[action.topping] + 1
+          ...stateWithDrinkOrder.drinkOrder.toppings,
+          [action.topping]: stateWithDrinkOrder.drinkOrder.toppings[action.topping] + 1
         }
       },
       price: initialState.price + action.price
@@ -132,18 +155,18 @@ describe('drinkCustomizer reducer', () => {
       topping: 'eggPudding',
       price: 0.75
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(stateWithDrinkOrder, action);
 
     const expectedState = {
-      ...initialState,
+      ...stateWithDrinkOrder,
       drinkOrder: {
-        ...initialState.drinkOrder,
+        ...stateWithDrinkOrder.drinkOrder,
         toppings: {
-          ...initialState.drinkOrder.toppings,
-          [action.topping]: initialState.drinkOrder.toppings[action.topping] - 1
+          ...stateWithDrinkOrder.drinkOrder.toppings,
+          [action.topping]: stateWithDrinkOrder.drinkOrder.toppings[action.topping] - 1
         }
       },
-      price: initialState.price - action.price
+      price: stateWithDrinkOrder.price - action.price
     };
   });
 

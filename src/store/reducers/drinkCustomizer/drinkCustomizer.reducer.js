@@ -1,20 +1,5 @@
 import * as actionTypes from '../../actions/actionTypes';
 
-const initialState = {
-  drinkOptions: {},
-  drinkOrder: {
-    base: '',
-    toppings: {
-      boba: 0,
-      eggPudding: 0,
-      grassJelly: 0
-    },
-    ice: '0%',
-    sugar: '0%'
-  },
-  price: 0
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_OPTIONS:
@@ -66,6 +51,12 @@ const reducer = (state = initialState, action) => {
           ...state.drinkOrder,
           [action.item]: action.level
         }
+      };
+
+    case actionTypes.SET_DRINK_ORDER_DEFAULT:
+      return {
+        ...state,
+        drinkOrder: action.drinkOrder
       };
 
     default: return state;
