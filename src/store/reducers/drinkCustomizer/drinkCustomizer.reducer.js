@@ -51,6 +51,15 @@ const reducer = (state = initialState, action) => {
         price: state.price - action.price
       };
 
+    case actionTypes.CHOOSE_ICE_OR_SUGAR_LEVEL:
+      return {
+        ...state,
+        drinkOrder: {
+          ...state.drinkOrder,
+          [action.item]: action.level
+        }
+      };
+
     default: return state;
   }
 };

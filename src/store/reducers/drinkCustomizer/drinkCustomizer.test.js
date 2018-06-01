@@ -146,6 +146,25 @@ describe('drinkCustomizer reducer', () => {
       price: initialState.price - action.price
     };
   });
+
+  it('handles CHOOSE_ICE_OR_SUGAR_LEVEL', () => {
+    const action = {
+      type: 'CHOOSE_ICE_OR_SUGAR_LEVEL',
+      item: 'ice',
+      level: '25%'
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      ...initialState,
+      drinkOrder: {
+        ...initialState.drinkOrder,
+        [action.item]: action.level
+      }
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
 });
 
 
