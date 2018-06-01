@@ -182,7 +182,7 @@ export class DrinkCustomizer extends Component {
           drinkOrder={this.props.drinkOrder} />
         <div>
           <p>bases:</p>
-          {this.renderBases(drinkOptions.bases)}
+          {this.renderBases(this.props.drinkOptions.bases)}
         </div>
         <div>
           <p>toppings:</p>
@@ -211,7 +211,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChooseBase: (base) => dispatch(actions.chooseBase(base)),
+    onChooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
     onAddTopping: (name, price) => dispatch(),
     onRemoveTopping: (name, price) => dispatch(),
     onChooseIceOrSugarLevel: () => dispatch()
