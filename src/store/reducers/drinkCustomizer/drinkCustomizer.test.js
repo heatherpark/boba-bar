@@ -71,7 +71,7 @@ describe('drinkCustomizer reducer', () => {
   it('handles SET_OPTIONS', () => {
     const action = {
       type: 'SET_OPTIONS',
-      options: DRINK_OPTIONS
+      drinkOptions: DRINK_OPTIONS
     };
     const nextState = reducer(initialState, action);
 

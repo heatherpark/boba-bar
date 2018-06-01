@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axios from '../../axios/orders';
 
 export const chooseBase = (base, price) => ({
   type: actionTypes.CHOOSE_BASE,
@@ -23,3 +24,21 @@ export const chooseIceOrSugarLevel = (item, level) => ({
   item,
   level
 });
+
+export const setDrinkOptions = drinkOptions => {
+  return {
+    type: actionTypes.SET_OPTIONS,
+    drinkOptions
+  }
+};  
+
+export const initOptions = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get('/drink-options');
+      dispatch(setDrinkOptions(response.data));
+    } catch (error) {
+      // TODO:  Set up error handling
+    }
+  };
+};
