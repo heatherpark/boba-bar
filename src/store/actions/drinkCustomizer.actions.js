@@ -5,3 +5,15 @@ export const chooseBase = (base, price) => ({
   base,
   price
 });
+
+export const addTopping = (topping, price) => ({
+  type: actionTypes.ADD_TOPPING,
+  topping,
+  price
+});
+
+export const removeTopping = (topping, price) => ({
+  type: actionTypes.REMOVE_TOPPING,
+  topping,
+  price
+});
