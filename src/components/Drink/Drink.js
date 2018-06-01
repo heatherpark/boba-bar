@@ -36,12 +36,14 @@ const Drink = props => {
   return (
     <div>
       {renderDrinkOrder(props.drinkOrder)}
+      <p className="price">{props.price}</p>
     </div>
   );  
 };
 
 Drink.propTypes = {
-  drinkorder: PropTypes.object
+  drinkOrder: PropTypes.object.isRequired,
+  price: PropTypes.number.isRequired
 };
 
 export default Drink;
