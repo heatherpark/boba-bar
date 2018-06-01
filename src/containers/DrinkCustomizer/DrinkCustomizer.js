@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Drink from '../../components/Drink/Drink';
 
-export const drinkOptions= {
+export const drinkOptions = {
   bases: {
     milkTea: [
       {
@@ -50,7 +51,7 @@ export const drinkOptions= {
   sugar: ['0%', '25%', '50%', '75%', '100%']
 };
 
-class DrinkCustomizer extends Component {
+export class DrinkCustomizer extends Component {
   state = {
     drinkOrder: {
       base: '',
@@ -181,11 +182,12 @@ class DrinkCustomizer extends Component {
   }
   
   render() {
+    console.log('props: ', this.props);
     return (
       <div>
         <Drink 
-          price={this.state.price}
-          drinkOrder={this.state.drinkOrder} />
+          price={this.props.price}
+          drinkOrder={this.props.drinkOrder} />
         <div>
           <p>bases:</p>
           {this.renderBases(drinkOptions.bases)}
@@ -207,4 +209,12 @@ class DrinkCustomizer extends Component {
   }
 }
 
-export default DrinkCustomizer;
+const mapStateToProps = state => {
+  return {
+    drinkOptions: state.drinkOptions,
+    drinkOrder: state.drinkOrder,
+    price: state.price
+  };
+}
+
+export default connect(mapStateToProps)(DrinkCustomizer);
