@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import DrinkCustomizer from './DrinkCustomizer';
+import Drink from '../../components/Drink/Drink';
 import { drinkOptions } from './DrinkCustomizer';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -17,6 +18,10 @@ describe('<DrinkCustomizer />', () => {
   afterEach(() => {
     wrapper.unmount();
   });
+
+  it('should render one <Drink /> component', () => {
+    expect(wrapper.find(Drink).length).toEqual(1);
+  }); 
 
   it('should render all options as unordered lists', () => {
     const countBases = (baseTypes) => {
