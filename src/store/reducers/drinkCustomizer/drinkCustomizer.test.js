@@ -63,6 +63,23 @@ describe('drinkCustomizer reducer', () => {
 
     expect(nextState).toEqual(expectedState);
   });
+
+  it('handles CHOOSE_BASE', () => {
+    const initialState = {};
+    const action = {
+      type: 'CHOOSE_BASE',
+      base: 'green milk tea'
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      drinkOrder: {
+        base: action.base
+      }
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
 });
 
 
