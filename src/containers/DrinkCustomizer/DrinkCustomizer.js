@@ -106,7 +106,11 @@ class DrinkCustomizer extends Component {
   
   renderToppings(toppings) {
     const toppingElements = toppings.map(topping => (
-      <li key={topping.name}>{topping.name} {topping.price}</li>
+      <li key={topping.name}>
+        {topping.name} {topping.price} 
+        <span className="more">+</span>
+        <span className="less">-</span>
+      </li>
     ));
 
     return <ul>{toppingElements}</ul>;
