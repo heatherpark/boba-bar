@@ -81,51 +81,90 @@ describe('<DrinkCustomizer />', () => {
     let moreButton
     let lessButton;
     let chosenTopping;
+    let currentState;
 
     beforeEach(() => {
       chosenTopping = 'boba';
+
       moreButton = wrapper.find('.more').first();
       lessButton = wrapper.find('.less').first();
+
+      const toppings = {
+          boba: 1,
+          eggPudding: 0,
+          grassJelly: 0
+      };
+
+      currentState = wrapper.setState({
+        ...wrapper.state(),
+        drinkOrder: {
+          ...wrapper.state().drinkOrder,
+          toppings
+        },
+        price: 0.5
+      });
     });
     
     it('choosing more of a topping should increment topping quantity in drink order', () => {
-      const expectedQuantity = 1;
+      const expectedQuantity = 2;
 
       moreButton.simulate('click');
-      const updatedQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
+      const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
 
-      expect(updatedQuantity).toEqual(expectedQuantity);
+      expect(actualQuantity).toEqual(expectedQuantity);
     });
 
     it('choosing less of a topping should decrement topping quantity in drink order', () => {
-      const updatedDrinkOrder = wrapper.state().drinkOrder;
-      updatedDrinkOrder.toppings[chosenTopping] = updatedDrinkOrder.toppings[chosenTopping] + 1;
-      
-      wrapper.setState({  
-        ...wrapper.state(),
-        drinkOrder: updatedDrinkOrder
-      });
-      
       const expectedQuantity = 0
       
       lessButton.simulate('click');
-      const updatedQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
+      const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
 
-      expect(updatedQuantity).toEqual(expectedQuantity);
+      expect(actualQuantity).toEqual(expectedQuantity);
     });
 
     it('adjusting topping quantity should adjust total price accordingly', () => {
+      let expectedPrice = 1;
+      moreButton.simulate('click');
+      let updatedPrice = wrapper.update().state().price;
+      
+      expect(updatedPrice).toEqual(expectedPrice);
 
+      expectedPrice = 0.5;
+      lessButton.simulate('click');
+      updatedPrice = wrapper.update().state().price;
+
+      expect(updatedPrice).toEqual(expectedPrice);
     });
 
     it('topping quantities should never fall below zero', () => {
+      const updatedDrinkOrder = wrapper.state().drinkOrder;
+      updatedDrinkOrder.toppings[chosenTopping] = 0;
 
+      wrapper.setState({
+        drinkOrder: updatedDrinkOrder
+      });
+
+      const expectedQuantity = 0
+      lessButton.simulate('click');
+      const actualQuantity = wrapper.update().state().drinkOrder.toppings[chosenTopping];
+
+      expect(actualQuantity).toEqual(expectedQuantity);
+    });
+
+    it('price should not be decreased if topping quantity is zero', () => {
+      const updatedDrinkOrder = wrapper.state().drinkOrder;
+
+      const expectedPrice = 0.5
+
+      let lessButton = wrapper.find('.less').at(1);
+      lessButton.simulate('click');
+
+      const actualPrice = wrapper.update().state().price;
+
+      expect(actualPrice).toEqual(expectedPrice);
     });
   });
-
-  
-
-  
 
   it('choosing ice dropdown option should update ice quantity in drink order', () => {
 
