@@ -143,9 +143,7 @@ export class DrinkCustomizer extends Component {
   render() {
     return (
       <div>
-        <Drink 
-          price={this.props.price}
-          drinkOrder={this.props.drinkOrder} />
+        <Drink />
         <div>
           <p>bases:</p>
           {this.renderBases(this.props.drinkOptions.bases)}
