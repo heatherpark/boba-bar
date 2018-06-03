@@ -4,54 +4,6 @@ import { connect } from 'react-redux';
 import Drink from '../../components/Drink/Drink';
 import * as actions from '../../store/actions';
 
-export const drinkOptions = {
-  bases: {
-    milkTea: [
-      {
-        flavor: 'green',
-        price: 2
-      },
-      {
-        flavor: 'black',
-        price: 2
-      },
-      {
-        flavor: 'oolong',
-        price: 2
-      }
-    ],
-    slush: [  
-      {
-        flavor: 'passion fruit',
-        price: 3
-      },
-      {
-        flavor: 'green apple',
-        price: 3
-      }
-    ]
-  },
-  toppings: [
-    {
-      displayName: 'boba',
-      value: 'boba',
-      price: 0.5
-    },
-    {
-      displayName: 'egg pudding',
-      value: 'eggPudding',
-      price: 0.75
-    },
-    {
-      displayName: 'grass jelly',
-      value: 'grassJelly',
-      price: 0.8
-    },
-  ],
-  ice: ['0%', '25%', '50%', '75%', '100%'],
-  sugar: ['0%', '25%', '50%', '75%', '100%']
-};
-
 export class DrinkCustomizer extends Component {
   componentDidMount() {
     this.props.initDrinkCustomizer();
@@ -76,8 +28,8 @@ export class DrinkCustomizer extends Component {
   };
 
   renderBases = bases => {
-    const baseTypes = []; 
-    
+    const baseTypes = [];
+
     for (let type in bases) {
       baseTypes.push(
         <li key={type}>
@@ -91,37 +43,37 @@ export class DrinkCustomizer extends Component {
 
   renderBaseFlavors = flavors => {
     const baseFlavors = flavors.map(flavor => (
-        <li 
-          key={flavor.flavor}
-          className="base-option"
-          onClick={() => {this.handleBaseClick(flavor.flavor, flavor.price)}}>
-          {flavor.flavor}
-        </li>
-      )
+      <li
+        key={flavor.flavor}
+        className="base-option"
+        onClick={() => {this.handleBaseClick(flavor.flavor, flavor.price)}}>
+        {flavor.flavor}
+      </li>
+    )
     );
 
     return <ul>{baseFlavors}</ul>;
   }
 
   renderIceAndSugarLevels = (item, levels) => {
-    const levelElements = levels.map(level => 
-        <li 
-          className={`${item}-option`}
-          onClick={() => this.handleIceAndSugarLevelClick(item, level)}
-          key={level}>{level}</li>
-      );
+    const levelElements = levels.map(level =>
+      <li
+        className={`${item}-option`}
+        onClick={() => this.handleIceAndSugarLevelClick(item, level)}
+        key={level}>{level}</li>
+    );
 
     return <ul>{levelElements}</ul>;
   };
-  
+
   renderToppings(toppings) {
     const toppingElements = toppings.map((topping, index) => (
       <li key={topping.displayName}>
-        {topping.displayName} {topping.price} 
-        <span 
+        {topping.displayName} {topping.price}
+        <span
           onClick={() => this.handleAddTopping(topping.value, topping.price)}
           className="add">+</span>
-        <span 
+        <span
           onClick={() => this.handleRemoveTopping(topping.value, topping.price)}
           className="remove">-</span>
       </li>
@@ -129,11 +81,12 @@ export class DrinkCustomizer extends Component {
 
     return <ul>{toppingElements}</ul>;
   }
-  
-  render() {
+
+  renderDrinkOptions(drinkOptions) {
+    if (!drinkOptions) return 'Loading...';
+
     return (
       <div>
-        <Drink />
         <div>
           <p>bases:</p>
           {this.renderBases(this.props.drinkOptions.bases)}
@@ -151,7 +104,16 @@ export class DrinkCustomizer extends Component {
           {this.renderIceAndSugarLevels('sugar', drinkOptions.sugar)}
         </div>
       </div>
-    );  
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        <Drink />
+        {this.renderDrinkOptions(this.props.drinkOptions)}
+      </div>
+    );
   }
 }
 
