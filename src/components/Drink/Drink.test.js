@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { Drink } from './Drink';
+import Drink from './Drink';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,6 +17,7 @@ describe('<Drink />', () => {
     ice: 0.5,
     sugar: 0.25
   };
+  
   it('should render a drink order and toppings as unordered lists', () => {
     const toppings = drinkOrder.toppings;
     const wrapper = shallow(<Drink 
