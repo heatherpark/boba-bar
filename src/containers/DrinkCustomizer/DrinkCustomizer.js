@@ -10,23 +10,11 @@ export class DrinkCustomizer extends Component {
     this.props.initDrinkCustomizer();
   }
 
-  handleBaseClick(base, price) {
-    this.props.chooseBase(base, price);
-  }
-
-  handleAddTopping(topping, price) {
-    this.props.addTopping(topping, price);
-  }
-
-  handleRemoveTopping(topping, price) {
+  removeTopping = (topping, price) => {
     if (this.props.drinkOrder.toppings[topping] > 0) {
       this.props.removeTopping(topping, price);
     }
   }
-
-  handleIceAndSugarLevelClick = (item, level) => {
-    this.props.chooseIceOrSugarLevel(item, level);
-  };
 
   render() {
     return (
@@ -39,7 +27,7 @@ export class DrinkCustomizer extends Component {
                 <CustomizerOptions
                   chooseBase={this.props.chooseBase}
                   addTopping={this.props.addTopping}
-                  removeTopping={this.props.removeTopping}
+                  removeTopping={this.removeTopping}
                   chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
                   drinkOptions={this.props.drinkOptions} />
             </React.Fragment>)
