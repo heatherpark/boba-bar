@@ -7,15 +7,15 @@ export const chooseBase = (base, price) => ({
   price
 });
 
-export const addTopping = (topping, price) => ({
-  type: actionTypes.ADD_TOPPING,
-  topping,
+export const addAddOn = (addOn, price) => ({
+  type: actionTypes.ADD_ADD_ON,
+  addOn,
   price
 });
 
-export const removeTopping = (topping, price) => ({
-  type: actionTypes.REMOVE_TOPPING,
-  topping,
+export const removeAddOn = (addOn, price) => ({
+  type: actionTypes.REMOVE_ADD_ON,
+  addOn,
   price
 });
 
@@ -33,15 +33,15 @@ export const setDrinkOptions = drinkOptions => {
 };
 
 export const defaultDrinkOrder = drinkOptions => {
-  const toppings = {};
+  const addOns = {};
 
-  drinkOptions.toppings.forEach(topping => {
-    toppings[topping.value] = 0;
+  drinkOptions.addOns.forEach(addOn => {
+    addOns[addOn.value] = 0;
   });
 
   return {
     base: '',
-    toppings,
+    addOns,
     ice: drinkOptions.ice[0],
     sugar: drinkOptions.sugar[0],
   };

@@ -10,7 +10,7 @@ describe('<Drink />', () => {
   let wrapper;
   const drinkOrder = {
     base: 'oolong milk tea',
-    toppings: {
+    addOns: {
       pudding: 1,
       boba: 2,
       grassJelly: 3
@@ -25,12 +25,12 @@ describe('<Drink />', () => {
       price={6.39} />);
   });
   
-  it('should render a drink order and toppings as unordered lists', () => {
-    const toppings = drinkOrder.toppings;
+  it('should render a drink order and add-ons as unordered lists', () => {
+    const addOns = drinkOrder.addOns;
 
     const listLength = wrapper.find('li').length;
     const expectedListLength = Object.keys(drinkOrder).length
-      + Object.keys(toppings).length;
+      + Object.keys(addOns).length;
 
     expect(listLength).toEqual(expectedListLength);
   });

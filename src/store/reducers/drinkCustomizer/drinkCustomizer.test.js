@@ -27,7 +27,7 @@ const DRINK_OPTIONS = {
       }
     ]
   },
-  toppings: [
+  addOns: [
     {
       displayName: 'boba',
       value: 'boba',
@@ -50,7 +50,7 @@ const DRINK_OPTIONS = {
 
 const DRINK_ORDER_DEFAULT = {
   base: '',
-  toppings: {
+  addOns: {
     boba: 0,
     eggPudding: 0,
     grassJelly: 0
@@ -126,10 +126,10 @@ describe('drinkCustomizer reducer', () => {
     expect(nextState).toEqual(expectedState);
   });
 
-  it('handles ADD_TOPPING', () => {
+  it('handles ADD_ADD_ON', () => {
     const action = {
-      type: 'ADD_TOPPING',
-      topping: 'eggPudding',
+      type: 'ADD_ADD_ON',
+      addOn: 'eggPudding',
       price: 0.75
     };
     const nextState = reducer(stateWithDrinkOrder, action);
@@ -138,9 +138,9 @@ describe('drinkCustomizer reducer', () => {
       ...stateWithDrinkOrder,
       drinkOrder: {
         ...stateWithDrinkOrder.drinkOrder,
-        toppings: {
-          ...stateWithDrinkOrder.drinkOrder.toppings,
-          [action.topping]: stateWithDrinkOrder.drinkOrder.toppings[action.topping] + 1
+        addOns: {
+          ...stateWithDrinkOrder.drinkOrder.addOns,
+          [action.addOn]: stateWithDrinkOrder.drinkOrder.addOns[action.addOn] + 1
         }
       },
       price: initialState.price + action.price
@@ -149,10 +149,10 @@ describe('drinkCustomizer reducer', () => {
     expect(nextState).toEqual(expectedState);
   });
 
-  it('handles REMOVE_TOPPING', () => {
+  it('handles REMOVE_ADD_ON', () => {
     const action = {
-      type: 'REMOVE_TOPPING',
-      topping: 'eggPudding',
+      type: 'REMOVE_ADD_ON',
+      addOn: 'eggPudding',
       price: 0.75
     };
     const nextState = reducer(stateWithDrinkOrder, action);
@@ -161,9 +161,9 @@ describe('drinkCustomizer reducer', () => {
       ...stateWithDrinkOrder,
       drinkOrder: {
         ...stateWithDrinkOrder.drinkOrder,
-        toppings: {
-          ...stateWithDrinkOrder.drinkOrder.toppings,
-          [action.topping]: stateWithDrinkOrder.drinkOrder.toppings[action.topping] - 1
+        addOns: {
+          ...stateWithDrinkOrder.drinkOrder.addOns,
+          [action.addOn]: stateWithDrinkOrder.drinkOrder.addOns[action.addOn] - 1
         }
       },
       price: stateWithDrinkOrder.price - action.price

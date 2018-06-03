@@ -46,12 +46,12 @@ const CustomizerOptions = props => {
     return <ul>{levelElements}</ul>;
   };
 
-  const renderToppings = (addOns) => {
+  const renderAddOns = (addOns) => {
     const elements = addOns.map((addOn, index) => (
       <li key={addOn.displayName}>
         <AddOn
-          addTopping={props.addTopping}
-          removeTopping={props.removeTopping}
+          addAddOn={props.addAddOn}
+          removeAddOn={props.removeAddOn}
           displayName={addOn.displayName}
           value={addOn.value}
           price={addOn.price} />
@@ -68,8 +68,8 @@ const CustomizerOptions = props => {
         {renderBases(props.drinkOptions.bases)}
       </div>
       <div>
-        <p>toppings:</p>
-        {renderToppings(props.drinkOptions.toppings)}
+        <p>add-ons:</p>
+        {renderAddOns(props.drinkOptions.addOns)}
       </div>
       <div>
         <p>ice:</p>

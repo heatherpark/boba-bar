@@ -5,10 +5,10 @@ const AddOn = props => {
     <React.Fragment>
       {props.displayName} {props.price}
       <span
-        onClick={() => props.addTopping(props.value, props.price)}
+        onClick={() => props.addAddOn(props.value, props.price)}
         className="add">+</span>
       <span
-        onClick={() => props.removeTopping(props.value, props.price)}
+        onClick={() => props.removeAddOn(props.value, props.price)}
         className="remove">-</span>
     </React.Fragment>
   );

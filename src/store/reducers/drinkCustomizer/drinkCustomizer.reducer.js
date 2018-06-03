@@ -24,27 +24,27 @@ const reducer = (state = initialState, action) => {
         price: state.price + action.price
       };
 
-    case actionTypes.ADD_TOPPING:
+    case actionTypes.ADD_ADD_ON:
       return {
         ...state,
         drinkOrder: {
           ...state.drinkOrder,
-          toppings: {
-            ...state.drinkOrder.toppings,
-            [action.topping]: state.drinkOrder.toppings[action.topping] + 1
+          addOns: {
+            ...state.drinkOrder.addOns,
+            [action.addOn]: state.drinkOrder.addOns[action.addOn] + 1
           },
         },
         price: state.price + action.price
       };
 
-    case actionTypes.REMOVE_TOPPING:
+    case actionTypes.REMOVE_ADD_ON:
       return {
         ...state,
         drinkOrder: {
           ...state.drinkOrder,
-          toppings: {
-            ...state.drinkOrder.toppings,
-            [action.topping]: state.drinkOrder.toppings[action.topping] - 1
+          addOns: {
+            ...state.drinkOrder.addOns,
+            [action.addOn]: state.drinkOrder.addOns[action.addOn] - 1
           }
         },
         price: state.price - action.price

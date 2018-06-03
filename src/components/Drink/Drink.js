@@ -8,9 +8,9 @@ const Drink = props => {
       let element = <li key={key}>
         {key}: {drinkOrder[key]}</li>;
 
-      if (key === 'toppings') {
+      if (key === 'addOns') {
         element = <li key={key}>
-          {key}: {renderToppings(drinkOrder[key])}</li>;
+          {key}: {renderAddOns(drinkOrder[key])}</li>;
       }
 
       elements.push(element);
@@ -19,11 +19,11 @@ const Drink = props => {
     return elements;
   }
 
-  function renderToppings(toppings) {
+  function renderAddOns(addOns) {
     const elements = [];
 
-    for (let key in toppings) {
-      const quantity = toppings[key];
+    for (let key in addOns) {
+      const quantity = addOns[key];
 
       elements.push(<li key={key}>
         {key} x{quantity}</li>);

@@ -10,9 +10,9 @@ export class DrinkCustomizer extends Component {
     this.props.initDrinkCustomizer();
   }
 
-  removeTopping = (topping, price) => {
-    if (this.props.drinkOrder.toppings[topping] > 0) {
-      this.props.removeTopping(topping, price);
+  removeAddOn = (addOn, price) => {
+    if (this.props.drinkOrder.addOns[addOn] > 0) {
+      this.props.removeAddOn(addOn, price);
     }
   }
 
@@ -26,8 +26,8 @@ export class DrinkCustomizer extends Component {
                   price={this.props.price} />
                 <CustomizerOptions
                   chooseBase={this.props.chooseBase}
-                  addTopping={this.props.addTopping}
-                  removeTopping={this.removeTopping}
+                  removeAddOn={this.props.removeAddOn}
+                  removeAddOn={this.removeAddOn}
                   chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
                   drinkOptions={this.props.drinkOptions} />
             </React.Fragment>)
@@ -48,8 +48,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     chooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
-    addTopping: (topping, price) => dispatch(actions.addTopping(topping, price)),
-    removeTopping: (topping, price) => dispatch(actions.removeTopping(topping, price)),
+    addAddOn: (addOn, price) => dispatch(actions.addAddOn(addOn, price)),
+    removeAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price)),
     chooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
     initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
   }
