@@ -1,69 +1,25 @@
 import * as actionTypes from '../../actions/actionTypes';
+import * as helpers from './helper';
 
-const initialState = {
-  drinkOptions: null,
-  drinkOrder: null,
-  price: 0
-};
-
-const reducer = (state = initialState, action) => {
+const reducer = (state = helpers.initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_OPTIONS:
-      return {
-        ...state,
-        drinkOptions: action.drinkOptions
-      };
+    case actionTypes.SET_OPTIONS: 
+      return helpers.addOption(state, action);
 
     case actionTypes.CHOOSE_BASE:
-      return {
-        ...state,
-        drinkOrder: {
-          ...state.drinkOrder,
-          base: action.base,
-        },
-        price: state.price + action.price
-      };
+      return helpers.chooseBase(state, action);
 
     case actionTypes.ADD_ADD_ON:
-      return {
-        ...state,
-        drinkOrder: {
-          ...state.drinkOrder,
-          addOns: {
-            ...state.drinkOrder.addOns,
-            [action.addOn]: state.drinkOrder.addOns[action.addOn] + 1
-          },
-        },
-        price: state.price + action.price
-      };
+      return helpers.addAddOn(state, action);
 
     case actionTypes.REMOVE_ADD_ON:
-      return {
-        ...state,
-        drinkOrder: {
-          ...state.drinkOrder,
-          addOns: {
-            ...state.drinkOrder.addOns,
-            [action.addOn]: state.drinkOrder.addOns[action.addOn] - 1
-          }
-        },
-        price: state.price - action.price
-      };
+      return helpers.removeAddOn(state, action);
 
     case actionTypes.CHOOSE_ICE_OR_SUGAR_LEVEL:
-      return {
-        ...state,
-        drinkOrder: {
-          ...state.drinkOrder,
-          [action.item]: action.level
-        }
-      };
+      return helpers.chooseIceOrSugarLevel(state, action);
 
     case actionTypes.SET_DRINK_ORDER_DEFAULT:
-      return {
-        ...state,
-        drinkOrder: action.drinkOrder
-      };
+      return helpers.setDrinkOrderDefault(state, action);
 
     default: return state;
   }
