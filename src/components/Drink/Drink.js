@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-export const Drink = props => {
+const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
     const elements = [];
 
@@ -40,11 +40,6 @@ export const Drink = props => {
       <p className="price">{props.price}</p>
     </div>
   );  
-};
-
-Drink.propTypes = {
-  drinkOrder: PropTypes.object.isRequired,
-  price: PropTypes.number.isRequired
 };
 
 export default Drink;
