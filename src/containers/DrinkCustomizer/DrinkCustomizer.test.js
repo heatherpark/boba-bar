@@ -1,21 +1,32 @@
 import React from 'react';
 import Provider from 'react-redux';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { DrinkCustomizer} from './DrinkCustomizer';
+import { DrinkCustomizer } from './DrinkCustomizer';
 import Drink from '../../components/Drink/Drink';
-import { drinkOptions } from './DrinkCustomizer';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const DRINK_OPTIONS = {
+  bases: {
+    milkTea: [{ flavor: "green", price: 2 }, { flavor: "black", price: 2 }, { flavor: "oolong", price: 2 }]
+  },
+  ice: ["0%", "25%", "50%", "75%", "100%"],
+  sugar: ["0%", "25%", "50%", "75%", "100%"],
+  toppings: [{ displayName: "boba", price: 0.5, value: "boba" }, { displayName: "egg pudding", price: 0.75, value: "eggPudding" }, { displayName: "grass jelly", price: 0.8, value: "grassJelly" }]
+};
+
 describe('<DrinkCustomizer />', () => {
   let wrapper;
+  let props;
 
   beforeEach(() => {
     wrapper = shallow(<DrinkCustomizer
-      drinkOptions={drinkOptions}
+      drinkOptions={DRINK_OPTIONS}
       initDrinkCustomizer={jest.fn()} />);
+
+    props = wrapper.instance().props;
   });
 
   afterEach(() => {
@@ -38,11 +49,11 @@ describe('<DrinkCustomizer />', () => {
       return total;
     };
 
-    const baseTypes = drinkOptions.bases;
-    const baseCount = countBases(drinkOptions.bases);
-    const toppings = drinkOptions.toppings;
-    const iceLevels = drinkOptions.ice;
-    const sugarLevels = drinkOptions.sugar;
+    const baseTypes = props.drinkOptions.bases;
+    const baseCount = countBases(props.drinkOptions.bases);
+    const toppings = props.drinkOptions.toppings;
+    const iceLevels = props.drinkOptions.ice;
+    const sugarLevels = props.drinkOptions.sugar;
 
     const listLength = wrapper.find('li').length;
     const expectedListLength = Object.keys(baseTypes).length
@@ -57,7 +68,7 @@ describe('<DrinkCustomizer />', () => {
   it('should render more and less buttons for each topping', () => {
     const moreButtons = wrapper.find('.add');
     const lessButtons = wrapper.find('.remove');
-    const toppings = drinkOptions.toppings;
+    const toppings = props.drinkOptions.toppings;
 
     expect(moreButtons.length).toEqual(toppings.length);
     expect(lessButtons.length).toEqual(toppings.length);
@@ -116,12 +127,12 @@ describe('<DrinkCustomizer />', () => {
 
       levelOption.simulate('click');
       let actualCalls = handleIceAndSugarLevelClick.mock.calls.length;
-      
+
       expect(actualCalls).toBe(actualCalls);
-      
+
       handleIceAndSugarLevelClick.mockReset();
       levelOption = wrapper.find('.sugar-option').first();
-      
+
       levelOption.simulate('click');
       actualCalls = handleIceAndSugarLevelClick.mock.calls.length;
 
