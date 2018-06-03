@@ -2,7 +2,7 @@ import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
   drinkOptions: null,
-  drinkOrder: {},
+  drinkOrder: null,
   price: 0
 };
 

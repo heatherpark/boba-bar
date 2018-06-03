@@ -1,4 +1,4 @@
-import reducer from './drinkCustomizer.reducer';
+import reducer from './drinkCustomizer';
 
 const DRINK_OPTIONS = {
   bases: {
