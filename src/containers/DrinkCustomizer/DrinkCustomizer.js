@@ -10,28 +10,33 @@ export class DrinkCustomizer extends Component {
     this.props.initDrinkCustomizer();
   }
 
-  removeAddOn = (addOn, price) => {
-    if (this.props.drinkOrder.addOns[addOn] > 0) {
+  handleRemoveAddOn = (addOn, price) => {
+    const addOnQuantity = this.props.drinkOrder.addOns[addOn];
+
+    if (addOnQuantity > 0) {
       this.props.removeAddOn(addOn, price);
     }
+  }
+
+  renderCustomizer() {
+    return (
+      <React.Fragment>
+        <Drink
+          drinkOrder={this.props.drinkOrder}
+          price={this.props.price} />
+        <CustomizerOptions
+          chooseBase={this.props.chooseBase}
+          removeAddOn={this.handleRemoveAddOn}
+          chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
+          drinkOptions={this.props.drinkOptions} />
+      </React.Fragment>
+    );
   }
 
   render() {
     return (
       <div>
-        {this.props.drinkOptions
-          ? (<React.Fragment>
-                <Drink
-                  drinkOrder={this.props.drinkOrder}
-                  price={this.props.price} />
-                <CustomizerOptions
-                  chooseBase={this.props.chooseBase}
-                  removeAddOn={this.props.removeAddOn}
-                  removeAddOn={this.removeAddOn}
-                  chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
-                  drinkOptions={this.props.drinkOptions} />
-            </React.Fragment>)
-          : 'Loading options'}
+        {this.props.drinkOptions ? this.renderCustomizer() : 'Loading options'}
       </div>
     );
   }
@@ -47,11 +52,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    chooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
     addAddOn: (addOn, price) => dispatch(actions.addAddOn(addOn, price)),
-    removeAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price)),
+    chooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
     chooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
-    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
+    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer()),
+    removeAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price))
   }
 };
 
