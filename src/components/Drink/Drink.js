@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
     const elements = [];
 
     for (let key in drinkOrder) {
-      let element = <li
-        key={key}>{key}: {drinkOrder[key]}</li>;
+      let element = <li key={key}>
+        {key}: {drinkOrder[key]}</li>;
 
       if (key === 'toppings') {
         element = <li key={key}>
