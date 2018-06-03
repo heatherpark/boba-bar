@@ -59,11 +59,11 @@ export const initDrinkCustomizer = () => {
     try {
       const response = await axios.get('/drink-options.json');
       const drinkOptions = response.data;
-
+      
       dispatch(setDrinkOptions(drinkOptions));
       dispatch(setDrinkOrderDefault(drinkOptions));
     } catch (error) {
-      // TODO:  Set up error handling
+      console.error(error);
     }
   };
 
