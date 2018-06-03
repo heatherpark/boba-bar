@@ -4,27 +4,37 @@ import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import CustomizerOptions from './CustomizerOptions';
+import { drinkOptions } from '../../mock-data';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const DRINK_OPTIONS = {
-  bases: {
-    milkTea: [{ flavor: "green", price: 2 }, { flavor: "black", price: 2 }, { flavor: "oolong", price: 2 }]
-  },
-  ice: ["0%", "25%", "50%", "75%", "100%"],
-  sugar: ["0%", "25%", "50%", "75%", "100%"],
-  addOns: [{ displayName: "boba", price: 0.5, value: "boba" }, { displayName: "egg pudding", price: 0.75, value: "eggPudding" }, { displayName: "grass jelly", price: 0.8, value: "grassJelly" }]
-};
-
 describe('<CustomizerOptions />', () => {
-  let wrapper;
+  it('should render all options as unordered lists', () => {
+    let wrapper = shallow(<CustomizerOptions
+      drinkOptions={drinkOptions} />);
+    const countBases = (baseTypes) => {
+      let total = 0;
 
-  beforeEach(() => {
-    wrapper = shallow(<CustomizerOptions
-      drinkOptions={DRINK_OPTIONS} />);
-  });
+      for (let type in baseTypes) {
+        total += baseTypes[type].length;
+      }
 
-  afterEach(() => {
-    wrapper.unmount();
+      return total;
+    };
+
+    const baseTypes = drinkOptions.bases;
+    const baseCount = countBases(drinkOptions.bases);
+    const addOns = drinkOptions.addOns;
+    const iceLevels = drinkOptions.ice;
+    const sugarLevels = drinkOptions.sugar;
+
+    const listLength = wrapper.find('li').length;
+    const expectedListLength = Object.keys(baseTypes).length
+      + baseCount
+      + Object.keys(addOns).length
+      + Object.keys(iceLevels).length
+      + Object.keys(sugarLevels).length;
+
+    expect(listLength).toEqual(expectedListLength);
   });
 });
