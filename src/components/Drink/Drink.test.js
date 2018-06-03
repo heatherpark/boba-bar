@@ -7,6 +7,7 @@ import Drink from './Drink';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<Drink />', () => {
+  let wrapper;
   const drinkOrder = {
     base: 'oolong milk tea',
     toppings: {
@@ -17,12 +18,15 @@ describe('<Drink />', () => {
     ice: 0.5,
     sugar: 0.25
   };
+
+  beforeEach(() => {
+    wrapper = shallow(<Drink 
+      drinkOrder={drinkOrder}
+      price={6.39} />);
+  });
   
   it('should render a drink order and toppings as unordered lists', () => {
     const toppings = drinkOrder.toppings;
-    const wrapper = shallow(<Drink 
-      drinkOrder={drinkOrder}
-      price={6.39} />);
 
     const listLength = wrapper.find('li').length;
     const expectedListLength = Object.keys(drinkOrder).length
@@ -32,10 +36,7 @@ describe('<Drink />', () => {
   });
 
   it('should render total price of drink', () => {
-    const wrapper = shallow(<Drink 
-      drinkOrder={drinkOrder}
-      price={6.39} />);
-
-    expect(wrapper.find('.price').length).toEqual(1);
+    const priceElementLength = wrapper.find('.price').length;
+    expect(priceElementLength).toEqual(1);
   });
 });
