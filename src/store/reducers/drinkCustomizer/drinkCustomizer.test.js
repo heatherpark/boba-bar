@@ -16,7 +16,7 @@ const DRINK_OPTIONS = {
         price: 2
       }
     ],
-    slush: [  
+    slush: [
       {
         flavor: 'passion fruit',
         price: 3
@@ -109,7 +109,8 @@ describe('drinkCustomizer reducer', () => {
   it('handles CHOOSE_BASE', () => {
     const action = {
       type: 'CHOOSE_BASE',
-      base: 'green milk tea',
+      baseType: 'milkTea',
+      flavor: 'green',
       price: 2
     };
     const nextState = reducer(initialState, action);
@@ -118,7 +119,7 @@ describe('drinkCustomizer reducer', () => {
       ...initialState,
       drinkOrder: {
         ...initialState.drinkOrder,
-        base: action.base
+        base: action.flavor
       },
       price: action.price
     };

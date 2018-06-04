@@ -16,16 +16,16 @@ describe('<CustomizerOptions />', () => {
       let total = 0;
 
       for (let type in baseTypes) {
-        total += baseTypes[type].length;
+        total += baseTypes[type].flavors.length;
       }
 
       return total;
     };
 
-    const baseTypes = drinkOptions.bases;
+    const baseTypes = Object.keys(drinkOptions.bases);
     const baseCount = countBases(drinkOptions.bases);
     const addOns = drinkOptions.addOns;
-    const iceLevels = drinkOptions.ice;
+  const iceLevels = drinkOptions.ice;
     const sugarLevels = drinkOptions.sugar;
 
     const listLength = wrapper.find('li').length;
