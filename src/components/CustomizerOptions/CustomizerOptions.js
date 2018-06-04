@@ -9,9 +9,11 @@ const CustomizerOptions = props => {
     const baseTypes = [];
 
     for (let type in bases) {
+      const flavors = bases[type].flavors;
+
       baseTypes.push(
         <li key={type}>
-          {type} <ul>{renderBaseFlavors(bases[type])}</ul>
+          {type}: {bases[type].price} <ul>{renderBaseFlavors(type, bases[type])}</ul>
         </li>
       );
     }
@@ -19,19 +21,21 @@ const CustomizerOptions = props => {
     return <ul>{baseTypes}</ul>;
   }
 
-  const renderBaseFlavors = flavors => {
-    const baseFlavors = flavors.map(
+  const renderBaseFlavors = (baseType, baseData) => {
+    const elements = baseData.flavors.map(
       flavor => (
-        <li key={flavor.flavor}>
+        <li key={baseType + '-' + flavor}>
           <Base
-            flavor={flavor.flavor}
-            price={flavor.price}
-            chooseBase={props.chooseBase} />
+            type={baseType}
+            price={baseData.price}
+            chooseBase={props.chooseBase}>
+            {flavor}
+          </Base>
         </li>
       )
     );
 
-    return <ul>{baseFlavors}</ul>;
+    return <ul>{elements}</ul>;
   }
 
   const renderIceAndSugarLevels = (item, levels) => {
