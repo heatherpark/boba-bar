@@ -1,6 +1,6 @@
 export const initialState = {
   drinkOptions: null,
-  drinkOrder: null,
+  drinkOrder: {},
   price: 0
 };
 
@@ -12,13 +12,28 @@ export function addOption(state, action) {
 }
 
 export function chooseBase(state, action) {
+  let updatedBaseFlavor = '';
+  let updatedDrinkPrice = state.price;
+  let currentBasePrice = 0;
+
+  if (state.drinkOrder.baseType) {
+    currentBasePrice = state.drinkOptions.bases[state.drinkOrder.baseType].price;
+  }
+
+  if (!state.drinkOrder.baseType || state.drinkOrder.baseType !== action.baseType) {
+    updatedDrinkPrice = updatedDrinkPrice - currentBasePrice + action.price;
+    state.drinkOrder.baseType = action.baseType;
+    updatedBaseFlavor = action.base;
+  }
+
   return {
     ...state,
     drinkOrder: {
+      baseType: action.baseType,
       ...state.drinkOrder,
-      base: action.base,
+      base: action.flavor,
     },
-    price: state.price + action.price
+    price: updatedDrinkPrice
   };
 }
 
