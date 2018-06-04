@@ -27,6 +27,7 @@ export class DrinkCustomizer extends Component {
         <CustomizerOptions
           chooseBase={this.props.chooseBase}
           removeAddOn={this.handleRemoveAddOn}
+          addAddOn={this.props.addAddOn}
           chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
           drinkOptions={this.props.drinkOptions} />
       </React.Fragment>
@@ -53,7 +54,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addAddOn: (addOn, price) => dispatch(actions.addAddOn(addOn, price)),
-    chooseBase: (base, price) => dispatch(actions.chooseBase(base, price)),
+    chooseBase: (baseType, base, price) => dispatch(actions.chooseBase(baseType, base, price)),
     chooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
     initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer()),
     removeAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price))

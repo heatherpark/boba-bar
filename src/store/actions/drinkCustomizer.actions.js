@@ -1,9 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/orders';
 
-export const chooseBase = (base, price) => ({
+export const chooseBase = (baseType, flavor, price) => ({
   type: actionTypes.CHOOSE_BASE,
-  base,
+  baseType,
+  flavor,
   price
 });
 
@@ -40,7 +41,10 @@ export const defaultDrinkOrder = drinkOptions => {
   });
 
   return {
-    base: '',
+    base: {
+      type: '',
+      flavor: ''
+    },
     addOns,
     ice: drinkOptions.ice[0],
     sugar: drinkOptions.sugar[0],

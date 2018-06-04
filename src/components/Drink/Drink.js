@@ -5,14 +5,23 @@ const Drink = props => {
     const elements = [];
 
     for (let key in drinkOrder) {
-      let element = <li key={key}>
-        {key}: {drinkOrder[key]}</li>;
+      let content = drinkOrder[key];
 
-      if (key === 'addOns') {
-        element = <li key={key}>
-          {key}: {renderAddOns(drinkOrder[key])}</li>;
+      if (key === 'baseType') {
+        content = null;
       }
 
+      if (key === 'base') {
+        content = drinkOrder[key].flavor;
+      }
+
+      if (key === 'addOns') {
+        content = renderAddOns(drinkOrder[key]);
+      }
+
+      let element = <li key={key}>
+        {key}: {content}</li>;
+        
       elements.push(element);
     }
 
