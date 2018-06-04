@@ -12,7 +12,6 @@ export function addOption(state, action) {
 }
 
 export function chooseBase(state, action) {
-  let updatedBaseFlavor = '';
   let updatedDrinkPrice = state.price;
   let currentBasePrice = 0;
 
@@ -23,7 +22,6 @@ export function chooseBase(state, action) {
   if (!state.drinkOrder.baseType || state.drinkOrder.baseType !== action.baseType) {
     updatedDrinkPrice = updatedDrinkPrice - currentBasePrice + action.price;
     state.drinkOrder.baseType = action.baseType;
-    updatedBaseFlavor = action.base;
   }
 
   return {

@@ -9,8 +9,6 @@ const CustomizerOptions = props => {
     const baseTypes = [];
 
     for (let type in bases) {
-      const flavors = bases[type].flavors;
-
       baseTypes.push(
         <li key={type}>
           {type}: {bases[type].price} <ul>{renderBaseFlavors(type, bases[type])}</ul>
