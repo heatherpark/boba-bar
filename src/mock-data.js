@@ -1,10 +1,15 @@
 export const drinkOptions = {
   bases: {
-    milkTea: [
-      { flavor: "green", price: 2 }, 
-      { flavor: "black", price: 2 }, 
-      { flavor: "oolong", price: 2 }
-    ]
+    milkTea: {
+      price: 2,
+      displayName: 'milk tea',
+      flavors: ['green', 'black', 'oolong']
+    },
+    slush: {
+      price: 3,
+      displayName: 'slush',
+      flavors: ['passion fruit', 'green apple', 'strawberry kiwi']
+    }
   },
   ice: ["0%", "25%", "50%", "75%", "100%"],
   sugar: ["0%", "25%", "50%", "75%", "100%"],
