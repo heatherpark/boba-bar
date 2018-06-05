@@ -1,6 +1,5 @@
 import React from 'react';
-import Provider from 'react-redux';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import CustomizerOptions from './CustomizerOptions';
