@@ -6,7 +6,8 @@ const OrderSummary = props => {
   return (
     <div>
       <h3>Your Order</h3>
-      <Drink />
+      <Drink 
+        drinkOrder={props.drinkOrder} />
 
       <p>Continue to checkout?</p>
       <button onClick={props.onPlaceOrderCanceled}>Cancel</button>

@@ -41,8 +41,9 @@ export class DrinkCustomizer extends Component {
       <React.Fragment>
         <Modal showModal={this.state.purchasing}>
           <OrderSummary
-          onPlaceOrderCanceled={this.handlePlaceOrderCanceled}
-          onPlaceOrderContinued={this.handlePlaceOrderContinued} />
+            drinkOrder={this.props.drinkOrder}
+            onPlaceOrderCanceled={this.handlePlaceOrderCanceled}
+            onPlaceOrderContinued={this.handlePlaceOrderContinued} />
         </Modal>
         <Drink
           drinkOrder={this.props.drinkOrder}
