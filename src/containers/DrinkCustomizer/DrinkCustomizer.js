@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 
 import Drink from '../../components/Drink/Drink';
 import CustomizerOptions from '../../components/CustomizerOptions/CustomizerOptions';
+import Modal from '../../components/UI/Modal/Modal';
 import * as actions from '../../store/actions';
 
 export class DrinkCustomizer extends Component {
+  state = {
+    purchasing: false
+  };
+
   componentDidMount() {
     this.props.initDrinkCustomizer();
   }
+
+  handlePurchase = () => {
+    this.setState({ purchasing: true });
+  };
 
   handleRemoveAddOn = (addOn, price) => {
     const addOnQuantity = this.props.drinkOrder.addOns[addOn];
@@ -21,10 +30,14 @@ export class DrinkCustomizer extends Component {
   renderCustomizer() {
     return (
       <React.Fragment>
+        <Modal showModal={this.state.purchasing}>
+          Modal content
+        </Modal>
         <Drink
           drinkOrder={this.props.drinkOrder}
           price={this.props.price} />
         <CustomizerOptions
+          onPurchase={this.handlePurchase}
           drinkOrder={this.props.drinkOrder}
           chooseBase={this.props.chooseBase}
           removeAddOn={this.handleRemoveAddOn}
