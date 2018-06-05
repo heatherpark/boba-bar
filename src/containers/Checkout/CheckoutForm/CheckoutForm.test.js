@@ -14,4 +14,13 @@ describe('<CheckoutForm />', () => {
     
     expect(formElements.length).toBe(1);    
   });
+
+  it('should render as form information as inputs', () => {
+    let wrapper = shallow(<CheckoutForm />);
+    const formInfo = wrapper.state().checkoutForm;
+    const fields = Object.keys(formInfo);
+    const inputs = wrapper.find('input');
+
+    expect(fields.length).toBe(inputs.length);
+  });
 });
