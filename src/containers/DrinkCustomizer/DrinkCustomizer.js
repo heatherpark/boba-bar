@@ -20,6 +20,7 @@ export class DrinkCustomizer extends Component {
     this.setState({ purchasing: true });
   };
 
+<<<<<<< HEAD
   handlePlaceOrderCanceled = () => {
     this.setState({ purchasing: false });
   };
@@ -28,6 +29,17 @@ export class DrinkCustomizer extends Component {
     // this.props.on
   };
 
+||||||| merged common ancestors
+=======
+  handlePurchaseCanceled = () => {
+    this.setState({ purchasing: false });
+  };
+
+  handlePurchaseContinued = () => {
+    // this.props.on
+  };
+
+>>>>>>> 4b660446de26d93fa80c9791a7705cecde7d5f60
   handleRemoveAddOn = (addOn, price) => {
     const addOnQuantity = this.props.drinkOrder.addOns[addOn];
 
@@ -40,9 +52,17 @@ export class DrinkCustomizer extends Component {
     return (
       <React.Fragment>
         <Modal showModal={this.state.purchasing}>
+<<<<<<< HEAD
           <OrderSummary
           onPlaceOrderCanceled={this.handlePlaceOrderCanceled}
           onPlaceOrderContinued={this.handlePlaceOrderContinued} />
+||||||| merged common ancestors
+          Modal content
+=======
+          <OrderSummary
+          onPurchaseCanceled={this.handlePurchaseCanceled}
+          onPurchaseContinued={this.handlePurchaseContinued} />
+>>>>>>> 4b660446de26d93fa80c9791a7705cecde7d5f60
         </Modal>
         <Drink
           drinkOrder={this.props.drinkOrder}
