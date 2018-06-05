@@ -4,15 +4,17 @@ import classes from './Modal.css';
 
 const Modal = props => {
   return (
-    <React.fragment>
+    <React.Fragment>
       <div 
         className={classes.Modal}
         style={{
-          transform: this.props.showModal ? 'translateY(0)' : 'translateY(-100vh)',
-          opacity: this.props.showModal ? '1' : '0'
+          transform: props.showModal ? 'translateY(0)' : 'translateY(-100vh)',
+          opacity: props.showModal ? '1' : '0'
         }}>
-        {this.props.children}
+        {props.children}
       </div>
-    </React.fragment>
+    </React.Fragment>
   );
 };
+
+export default Modal;
