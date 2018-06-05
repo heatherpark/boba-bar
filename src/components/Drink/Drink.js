@@ -38,10 +38,10 @@ const Drink = props => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       {renderDrinkOrder(props.drinkOrder)}
       <p className="price">{props.price}</p>
-    </div>
+    </React.Fragment>
   );  
 };
 

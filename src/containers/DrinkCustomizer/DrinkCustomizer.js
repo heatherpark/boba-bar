@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Drink from '../../components/Drink/Drink';
 import CustomizerOptions from '../../components/CustomizerOptions/CustomizerOptions';
 import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import * as actions from '../../store/actions';
 
 export class DrinkCustomizer extends Component {
@@ -19,6 +20,14 @@ export class DrinkCustomizer extends Component {
     this.setState({ purchasing: true });
   };
 
+  handlePurchaseCanceled = () => {
+    this.setState({ purchasing: false });
+  };
+
+  handlePurchaseContinued = () => {
+    // this.props.on
+  };
+
   handleRemoveAddOn = (addOn, price) => {
     const addOnQuantity = this.props.drinkOrder.addOns[addOn];
 
@@ -31,7 +40,9 @@ export class DrinkCustomizer extends Component {
     return (
       <React.Fragment>
         <Modal showModal={this.state.purchasing}>
-          Modal content
+          <OrderSummary
+          onPurchaseCanceled={this.handlePurchaseCanceled}
+          onPurchaseContinued={this.handlePurchaseContinued} />
         </Modal>
         <Drink
           drinkOrder={this.props.drinkOrder}
