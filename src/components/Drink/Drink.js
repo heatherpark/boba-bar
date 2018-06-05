@@ -7,10 +7,6 @@ const Drink = props => {
     for (let key in drinkOrder) {
       let content = drinkOrder[key];
 
-      if (key === 'baseType') {
-        content = null;
-      }
-
       if (key === 'base') {
         content = drinkOrder[key].flavor;
       }

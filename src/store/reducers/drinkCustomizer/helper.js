@@ -27,9 +27,11 @@ export function chooseBase(state, action) {
   return {
     ...state,
     drinkOrder: {
-      baseType: action.baseType,
       ...state.drinkOrder,
-      base: action.flavor,
+      base: {
+        type: action.baseType,
+        flavor: action.flavor
+      },
     },
     price: updatedDrinkPrice
   };
