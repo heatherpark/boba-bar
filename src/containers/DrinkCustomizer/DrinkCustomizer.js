@@ -25,6 +25,7 @@ export class DrinkCustomizer extends Component {
           drinkOrder={this.props.drinkOrder}
           price={this.props.price} />
         <CustomizerOptions
+          drinkOrder={this.props.drinkOrder}
           chooseBase={this.props.chooseBase}
           removeAddOn={this.handleRemoveAddOn}
           addAddOn={this.props.addAddOn}

@@ -36,6 +36,8 @@ const CustomizerOptions = props => {
     return <ul>{elements}</ul>;
   }
 
+  const drinkOrderIsValid = (drinkOrder) => !!!drinkOrder.base;
+
   const renderIceAndSugarLevels = (item, levels) => {
     const levelElements = levels.map(level =>
       <li key={`${item}-${level}`}>
@@ -76,6 +78,7 @@ const CustomizerOptions = props => {
       {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
       <p>sugar:</p>
       {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+      <button disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
     </div>
   );
 };
