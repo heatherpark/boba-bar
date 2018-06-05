@@ -21,7 +21,6 @@ export function chooseBase(state, action) {
 
   if (!state.drinkOrder.baseType || state.drinkOrder.baseType !== action.baseType) {
     updatedDrinkPrice = updatedDrinkPrice - currentBasePrice + action.price;
-    state.drinkOrder.baseType = action.baseType;
   }
 
   return {
