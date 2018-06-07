@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Input from '../../../components/UI/Input/Input';
-import { checkValidity } from '../../../shared/utility';
+import { checkValidity, formIsValid } from '../../../shared/utility';
 import checkoutFormData from './checkout-form-data';
 
 class CheckoutForm extends Component {
@@ -15,29 +15,26 @@ class CheckoutForm extends Component {
   }
 
   handleInputChange = (value, field, data) => {
-    this.setState(prevState => {
-      return {
-        checkoutForm: {
-          ...prevState.checkoutForm,
-          [field]: {
-            value,
-            valid: checkValidity(value, data.validation),
-            touched: true
-          }
+    const updateCheckoutFormState = prevState => ({
+      checkoutForm: {
+        ...prevState.checkoutForm,
+        [field]: {
+          value,
+          valid: checkValidity(value, data.validation),
+          touched: true
         }
       }
     });
+
+    const updateFormIsValidState = prevState => ({
+      formIsValid: formIsValid(prevState.checkoutForm)
+    });
+
+    this.setState(
+      prevState => updateCheckoutFormState(prevState),
+      () => this.setState(prevState => updateFormIsValidState(prevState))
+    );
   };
-
-  formIsValid(form) {
-    let formIsValid = true;
-
-    for (let field in form) {
-      formIsValid = form[field].valid && formIsValid;
-    }
-
-    return formIsValid;
-  }
 
   renderFormInputs(formData) {
     const inputs = [];
