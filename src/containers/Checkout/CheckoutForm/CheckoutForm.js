@@ -14,17 +14,22 @@ class CheckoutForm extends Component {
     this.setState({ checkoutForm: checkoutFormData });
   }
 
-  handleInputChange = (value, field, data) => {
-    const updateCheckoutFormState = prevState => ({
-      checkoutForm: {
-        ...prevState.checkoutForm,
-        [field]: {
-          value,
-          valid: checkValidity(value, data.validation),
-          touched: true
+  handleInputChange = (value, field) => {
+    const updateCheckoutFormState = prevState => {
+      const inputData = prevState.checkoutForm[field];
+
+      return {
+        checkoutForm: {
+          ...prevState.checkoutForm,
+          [field]: {
+            ...prevState.checkoutForm[field],
+            value,
+            valid: checkValidity(value, inputData.validation),
+            touched: true
+          }
         }
-      }
-    });
+      };
+    };
 
     const updateFormIsValidState = prevState => ({
       formIsValid: formIsValid(prevState.checkoutForm)
