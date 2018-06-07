@@ -14,26 +14,30 @@ class CheckoutForm extends Component {
     this.setState({ checkoutForm: checkoutFormData });
   }
 
-  handleInputChange = (event, inputIdentifier) => {
-    const updatedFormElement = {
-      ...this.state.checkoutForm[inputIdentifier],
-      value: event.target.value,
-      valid: checkValidity(event.target.value, this.state.checkoutForm[inputIdentifier].validation),
-      touched: true
-    };
+  handleInputChange = (value, field, data) => {
+    this.setState(prevState => {
+      return {
+        checkoutForm: {
+          ...prevState.checkoutForm,
+          [field]: {
+            value,
+            valid: checkValidity(value, data.validation),
+            touched: true
+          }
+        }
+      }
+    });
+  };
 
-    const updatedCheckoutForm = {
-      ...this.state.checkoutForm,
-      [inputIdentifier]: updatedFormElement
-    };
-
+  formIsValid(form) {
     let formIsValid = true;
-    for (let inputIdentifier in updatedCheckoutForm) {
-      formIsValid = updatedCheckoutForm[inputIdentifier].valid && formIsValid;
+
+    for (let field in form) {
+      formIsValid = form[field].valid && formIsValid;
     }
 
-    this.setState({ checkoutForm: updatedCheckoutForm, formIsValid: formIsValid });
-  };
+    return formIsValid;
+  }
 
   renderFormInputs(formData) {
     const formElementsArray = [];
@@ -45,8 +49,12 @@ class CheckoutForm extends Component {
       });
     }
 
-    return formElementsArray.map(formElement => (
-      <Input
+    return formElementsArray.map(formElement => {
+      let val;
+      if (formElement.id === 'name') {
+        val = formElement.value;
+      }
+      return <Input
         key={formElement.id}
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
@@ -54,8 +62,12 @@ class CheckoutForm extends Component {
         invalid={!formElement.config.valid}
         shouldValidate={formElement.config.validation}
         touched={formElement.config.touched}
-        onChange={(event) => this.handleInputChange(event, formElement.id)} />
-    ));
+        onChange={(event) => this.handleInputChange(
+          event.target.value,
+          formElement.id,
+          this.state.checkoutForm[formElement.id])
+        } />
+    });
   }
 
   render() {
