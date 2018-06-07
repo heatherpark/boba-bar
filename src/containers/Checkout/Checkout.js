@@ -4,10 +4,14 @@ import Modal from '../../components/UI/Modal/Modal';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 
 class Checkout extends Component {
+  state = {
+    checkingOut: false
+  };
+
   render() {
     return (
       <div>
-        <Modal showModal={true}>
+        <Modal showModal={this.state.checkingOut}>
           <CheckoutForm />
         </Modal>
       </div>
