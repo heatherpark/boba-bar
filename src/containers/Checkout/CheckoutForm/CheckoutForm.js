@@ -40,34 +40,28 @@ class CheckoutForm extends Component {
   }
 
   renderFormInputs(formData) {
-    const formElementsArray = [];
+    const inputs = [];
 
     for (let key in formData) {
-      formElementsArray.push({
-        id: key,
-        config: formData[key]
-      });
+      const config = formData[key];
+
+      inputs.push(
+        <Input
+          key={key}
+          elementType={config.elementType}
+          elementConfig={config.elementConfig}
+          value={config.value}
+          invalid={!config.valid}
+          shouldValidate={config.validation}
+          touched={config.touched}
+          onChange={(event) => this.handleInputChange(
+            event.target.value,
+            key,
+            this.state.checkoutForm[key])} />
+      );
     }
 
-    return formElementsArray.map(formElement => {
-      let val;
-      if (formElement.id === 'name') {
-        val = formElement.value;
-      }
-      return <Input
-        key={formElement.id}
-        elementType={formElement.config.elementType}
-        elementConfig={formElement.config.elementConfig}
-        value={formElement.config.value}
-        invalid={!formElement.config.valid}
-        shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}
-        onChange={(event) => this.handleInputChange(
-          event.target.value,
-          formElement.id,
-          this.state.checkoutForm[formElement.id])
-        } />
-    });
+    return inputs;
   }
 
   render() {
