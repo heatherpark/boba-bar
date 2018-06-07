@@ -8,9 +8,15 @@ class Checkout extends Component {
     checkingOut: false
   };
 
+  handleCheckoutContinued = () => {
+    this.setState({ checkingOut: true });
+  };
+
   render() {
     return (
       <div>
+        <button onClick={this.handleCheckoutContinued}>check out</button>
+        <button>cancel</button>
         <Modal showModal={this.state.checkingOut}>
           <CheckoutForm />
         </Modal>
