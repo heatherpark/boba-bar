@@ -119,7 +119,10 @@ describe('drinkCustomizer reducer', () => {
       ...initialState,
       drinkOrder: {
         ...initialState.drinkOrder,
-        base: action.flavor
+        base: {
+          flavor: action.flavor,
+          type: action.baseType
+        }
       },
       price: action.price
     };
