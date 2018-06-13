@@ -4,6 +4,6 @@ export {
   removeAddOn,
   chooseIceOrSugarLevel,
   initDrinkCustomizer
-} from './drinkCustomizer.actions';
+} from './drinkCustomizer';
 
 export { checkOut } from './orders';
