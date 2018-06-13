@@ -42,7 +42,6 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     drinkOrder: state.drinkCustomizer.drinkOrder,
     checkedOut: state.orders.checkedOut,
