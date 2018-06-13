@@ -5,3 +5,7 @@ export {
   chooseIceOrSugarLevel,
   initDrinkCustomizer
 } from './drinkCustomizer.actions';
+
+export {
+  checkOut
+} from './orders';
