@@ -1,3 +1,6 @@
+import React from 'react';
+import Input from '../components/UI/Input/Input';
+
 export const checkValidity = (value, rules) => {
 	let isValid = true;
 	if (!rules) {
@@ -38,3 +41,28 @@ export const formIsValid = (form) => {
 
 	return formIsValid;
 };
+
+export const renderFormInputs = (formData) => {
+	const inputs = [];
+
+	for (let key in formData) {
+		const config = formData[key];
+
+		inputs.push(
+			<Input
+				key={key}
+				elementType={config.elementType}
+				elementConfig={config.elementConfig}
+				value={config.value}
+				invalid={!config.valid}
+				shouldValidate={config.validation}
+				touched={config.touched}
+				onChange={(event) => this.handleInputChange(
+					event.target.value,
+					key,
+					this.state.checkoutForm[key])} />
+		);
+	}
+
+	return inputs;
+}

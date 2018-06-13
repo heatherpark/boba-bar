@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Input from '../../../components/UI/Input/Input';
-import { checkValidity, formIsValid } from '../../../shared/utility';
+import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
 import checkoutFormData from './checkout-form-data';
 
 class CheckoutForm extends Component {
@@ -42,56 +41,23 @@ class CheckoutForm extends Component {
     );
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     this.props.onCheckOut(this.props.drinkOrder);
   };
 
-  renderFormInputs(formData) {
-    const inputs = [];
-
-    for (let key in formData) {
-      const config = formData[key];
-
-      inputs.push(
-        <Input
-          key={key}
-          elementType={config.elementType}
-          elementConfig={config.elementConfig}
-          value={config.value}
-          invalid={!config.valid}
-          shouldValidate={config.validation}
-          touched={config.touched}
-          onChange={(event) => this.handleInputChange(
-            event.target.value,
-            key,
-            this.state.checkoutForm[key])} />
-      );
-    }
-
-    return inputs;
-  }
-
   render() {
-    let form = (
-      <React.Fragment>
+    return (
+      <div>
+        {this.state.checkedOut ? <Redirect to="/" /> : null}
+
         <h4>Please enter your information</h4>
         <form>
-          {this.renderFormInputs(this.state.checkoutForm)}
-          <button 
+          {renderFormInputs(this.state.checkoutForm)}
+          <button
             disabled={this.props.checkingOut}
             onClick={this.handleSubmit}>Check Out</button>
         </form>
-      </React.Fragment>
-    );
-
-    if (this.state.checkedOut) {
-      form = <Redirect to="/" />;
-    }
-
-    return (
-      <div>
-        {form}
       </div>
     );
   }
