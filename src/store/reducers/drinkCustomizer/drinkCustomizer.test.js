@@ -5,30 +5,29 @@ import { defaultDrinkOrder } from '../../../mock-data';
 import * as actionTypes from '../../actions/actionTypes';
 
 describe('drinkCustomizer reducer', () => {
+  let initialState;
+  let addOnsState;
+
+  beforeEach(() => {
+    initialState = {
+      ...initialState,
+      drinkOrder: defaultDrinkOrder,
+      price: 0
+    };
+
+    addOnsState = initialState.drinkOrder.addOns;
+  });
+
   it('handles SET_OPTIONS', () => {
     const action = {
-<<<<<<< HEAD
       type: actionTypes.SET_OPTIONS,
       drinkOptions
-||||||| merged common ancestors
-      type: 'SET_OPTIONS',
-      drinkOptions: DRINK_OPTIONS
-=======
-      type: actionTypes.SET_OPTIONS,
-      drinkOptions: drinkOptions
->>>>>>> 06a23ef9401e692cde6f768221f9cffec920a7a5
     };
     const nextState = reducer(initialState, action);
 
     const expectedState = {
       ...initialState,
-<<<<<<< HEAD
       drinkOptions
-||||||| merged common ancestors
-      drinkOptions: DRINK_OPTIONS
-=======
-      drinkOptions: drinkOptions
->>>>>>> 06a23ef9401e692cde6f768221f9cffec920a7a5
     };
 
     expect(nextState).toEqual(expectedState);
@@ -73,31 +72,18 @@ describe('drinkCustomizer reducer', () => {
     expect(nextState).toEqual(expectedState);
   });
 
-  describe('toppings', () => {
-    let stateWithDrinkOrder;
-    let addOnsState;
-
-    beforeEach(() => {
-      stateWithDrinkOrder = {
-        ...initialState,
-        drinkOrder: defaultDrinkOrder
-      }
-
-      addOnsState = stateWithDrinkOrder.drinkOrder.addOns;
-    });
-
     it('handles ADD_ADD_ON', () => {
       const action = {
         type: actionTypes.ADD_ADD_ON,
         addOn: 'eggPudding',
         price: 0.75
       };
-      const nextState = reducer(stateWithDrinkOrder, action);
+      const nextState = reducer(initialState, action);
 
       const expectedState = {
-        ...stateWithDrinkOrder,
+        ...initialState,
         drinkOrder: {
-          ...stateWithDrinkOrder.drinkOrder,
+          ...initialState.drinkOrder,
           addOns: {
             ...addOnsState,
             [action.addOn]: addOnsState[action.addOn] + 1
@@ -115,23 +101,22 @@ describe('drinkCustomizer reducer', () => {
         addOn: 'eggPudding',
         price: 0.75
       };
-      const nextState = reducer(stateWithDrinkOrder, action);
+      const nextState = reducer(initialState, action);
 
       const expectedState = {
-        ...stateWithDrinkOrder,
+        ...initialState,
         drinkOrder: {
-          ...stateWithDrinkOrder.drinkOrder,
+          ...initialState.drinkOrder,
           addOns: {
             ...addOnsState,
             [action.addOn]: addOnsState[action.addOn] - 1
           }
         },
-        price: stateWithDrinkOrder.price - action.price
+        price: initialState.price - action.price
       };
 
       expect(nextState).toEqual(expectedState);
     });
-  });
 
   it('handles CHOOSE_ICE_OR_SUGAR_LEVEL', () => {
     const action = {
