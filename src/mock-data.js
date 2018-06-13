@@ -18,3 +18,17 @@ export const drinkOptions = {
     { displayName: "egg pudding", price: 0.75, value: "eggPudding" }, 
     { displayName: "grass jelly", price: 0.8, value: "grassJelly" }]
 };
+
+export const defaultDrinkOrder = {
+  base: {
+    type: '',
+    flavor: ''
+  },
+  addOns: {
+    boba: 0,
+    eggPudding: 0,
+    grassJelly: 0
+  },
+  ice: '0%',
+  sugar: '0%'
+};
