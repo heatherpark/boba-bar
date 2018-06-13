@@ -7,14 +7,28 @@ import * as actionTypes from '../../actions/actionTypes';
 describe('drinkCustomizer reducer', () => {
   it('handles SET_OPTIONS', () => {
     const action = {
+<<<<<<< HEAD
       type: actionTypes.SET_OPTIONS,
       drinkOptions
+||||||| merged common ancestors
+      type: 'SET_OPTIONS',
+      drinkOptions: DRINK_OPTIONS
+=======
+      type: actionTypes.SET_OPTIONS,
+      drinkOptions: drinkOptions
+>>>>>>> 06a23ef9401e692cde6f768221f9cffec920a7a5
     };
     const nextState = reducer(initialState, action);
 
     const expectedState = {
       ...initialState,
+<<<<<<< HEAD
       drinkOptions
+||||||| merged common ancestors
+      drinkOptions: DRINK_OPTIONS
+=======
+      drinkOptions: drinkOptions
+>>>>>>> 06a23ef9401e692cde6f768221f9cffec920a7a5
     };
 
     expect(nextState).toEqual(expectedState);
