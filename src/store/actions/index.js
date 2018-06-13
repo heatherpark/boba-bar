@@ -6,6 +6,4 @@ export {
   initDrinkCustomizer
 } from './drinkCustomizer.actions';
 
-export {
-  checkOut
-} from './orders';
+export { checkOut } from './orders';
