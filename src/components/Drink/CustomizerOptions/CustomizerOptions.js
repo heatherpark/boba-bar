@@ -36,7 +36,7 @@ const CustomizerOptions = props => {
     return <ul>{elements}</ul>;
   }
 
-  const drinkOrderIsValid = (drinkOrder) => drinkOrder.base.flavor;
+  const drinkOrderIsValid = drinkOrder => drinkOrder && drinkOrder.base.flavor;
 
   const renderIceAndSugarLevels = (item, levels) => {
     const levelElements = levels.map(level =>
@@ -52,17 +52,16 @@ const CustomizerOptions = props => {
   };
 
   const renderAddOns = (addOns) => {
-    const elements = addOns.map(
-      (addOn, index) => (
-        <li key={addOn.displayName}>
-          <AddOn
-            onAddAddOn={props.onAddAddOn}
-            onRemoveAddOn={props.onRemoveAddOn}
-            displayName={addOn.displayName}
-            value={addOn.value}
-            price={addOn.price} />
-        </li>
-      )
+    const elements = addOns.map(addOn => (
+      <li key={addOn.displayName}>
+        <AddOn
+          onAddAddOn={props.onAddAddOn}
+          onRemoveAddOn={props.onRemoveAddOn}
+          displayName={addOn.displayName}
+          value={addOn.value}
+          price={addOn.price} />
+      </li>
+    )
     );
 
     return <ul>{elements}</ul>;
@@ -78,10 +77,9 @@ const CustomizerOptions = props => {
       {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
       <p>sugar:</p>
       {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
-      <button 
+      <button
         onClick={props.onPlaceOrder}
-        disabled={props.drinkOrder.base
-          && !drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
+        disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 export const initialState = {
   drinkOptions: null,
-  drinkOrder: {},
+  drinkOrder: null,
   price: 0
 };
 
