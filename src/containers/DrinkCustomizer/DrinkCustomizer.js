@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Drink from '../../components/Drink/Drink';
 import CustomizerOptions from '../../components/CustomizerOptions/CustomizerOptions';
 import * as actions from '../../store/actions';
 
 export class DrinkCustomizer extends Component {
+  state = {
+    placingOrder: false
+  };
+
   componentDidMount() {
     this.props.initDrinkCustomizer();
   }
@@ -19,12 +24,14 @@ export class DrinkCustomizer extends Component {
   }
 
   handlePlaceOrder = () => {
-    console.log('placing order');
+    this.setState({ placingOrder: true });
   };
 
   renderCustomizer() {
-    return (
-      <React.Fragment>
+    let drinkCustomizer = <Redirect to="/checkout" />;
+
+    if (!this.state.placingOrder) {
+      drinkCustomizer = <React.Fragment>
         <Drink
           drinkOrder={this.props.drinkOrder}
           price={this.props.price} />
@@ -36,6 +43,12 @@ export class DrinkCustomizer extends Component {
           addAddOn={this.props.addAddOn}
           chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
           drinkOptions={this.props.drinkOptions} />
+      </React.Fragment>
+    }
+
+    return (
+      <React.Fragment>
+        {drinkCustomizer}
       </React.Fragment>
     );
   }
