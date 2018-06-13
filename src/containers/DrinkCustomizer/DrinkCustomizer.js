@@ -18,6 +18,10 @@ export class DrinkCustomizer extends Component {
     }
   }
 
+  handlePlaceOrder = () => {
+    console.log('placing order');
+  };
+
   renderCustomizer() {
     return (
       <React.Fragment>
@@ -25,7 +29,7 @@ export class DrinkCustomizer extends Component {
           drinkOrder={this.props.drinkOrder}
           price={this.props.price} />
         <CustomizerOptions
-          onPurchase={this.handlePurchase}
+          onPlaceOrder={this.handlePlaceOrder}
           drinkOrder={this.props.drinkOrder}
           chooseBase={this.props.chooseBase}
           removeAddOn={this.handleRemoveAddOn}

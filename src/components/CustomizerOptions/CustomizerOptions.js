@@ -79,7 +79,7 @@ const CustomizerOptions = props => {
       <p>sugar:</p>
       {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
       <button 
-        onClick={props.onPurchase}
+        onClick={props.onPlaceOrder}
         disabled={props.drinkOrder.base
           && !drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
     </div>
