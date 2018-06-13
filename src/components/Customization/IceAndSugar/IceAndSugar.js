@@ -3,7 +3,7 @@ import React from 'react';
 const IceAndSugar = props => {
   return (
     <span 
-      onClick={() => props.chooseIceOrSugarLevel(
+      onClick={() => props.onChooseIceOrSugarLevel(
         props.item, 
         props.level
       )}>

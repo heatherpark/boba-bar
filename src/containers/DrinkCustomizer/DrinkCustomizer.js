@@ -15,41 +15,31 @@ export class DrinkCustomizer extends Component {
     this.props.initDrinkCustomizer();
   }
 
-  handleRemoveAddOn = (addOn, price) => {
-    const addOnQuantity = this.props.drinkOrder.addOns[addOn];
-
-    if (addOnQuantity > 0) {
-      this.props.removeAddOn(addOn, price);
-    }
-  }
-
   handlePlaceOrder = () => {
     this.setState({ placingOrder: true });
   };
 
-  renderCustomizer() {
-    let drinkCustomizer = <Redirect to="/checkout" />;
+  handleRemoveAddOn = (addOn, price) => {
+    const addOnQuantity = this.props.drinkOrder.addOns[addOn];
+    addOnQuantity > 0 && this.props.onRemoveAddOn(addOn, price);
+  }
 
-    if (!this.state.placingOrder) {
-      drinkCustomizer = <React.Fragment>
+  renderCustomizer() {
+    return (
+      <div>
+        {this.state.placingOrder ? <Redirect to="/checkout" /> : null}
         <Drink
           drinkOrder={this.props.drinkOrder}
           price={this.props.price} />
         <CustomizerOptions
           onPlaceOrder={this.handlePlaceOrder}
           drinkOrder={this.props.drinkOrder}
-          chooseBase={this.props.chooseBase}
-          removeAddOn={this.handleRemoveAddOn}
-          addAddOn={this.props.addAddOn}
-          chooseIceOrSugarLevel={this.props.chooseIceOrSugarLevel}
+          onChooseBase={this.props.onChooseBase}
+          onRemoveAddOn={this.handleRemoveAddOn}
+          onAddAddOn={this.props.onAddAddOn}
+          onChooseIceOrSugarLevel={this.props.onChooseIceOrSugarLevel}
           drinkOptions={this.props.drinkOptions} />
-      </React.Fragment>
-    }
-
-    return (
-      <React.Fragment>
-        {drinkCustomizer}
-      </React.Fragment>
+      </div>
     );
   }
 
@@ -72,11 +62,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addAddOn: (addOn, price) => dispatch(actions.addAddOn(addOn, price)),
-    chooseBase: (baseType, base, price) => dispatch(actions.chooseBase(baseType, base, price)),
-    chooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
-    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer()),
-    removeAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price))
+    onAddAddOn: (addOn, price) => dispatch(actions.addAddOn(addOn, price)),
+    onChooseBase: (baseType, base, price) => dispatch(actions.chooseBase(baseType, base, price)),
+    onChooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
+    onRemoveAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price)),
+    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
   }
 };
 

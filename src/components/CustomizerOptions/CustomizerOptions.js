@@ -26,7 +26,7 @@ const CustomizerOptions = props => {
           <Base
             type={baseType}
             price={baseData.price}
-            chooseBase={props.chooseBase}>
+            onChooseBase={props.onChooseBase}>
             {flavor}
           </Base>
         </li>
@@ -42,7 +42,7 @@ const CustomizerOptions = props => {
     const levelElements = levels.map(level =>
       <li key={`${item}-${level}`}>
         <IceAndSugar
-          chooseIceOrSugarLevel={props.chooseIceOrSugarLevel}
+          onChooseIceOrSugarLevel={props.onChooseIceOrSugarLevel}
           item={item}
           level={level} />
       </li>
@@ -56,8 +56,8 @@ const CustomizerOptions = props => {
       (addOn, index) => (
         <li key={addOn.displayName}>
           <AddOn
-            addAddOn={props.addAddOn}
-            removeAddOn={props.removeAddOn}
+            onAddAddOn={props.onAddAddOn}
+            onRemoveAddOn={props.onRemoveAddOn}
             displayName={addOn.displayName}
             value={addOn.value}
             price={addOn.price} />

@@ -4,10 +4,10 @@ const AddOn = props => (
   <React.Fragment>
     {props.displayName} {props.price}
     <span
-      onClick={() => props.addAddOn(props.value, props.price)}
+      onClick={() => props.onAddAddOn(props.value, props.price)}
       className="add">+</span>
     <span
-      onClick={() => props.removeAddOn(props.value, props.price)}
+      onClick={() => props.onRemoveAddOn(props.value, props.price)}
       className="remove">-</span>
   </React.Fragment>
 );
