@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
 import { checkValidity, formIsValid } from '../../../shared/utility';
@@ -41,6 +42,11 @@ class CheckoutForm extends Component {
     );
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onCheckOut(this.props.drinkOrder);
+  };
+
   renderFormInputs(formData) {
     const inputs = [];
 
@@ -67,12 +73,25 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    return (
-      <div>
+    let form = (
+      <React.Fragment>
         <h4>Please enter your information</h4>
         <form>
           {this.renderFormInputs(this.state.checkoutForm)}
+          <button 
+            disabled={this.props.checkingOut}
+            onClick={this.handleSubmit}>Check Out</button>
         </form>
+      </React.Fragment>
+    );
+
+    if (this.state.checkedOut) {
+      form = <Redirect to="/" />;
+    }
+
+    return (
+      <div>
+        {form}
       </div>
     );
   }
