@@ -64,9 +64,9 @@ export class DrinkCustomizer extends Component {
 
 const mapStateToProps = state => {
   return {
-    drinkOptions: state.drinkOptions,
-    drinkOrder: state.drinkOrder,
-    price: state.price
+    drinkOptions: state.drinkCustomizer.drinkOptions,
+    drinkOrder: state.drinkCustomizer.drinkOrder,
+    price: state.drinkCustomizer.price
   };
 }
 
