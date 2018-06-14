@@ -12,6 +12,15 @@ const reducer = (state = helpers.initialState, action) => {
     case actionTypes.CHECKOUT_FAILED:
       return helpers.checkoutFailed(state, action);
 
+    case actionTypes.FETCH_ORDERS_START:
+      return helpers.fetchOrdersStart(state, action);
+
+    case actionTypes.FETCH_ORDERS_SUCCESS:
+      return helpers.fetchOrdersSuccess(state, action);
+
+    case actionTypes.FETCH_ORDERS_FAILED:
+      return helpers.fetchOrdersFailed(state, action);
+
     default: return state;
   }
 };
