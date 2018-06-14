@@ -31,6 +31,7 @@ class Checkout extends Component {
         <Modal showModal={this.state.checkoutConfirmed}>
           <CheckoutForm
             drinkOrder={this.props.drinkOrder}
+            price={this.props.price}
             checkedOut={this.props.checkedOut}
             checkingOut={this.props.checkingOut}
             onCheckOut={this.props.onCheckOut}
@@ -44,8 +45,10 @@ class Checkout extends Component {
 const mapStateToProps = state => {
   return {
     drinkOrder: state.drinkCustomizer.drinkOrder,
+    price: state.drinkCustomizer.price,
     checkedOut: state.orders.checkedOut,
-    checkingOut: state.orders.checkingOut
+    checkingOut: state.orders.checkingOut,
+    userId: state.auth.userId
   };
 };
 
