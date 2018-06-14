@@ -8,6 +8,7 @@ import * as actions from '../../../store/actions';
 class Login extends Component {
   state = {
     loginForm: loginFormData,
+    isSignup: true,
     formIsValid: false
   };
 
@@ -41,11 +42,18 @@ class Login extends Component {
   handleLogin = event => {
     event.preventDefault();
 
-    const { loginForm } = this.state;
+    const { loginForm, isSignup } = this.state;
     this.props.onAuth(
       loginForm.email.value,
-      loginForm.password.value
+      loginForm.password.value,
+      isSignup
     );
+  };
+
+  handleSwitchAuthMode = () => {
+    this.setState(prevState => {
+      return { isSiignup: !prevState.isSignup };
+    });
   };
 
   render() {
@@ -55,7 +63,12 @@ class Login extends Component {
       <div> 
         <form onSubmit={this.handleLogin}>
           {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
-          <button disabled={!this.state.formIsValid}>Log In</button>
+          <button disabled={!this.state.formIsValid}>Sign Up</button>
+          <a 
+            href="#"
+            onClick={this.handleSwitchAuthMode}>
+            {this.state.isSignup ? 'Log In' : 'Sign Up'}
+          </a>
         </form>
       </div>
     ); 
