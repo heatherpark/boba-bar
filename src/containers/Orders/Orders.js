@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 export class Orders extends Component {
+  componentDidMount() {
+    this.props.onFetchOrders(this.props.token, this.props.userId);
+  }
+  
   render() {
     return (
       <div>Orders</div>
@@ -11,13 +15,14 @@ export class Orders extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   orders: state.orders.orders
-// });
+const mapStateToProps = state => ({
+  orders: state.orders.orders,
+  token: state.auth.token,
+  userId: state.auth.userId
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   onFetchOrders: () => dispatch(actions.fetchOrders)
-// });
+const mapDispatchToProps = dispatch => ({
+  onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId))
+});
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Orders);
-export default Orders;
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
