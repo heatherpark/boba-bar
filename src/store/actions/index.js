@@ -6,6 +6,8 @@ export {
   initDrinkCustomizer
 } from './drinkCustomizer';
 
-export { checkOut } from './orders';
+export { 
+  checkOut,
+  fetchOrders } from './orders';
 
 export { auth } from './auth';
