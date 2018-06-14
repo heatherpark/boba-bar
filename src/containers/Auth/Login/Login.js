@@ -52,32 +52,34 @@ class Login extends Component {
 
   handleSwitchAuthMode = () => {
     this.setState(prevState => {
-      return { isSiignup: !prevState.isSignup };
+      return { isSignup: !prevState.isSignup };
     });
   };
 
   render() {
     const { loginForm } = this.state;
 
-    return(
-      <div> 
+    return (
+      <div>
         <form onSubmit={this.handleLogin}>
           {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
-          <button disabled={!this.state.formIsValid}>Sign Up</button>
-          <a 
+          <button disabled={!this.state.formIsValid}>
+            {this.state.isSignup ? 'Sign Up' : 'Log In'}
+          </button>
+          <a
             href="#"
             onClick={this.handleSwitchAuthMode}>
-            {this.state.isSignup ? 'Log In' : 'Sign Up'}
+            {this.state.isSignup ? 'Have an account already ? Log In' : 'New User ? Sign Up'}
           </a>
         </form>
       </div>
-    ); 
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password))
+    onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
   };
 };
 

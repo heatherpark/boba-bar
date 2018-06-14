@@ -9,7 +9,7 @@ const Navigation = () => {
         <NavigationItem link="/">Drink Customizer</NavigationItem>
         <NavigationItem link="/orders">My Orders</NavigationItem>
         <NavigationItem link="/login">Log In</NavigationItem>
-        <NavigationItem link="/logou">Log In</NavigationItem>
+        <NavigationItem link="/logout">Log Out</NavigationItem>
       </li>
     </ul>
   );
