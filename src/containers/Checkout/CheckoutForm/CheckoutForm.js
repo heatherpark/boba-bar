@@ -6,13 +6,9 @@ import checkoutFormData from './checkout-form-data';
 
 class CheckoutForm extends Component {
   state = {
-    checkoutForm: {},
+    checkoutForm: checkoutFormData,
     formIsValid: false
   };
-
-  componentWillMount() {
-    this.setState({ checkoutForm: checkoutFormData });
-  }
 
   handleInputChange = (value, field) => {
     const updateCheckoutFormState = prevState => {
@@ -47,13 +43,15 @@ class CheckoutForm extends Component {
   };
 
   render() {
+    const { checkoutForm } = this.state;
+
     return (
       <div>
         {this.state.checkedOut ? <Redirect to="/" /> : null}
 
         <h4>Please enter your information</h4>
         <form>
-          {renderFormInputs(this.state.checkoutForm)}
+          {checkoutForm ? renderFormInputs(checkoutForm, this.handleInputChange) : null}
           <button
             disabled={this.props.checkingOut}
             onClick={this.handleSubmit}>Check Out</button>

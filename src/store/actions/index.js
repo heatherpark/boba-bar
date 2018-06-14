@@ -7,3 +7,5 @@ export {
 } from './drinkCustomizer';
 
 export { checkOut } from './orders';
+
+export { auth } from './auth';
