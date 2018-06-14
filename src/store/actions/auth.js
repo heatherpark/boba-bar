@@ -37,3 +37,7 @@ export const authSuccess = (token, userId) => ({
   token,
   userId
 });
+
+export const logout = () => ({
+  type: actionTypes.AUTH_LOGOUT
+});

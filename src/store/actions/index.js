@@ -8,4 +8,7 @@ export {
 
 export { checkOut } from './orders';
 
-export { auth } from './auth';
+export { 
+  auth,
+  logout 
+} from './auth';
