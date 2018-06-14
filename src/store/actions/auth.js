@@ -3,7 +3,7 @@ import * as utils from './utilities';
 
 import * as actionTypes from './actionTypes';
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignup) => {
   return async function(dispatch) {
     dispatch(authStart());
 
@@ -14,14 +14,16 @@ export const auth = (email, password) => {
     };
 
     try {
-      const response = await axios.post('/verifyPassword', authData);
+      const response = isSignup 
+        ? await axios.post('/signupNewUser', authData)
+        : await axios.post('/verifyPassword', authData);
       const { expiresIn, idToken: token, localId: userId } = response.data;
 
       utils.setAuthData(token, userId, expiresIn);
 
       dispatch(authSuccess(token, userId));
     } catch (error) {
-
+      console.error(error);
     }
   }
 };
