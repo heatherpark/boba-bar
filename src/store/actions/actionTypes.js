@@ -10,3 +10,9 @@ export const SET_DRINK_ORDER_DEFAULT = 'SET_DRINK_ORDER_DEFAULT';
 export const CHECKOUT_START = 'CHECKOUT_START';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILED = 'CHECKOUT_FAILED';
+
+// authentication
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
