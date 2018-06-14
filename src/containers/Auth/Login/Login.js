@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import loginFormData from './login-form-data';
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
+import * as actions from '../../../store/actions';
 
 class Login extends Component {
   state = {
@@ -36,6 +38,16 @@ class Login extends Component {
     );
   };
 
+  handleLogin = event => {
+    event.preventDefault();
+
+    const { loginForm } = this.state;
+    this.props.onAuth(
+      loginForm.email.value,
+      loginForm.password.value
+    );
+  };
+
   render() {
     const { loginForm } = this.state;
 
@@ -43,13 +55,17 @@ class Login extends Component {
       <div> 
         <form onSubmit={this.handleLogin}>
           {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
-          <button
-            disabled={!this.props.formIsValid}
-            onClick={this.handleSubmit}>Log In</button>
+          <button disabled={!this.state.formIsValid}>Log In</button>
         </form>
       </div>
     ); 
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password) => dispatch(actions.auth(email, password))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
