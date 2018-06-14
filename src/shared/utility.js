@@ -42,7 +42,7 @@ export const formIsValid = (form) => {
 	return formIsValid;
 };
 
-export const renderFormInputs = (formData) => {
+export const renderFormInputs = (formData, changeHandler) => {
 	const inputs = [];
 
 	for (let key in formData) {
@@ -57,10 +57,10 @@ export const renderFormInputs = (formData) => {
 				invalid={!config.valid}
 				shouldValidate={config.validation}
 				touched={config.touched}
-				onChange={(event) => this.handleInputChange(
+				onChange={(event) => changeHandler(
 					event.target.value,
 					key,
-					this.state.checkoutForm[key])} />
+					config)} />
 		);
 	}
 
