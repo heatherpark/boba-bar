@@ -43,6 +43,7 @@ class Login extends Component {
     event.preventDefault();
 
     const { loginForm, isSignup } = this.state;
+    
     this.props.onAuth(
       loginForm.email.value,
       loginForm.password.value,
