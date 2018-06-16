@@ -8,6 +8,7 @@ export {
 
 export { 
   checkOut,
-  fetchOrders } from './orders';
+  fetchOrders 
+} from './orders';
 
 export { auth } from './auth';
