@@ -24,6 +24,18 @@ export const authFail = error => ({
   error
 });
 
+export const logout = () => ({
+  type: actionTypes.AUTH_LOGOUT
+});
+
+export const checkAuthTimeout = (expirationTime) => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000);
+  };
+};
+
 export const auth = (email, password, isSignup) => {
   return async dispatch => {
     dispatch(authStart());
@@ -35,17 +47,25 @@ export const auth = (email, password, isSignup) => {
     };
 
     try {
-      const response = isSignup 
+      const response = isSignup
         ? await axios.post('/signupNewUser', authData)
         : await axios.post('/verifyPassword', authData);
-      const { expiresIn, idToken: token, localId: userId } = response.data;
+      const { 
+        expiresIn, 
+        idToken: token, 
+        localId: userId,
+      } = response.data;
 
       setAuthData(token, userId, expiresIn);
 
       dispatch(authSuccess(token, userId));
+      dispatch(checkAuthTimeout(expiresIn));
     } catch (error) {
-      console.error(error);
-      dispatch(authFail(error));
+      console.error(error.response.data.error.message);
+      dispatch(authFail(error.response.data.error.message));
     }
   }
 };
+
+
+
