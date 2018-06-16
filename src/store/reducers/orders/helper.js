@@ -20,7 +20,7 @@ export const checkoutSuccess = state => {
   };
 };
 
-export const checkoutFailed = state => {
+export const checkoutFail = state => {
   return {
     ...state,
     checkedOut: false,
@@ -43,7 +43,7 @@ export const fetchOrdersSuccess = (state, action) => {
   };
 };
 
-export const fetchOrdersFailed = state => {
+export const fetchOrdersFail = state => {
   return {
     ...state,
     fetchingOrders: false

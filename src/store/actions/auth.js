@@ -1,10 +1,9 @@
 import axios from '../../axios/auth';
 import * as utils from './utilities';
-
 import * as actionTypes from './actionTypes';
 
 export const auth = (email, password, isSignup) => {
-  return async function(dispatch) {
+  return async dispatch => {
     dispatch(authStart());
 
     const authData = {
@@ -24,16 +23,20 @@ export const auth = (email, password, isSignup) => {
       dispatch(authSuccess(token, userId));
     } catch (error) {
       console.error(error);
+      dispatch(authFail(error));
     }
   }
 };
 
-export const authStart = () => ({
-  type: actionTypes.AUTH_START 
-});
+export const authStart = () => ({ type: actionTypes.AUTH_START });
 
 export const authSuccess = (token, userId) => ({
   type: actionTypes.AUTH_SUCCESS,
   token,
   userId
+});
+
+export const authFail = error => ({
+  type: actionTypes.AUTH_FAIL,
+  error
 });

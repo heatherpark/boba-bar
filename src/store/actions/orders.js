@@ -9,7 +9,7 @@ export const checkOut = orderData => {
   //     dispatch(checkoutSuccess());
   //   } catch (error) {
   //     console.error(error);
-  //     dispatch(checkoutFailed());
+  //     dispatch(checkoutFail());
   //   }
   // };
 };
@@ -22,7 +22,7 @@ export const checkoutSuccess = () => ({
   type: actionTypes.CHECKOUT_SUCCESS
 });
 
-export const checkoutFailed = () => ({
+export const checkoutFail = () => ({
   type: actionTypes.CHECKOUT_FAIL
 });
 
@@ -49,7 +49,7 @@ export const fetchOrders = (token, userId) => {
 
       dispatch(fetchOrdersSuccess(orders));
     } catch (error) {
-      dispatch(fetchOrdersFailed());
+      dispatch(fetchOrdersFail());
     }
   }
 };
@@ -65,6 +65,6 @@ export const fetchOrdersSuccess = (orders) => ({
   orders
 });
 
-export const fetchOrdersFailed = () => ({
+export const fetchOrdersFail = () => ({
   type: actionTypes.FETCH_ORDERS_FAIL
 });

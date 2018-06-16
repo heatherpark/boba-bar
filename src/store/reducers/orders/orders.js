@@ -10,7 +10,7 @@ const reducer = (state = helpers.initialState, action) => {
       return helpers.checkoutSuccess(state);
 
     case actionTypes.CHECKOUT_FAIL:
-      return helpers.checkoutFailed(state);
+      return helpers.checkoutFail(state);
 
     case actionTypes.FETCH_ORDERS_START:
       return helpers.fetchOrdersStart(state);
@@ -19,7 +19,7 @@ const reducer = (state = helpers.initialState, action) => {
       return helpers.fetchOrdersSuccess(state, action);
 
     case actionTypes.FETCH_ORDERS_FAIL:
-      return helpers.fetchOrdersFailed(state);
+      return helpers.fetchOrdersFail(state);
 
     default: return state;
   }

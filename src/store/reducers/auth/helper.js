@@ -19,7 +19,7 @@ export const authSuccess = (state, action) => ({
   loggingIn: false
 });
 
-export const authFailed = (state, action) => ({
+export const authFail = (state, action) => ({
   ...state,
   error: action.error,
   loggingIn: false
