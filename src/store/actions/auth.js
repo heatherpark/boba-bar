@@ -66,6 +66,3 @@ export const auth = (email, password, isSignup) => {
     }
   }
 };
-
-
-
