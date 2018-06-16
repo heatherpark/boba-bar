@@ -5,14 +5,14 @@ export const initialState = {
   orders: []
 };
 
-export const checkoutStart = (state, action) => {
+export const checkoutStart = state => {
   return {
     ...state,
     checkingOut: true
   };
 };
 
-export const checkoutSuccess = (state, action) => {
+export const checkoutSuccess = state => {
   return {
     ...state,
     checkedOut: true,
@@ -20,7 +20,7 @@ export const checkoutSuccess = (state, action) => {
   };
 };
 
-export const checkoutFailed = (state, action) => {
+export const checkoutFailed = state => {
   return {
     ...state,
     checkedOut: false,
@@ -28,7 +28,7 @@ export const checkoutFailed = (state, action) => {
   };
 };
 
-export const fetchOrdersStart = (state, action) => {
+export const fetchOrdersStart = state => {
   return {
     ...state,
     fetchingOrders: true
@@ -43,7 +43,7 @@ export const fetchOrdersSuccess = (state, action) => {
   };
 };
 
-export const fetchOrdersFailed = (state, action) => {
+export const fetchOrdersFailed = state => {
   return {
     ...state,
     fetchingOrders: false
