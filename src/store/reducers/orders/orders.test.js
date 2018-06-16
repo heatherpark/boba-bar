@@ -32,14 +32,14 @@ describe('orders reducer', () => {
     expect(nextState).toEqual(expectedState);
   });
 
-  it('should handle CHECKOUT_FAILED', () => {
+  it('should handle CHECKOUT_FAIL', () => {
     const initialState = {
       checkingOut: true,
       checkedOut: false
     };
 
     const action = {
-      type: actionTypes.CHECKOUT_FAILED
+      type: actionTypes.CHECKOUT_FAIL
     };
     const nextState = reducer(initialState, action);
 
@@ -83,9 +83,9 @@ describe('orders reducer', () => {
     expect(nextState).toEqual(expectedState);
   });
 
-  it('should handle FETCH_ORDERS_FAILED', () => {
+  it('should handle FETCH_ORDERS_FAIL', () => {
     const action = {
-      type: actionTypes.FETCH_ORDERS_FAILED
+      type: actionTypes.FETCH_ORDERS_FAIL
     };
     const nextState = reducer(initialState, action);
 

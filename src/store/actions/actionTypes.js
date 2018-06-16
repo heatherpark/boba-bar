@@ -9,15 +9,15 @@ export const SET_DRINK_ORDER_DEFAULT = 'SET_DRINK_ORDER_DEFAULT';
 // checkout
 export const CHECKOUT_START = 'CHECKOUT_START';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
-export const CHECKOUT_FAILED = 'CHECKOUT_FAILED';
+export const CHECKOUT_FAIL = 'CHECKOUT_FAIL';
 
 // orders
 export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
-export const FETCH_ORDERS_FAILED = 'FETCH_ORDERS_FAILED';
+export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
 
 // authentication
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_FAILED = 'AUTH_FAILED';
+export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';

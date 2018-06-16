@@ -23,7 +23,7 @@ export const checkoutSuccess = () => ({
 });
 
 export const checkoutFailed = () => ({
-  type: actionTypes.CHECKOUT_FAILED
+  type: actionTypes.CHECKOUT_FAIL
 });
 
 export const fetchOrders = (token, userId) => {
@@ -66,5 +66,5 @@ export const fetchOrdersSuccess = (orders) => ({
 });
 
 export const fetchOrdersFailed = () => ({
-  type: actionTypes.FETCH_ORDERS_FAILED
+  type: actionTypes.FETCH_ORDERS_FAIL
 });

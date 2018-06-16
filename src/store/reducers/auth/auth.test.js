@@ -1,14 +1,11 @@
 import reducer from './auth';
-import helper from './helper'
 import * as actionTypes from '../../actions/actionTypes';
 
 import { initialState } from './helper';
 
 describe('auth reducer', () => {
   it('should handle AUTH_START', () => {
-    const action = {
-      type: actionTypes.AUTH_START
-    };
+    const action = { type: actionTypes.AUTH_START };
     const nextState = reducer(initialState, action);
 
     const expectedState = {
@@ -41,7 +38,7 @@ describe('auth reducer', () => {
 
   it('should handle AUTH_FAIL', () => {
     const action = {
-      type: actionTypes.AUTH_FAILED,
+      type: actionTypes.AUTH_FAIL,
       error: 'Authentication failed'
     };
     const nextState = reducer(initialState, action);

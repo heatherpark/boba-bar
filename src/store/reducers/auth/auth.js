@@ -9,7 +9,7 @@ const reducer = (state = helpers.initialState, action) => {
     case actionTypes.AUTH_SUCCESS:
       return helpers.authSuccess(state, action);
 
-    case actionTypes.AUTH_FAILED:
+    case actionTypes.AUTH_FAIL:
       return helpers.authFailed(state, action);
 
     case actionTypes.AUTH_LOGOUT:
