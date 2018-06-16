@@ -5,7 +5,7 @@ export const initialState = {
   error: null
 };
 
-export const authStart = (state, action) => ({
+export const authStart = state => ({
   ...state,
   error: null,
   loggingIn: true
@@ -25,7 +25,7 @@ export const authFailed = (state, action) => ({
   loggingIn: false
 });
 
-export const authLogout = (state, action) => ({
+export const authLogout = state => ({
   ...state,
   token: null,
   userId: null

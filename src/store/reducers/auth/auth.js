@@ -4,7 +4,7 @@ import * as helpers from './helper';
 const reducer = (state = helpers.initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
-      return helpers.authStart(state, action);
+      return helpers.authStart(state);
 
     case actionTypes.AUTH_SUCCESS:
       return helpers.authSuccess(state, action);
@@ -13,7 +13,7 @@ const reducer = (state = helpers.initialState, action) => {
       return helpers.authFailed(state, action);
 
     case actionTypes.AUTH_LOGOUT:
-      return helpers.authLogout(state, action);
+      return helpers.authLogout(state);
 
     default:
       return state;
