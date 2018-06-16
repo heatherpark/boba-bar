@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import loginFormData from './login-form-data';
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
@@ -62,6 +63,8 @@ class Login extends Component {
 
     return (
       <div>
+        {this.props.isAuthenticated ? <Redirect to="/" /> : null}
+
         <form onSubmit={this.handleLogin}>
           {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
           <button disabled={!this.state.formIsValid}>
@@ -78,10 +81,16 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
