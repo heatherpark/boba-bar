@@ -5,6 +5,7 @@ import AddOn from '../Customization/AddOn/AddOn';
 import IceAndSugar from '../Customization/IceAndSugar/IceAndSugar';
 
 import typography from '../../../css/typography.css';
+import styles from './CustomizerOptions.css';
 
 const CustomizerOptions = props => {
   const renderBases = bases => {
@@ -12,10 +13,14 @@ const CustomizerOptions = props => {
 
     for (let type in bases) {
       baseTypes.push(
-        <li key={type}>
-          <h3 className={typography.headingQuaternary}>{type}: {bases[type].price}</h3>
+        <div className={styles.baseType}>
+          <h3
+            key={type}
+            className={typography.headingQuaternary}>
+            {type} ${bases[type].price}:
+          </h3>
           <ul>{renderBaseFlavors(type, bases[type])}</ul>
-        </li>
+        </div>
       );
     }
 
@@ -25,7 +30,7 @@ const CustomizerOptions = props => {
   const renderBaseFlavors = (baseType, baseData) => {
     const elements = baseData.flavors.map(
       flavor => (
-        <li 
+        <li
           className={typography.paragraph}
           key={baseType + '-' + flavor}>
           <Base
@@ -73,19 +78,29 @@ const CustomizerOptions = props => {
   }
 
   return (
-    <div>
-      <h3 className={typography.headingTertiary}>bases:</h3>
-      {renderBases(props.drinkOptions.bases)}
-      <h3 className={typography.headingTertiary}>add-ons:</h3>
-      {renderAddOns(props.drinkOptions.addOns)}
-      <h3 className={typography.headingTertiary}>ice:</h3>
-      {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
-      <h3 className={typography.headingTertiary}>sugar:</h3>
-      {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+    <section className={styles.customizerOptions}>
+      <div className={styles.section}>
+        <h3 className={typography.headingTertiary + ' section-heading'}>
+          choose your base:
+        </h3>
+        {renderBases(props.drinkOptions.bases)}
+      </div>
+      <div className={styles.section}>
+        <h3 className={typography.headingTertiary + ' section-heading'}>add-ons:</h3>
+        {renderAddOns(props.drinkOptions.addOns)}
+      </div>
+      <div className={styles.section}>
+        <h3 className={typography.headingTertiary + ' section-heading'}>ice:</h3>
+        {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
+      </div>
+      <div className={styles.section}>
+        <h3 className={typography.headingTertiary + ' section-heading'}>sugar:</h3>
+        {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+      </div>
       <button
         onClick={props.onPlaceOrder}
         disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
-    </div>
+    </section>
   );
 };
 
