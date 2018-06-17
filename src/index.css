@@ -15,4 +15,6 @@ body {
   font-size: 1.4rem;
   color: #563440;
   background-color: #F4EBE8;
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
