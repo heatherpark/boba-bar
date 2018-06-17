@@ -5,6 +5,14 @@ import { Redirect } from 'react-router-dom';
 import loginFormData from './login-form-data';
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
 import * as actions from '../../../store/actions';
+import styles from './Login.css';
+
+import { 
+  Button, 
+  Form, 
+  Header, 
+  Segment 
+} from 'semantic-ui-react';
 
 class Login extends Component {
   state = {
@@ -44,7 +52,7 @@ class Login extends Component {
     event.preventDefault();
 
     const { loginForm, isSignup } = this.state;
-    
+
     this.props.onAuth(
       loginForm.email.value,
       loginForm.password.value,
@@ -62,21 +70,42 @@ class Login extends Component {
     const { loginForm } = this.state;
 
     return (
-      <div>
+      <div className={styles.Login}>
         {this.props.isAuthenticated ? <Redirect to="/" /> : null}
-
-        <form onSubmit={this.handleLogin}>
-          {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
-          <button disabled={!this.state.formIsValid}>
-            {this.state.isSignup ? 'Sign Up' : 'Log In'}
-          </button>
-          <a
-            href="#"
-            onClick={this.handleSwitchAuthMode}>
-            {this.state.isSignup ? 'Have an account already ? Log In' : 'New User ? Sign Up'}
-          </a>
-        </form>
-      </div>
+        <Header as="h2" textAlign="center">
+          {this.state.isSignup
+            ? 'Sign up for an account!'
+            : 'Log in to Boba Bar!'}
+        </Header>
+        <Segment>
+          <Form
+            className={styles.LoginForm}
+            onSubmit={this.handleLogin}>
+            {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
+            <Button
+              fluid
+              primary
+              disabled={!this.state.formIsValid}>
+              {this.state.isSignup ? 'Sign Up' : 'Log In'}
+            </Button>
+          </Form>
+        </Segment>
+        <Segment textAlign="center">
+          <p>
+            {this.state.isSignup
+              ? 'Already have an account?'
+              : 'New user?'}
+            &nbsp;&nbsp;
+            <a 
+              onClick={this.handleSwitchAuthMode}
+              href="#">
+              {this.state.isSignup
+                ? "Log in here."
+                : "Sign up here."}
+            </a>
+          </p>
+        </Segment>
+      </div >
     );
   }
 }
