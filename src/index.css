@@ -29,4 +29,7 @@ body {
   background: var(--color-bg);
   font-family: "Montserrat", sans-serif;
   font-size: var(--font-size-default);
+  max-width: 120rem;
+  margin: 0 auto;
+  width: 90%;
 }
