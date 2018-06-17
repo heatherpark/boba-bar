@@ -4,6 +4,8 @@ import Base from '../Customization/Base/Base';
 import AddOn from '../Customization/AddOn/AddOn';
 import IceAndSugar from '../Customization/IceAndSugar/IceAndSugar';
 
+import typography from '../../../css/typography.css';
+
 const CustomizerOptions = props => {
   const renderBases = bases => {
     const baseTypes = [];
@@ -11,7 +13,8 @@ const CustomizerOptions = props => {
     for (let type in bases) {
       baseTypes.push(
         <li key={type}>
-          {type}: {bases[type].price} <ul>{renderBaseFlavors(type, bases[type])}</ul>
+          <h3 className={typography.headingQuaternary}>{type}: {bases[type].price}</h3>
+          <ul>{renderBaseFlavors(type, bases[type])}</ul>
         </li>
       );
     }
@@ -22,7 +25,9 @@ const CustomizerOptions = props => {
   const renderBaseFlavors = (baseType, baseData) => {
     const elements = baseData.flavors.map(
       flavor => (
-        <li key={baseType + '-' + flavor}>
+        <li 
+          className={typography.paragraph}
+          key={baseType + '-' + flavor}>
           <Base
             type={baseType}
             price={baseData.price}
@@ -69,13 +74,13 @@ const CustomizerOptions = props => {
 
   return (
     <div>
-      <p>bases:</p>
+      <h3 className={typography.headingTertiary}>bases:</h3>
       {renderBases(props.drinkOptions.bases)}
-      <p>add-ons:</p>
+      <h3 className={typography.headingTertiary}>add-ons:</h3>
       {renderAddOns(props.drinkOptions.addOns)}
-      <p>ice:</p>
+      <h3 className={typography.headingTertiary}>ice:</h3>
       {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
-      <p>sugar:</p>
+      <h3 className={typography.headingTertiary}>sugar:</h3>
       {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
       <button
         onClick={props.onPlaceOrder}
