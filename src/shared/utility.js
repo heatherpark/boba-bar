@@ -1,5 +1,8 @@
 import React from 'react';
+
 import Input from '../components/UI/Input/Input';
+
+import { Form } from 'semantic-ui-react';
 
 export const checkValidity = (value, rules) => {
 	let isValid = true;
@@ -49,18 +52,20 @@ export const renderFormInputs = (formData, changeHandler) => {
 		const config = formData[key];
 
 		inputs.push(
-			<Input
-				key={key}
-				elementType={config.elementType}
-				elementConfig={config.elementConfig}
-				value={config.value}
-				invalid={!config.valid}
-				shouldValidate={config.validation}
-				touched={config.touched}
-				onChange={(event) => changeHandler(
-					event.target.value,
-					key,
-					config)} />
+			<Form.Field>
+				<Input
+					key={key}
+					elementType={config.elementType}
+					elementConfig={config.elementConfig}
+					value={config.value}
+					invalid={!config.valid}
+					shouldValidate={config.validation}
+					touched={config.touched}
+					onChange={(event) => changeHandler(
+						event.target.value,
+						key,
+						config)} />
+			</Form.Field>
 		);
 	}
 
