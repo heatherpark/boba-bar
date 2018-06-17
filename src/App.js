@@ -15,15 +15,15 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Navigation isAuthenticated={this.props.isAuthenticated} />
+        {this.props.location.pathname !== "/login"
+          ? <Navigation isAuthenticated={this.props.isAuthenticated} />
+          : null}
         <Switch>
           <Route path="/checkout" component={Checkout} />
           <Route path="/orders" component={Orders} />
           <Route path="/login" component={Login} />
-          <Route path="/" exact component={DrinkCustomizer} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
+          <Route path="/" component={DrinkCustomizer} />
           <Redirect to="/" />
         </Switch>
       </Container>
