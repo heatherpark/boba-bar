@@ -9,10 +9,12 @@ import Login from './containers/Auth/Login/Login';
 import Logout from './containers/Auth/Logout/Logout';
 import Navigation from './components/Navigation/Navigation';
 
+import { Container } from 'semantic-ui-react';
+
 class App extends Component {
   render() {
     return (
-      <div>
+      <Container>
         <Navigation isAuthenticated={this.props.isAuthenticated} />
         <Switch>
           <Route path="/checkout" component={Checkout} />
@@ -24,7 +26,7 @@ class App extends Component {
           <Route path="/logout" component={Logout} />
           <Redirect to="/" />
         </Switch>
-      </div>
+      </Container>
     );
   }
 }
