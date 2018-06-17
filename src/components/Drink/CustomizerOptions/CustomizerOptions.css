@@ -1,0 +1,22 @@
+.section:not(:last-child) {
+  margin-bottom: 4rem;
+}
+
+.section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.section li {
+  display: inline-block;
+}
+
+.baseType h3,
+.section li:not(:last-child) {
+  margin-right: 1.2rem;
+}
+
+.baseType h3,
+.baseType ul {
+  display: inline-block;
+}
+
