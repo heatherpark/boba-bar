@@ -3,7 +3,6 @@ import React from 'react';
 import Base from '../Customization/Base/Base';
 import AddOn from '../Customization/AddOn/AddOn';
 import IceAndSugar from '../Customization/IceAndSugar/IceAndSugar';
-import utilityStyles from '../../../css/utility.css';
 
 import { Segment, List, Header } from 'semantic-ui-react';
 
@@ -14,8 +13,10 @@ const CustomizerOptions = props => {
     for (let type in bases) {
       baseTypes.push(
         <List.Item key={type}>
-          <span className={utilityStyles['u-uppercase']}>{type} </span>
-          ${bases[type].price} {renderBaseFlavors(type, bases[type])}
+          <Header as="h4">
+            {type} ${bases[type].price}
+          </Header>
+           {renderBaseFlavors(type, bases[type])}
         </List.Item>
       );
     }
