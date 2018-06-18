@@ -4,7 +4,7 @@ import Base from '../Customization/Base/Base';
 import AddOn from '../Customization/AddOn/AddOn';
 import IceAndSugar from '../Customization/IceAndSugar/IceAndSugar';
 
-import { Segment, List, Header } from 'semantic-ui-react';
+import { Button, Segment, List, Header } from 'semantic-ui-react';
 
 const CustomizerOptions = props => {
   const renderBases = bases => {
@@ -16,7 +16,7 @@ const CustomizerOptions = props => {
           <Header as="h4">
             {type} ${bases[type].price}
           </Header>
-           {renderBaseFlavors(type, bases[type])}
+          {renderBaseFlavors(type, bases[type])}
         </List.Item>
       );
     }
@@ -50,7 +50,7 @@ const CustomizerOptions = props => {
           onChooseIceOrSugarLevel={props.onChooseIceOrSugarLevel}
           item={item}
           level={level} />
-      </List.Item> 
+      </List.Item>
     );
 
     return <List horizontal>{levelElements}</List>;
@@ -74,25 +74,32 @@ const CustomizerOptions = props => {
 
   return (
     <div>
-      <Segment>
-        <Header as="h3">choose your base:</Header>
-        {renderBases(props.drinkOptions.bases)}
-      </Segment>
-      <Segment>
-        <Header as="h3">add-ons:</Header>
-        {renderAddOns(props.drinkOptions.addOns)}
-      </Segment>
-      <Segment>
-        <Header as="h3">ice:</Header>
-        {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
-      </Segment>
-      <Segment>
-        <Header as="h3">sugar:</Header>
-        {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
-      </Segment>
-      <button
-        onClick={props.onPlaceOrder}
-        disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</button>
+      <Segment.Group compact>
+        <Segment>
+          <Header as="h3">choose your base:</Header>
+          {renderBases(props.drinkOptions.bases)}
+        </Segment>
+        <Segment>
+          <Header as="h3">add-ons:</Header>
+          {renderAddOns(props.drinkOptions.addOns)}
+        </Segment>
+        <Segment>
+          <Header as="h3">ice:</Header>
+          {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
+        </Segment>
+        <Segment>
+          <Header as="h3">sugar:</Header>
+          {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+        </Segment>
+        <Segment>
+          <Button
+            primary
+            onClick={props.onPlaceOrder}
+            fluid
+            disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</Button>
+        </Segment>
+      </Segment.Group>
+
     </div>
   );
 };
