@@ -56,6 +56,18 @@ const CustomizerOptions = props => {
     return <List horizontal>{levelElements}</List>;
   };
 
+  const renderChosenAddOns = addOns => {
+    const addOnText = [];
+
+    for (let addOn in addOns) {
+      if (addOns[addOn] > 0) {
+        addOnText.push(addOn + ': ' + addOns[addOn]);
+      }
+    }
+
+    return addOnText.join(', ');
+  };
+
   const renderAddOns = (addOns) => {
     const elements = addOns.map(addOn => (
       <List.Item key={addOn.displayName}>
@@ -76,20 +88,53 @@ const CustomizerOptions = props => {
     <div>
       <Segment.Group compact>
         <Segment>
-          <Header as="h3">choose your base:</Header>
+          <Header as="h3">
+            base: &nbsp;
+            <span style={{ fontWeight: 'normal' }}>
+              {props.drinkOrder
+                ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
+                : null}
+            </span>
+          </Header>
           {renderBases(props.drinkOptions.bases)}
         </Segment>
         <Segment>
-          <Header as="h3">add-ons:</Header>
+          <Header as="h3">
+            add-ons: &nbsp;
+            <span style={{ fontWeight: 'normal' }}>
+              {props.drinkOrder
+                ? renderChosenAddOns(props.drinkOrder.addOns)
+                : null}
+            </span>
+          </Header>
           {renderAddOns(props.drinkOptions.addOns)}
         </Segment>
         <Segment>
-          <Header as="h3">ice:</Header>
+          <Header as="h3">
+            ice: &nbsp;
+            <span style={{ fontWeight: 'normal' }}>
+              {props.drinkOrder
+                ? props.drinkOrder.ice
+                : null}
+            </span>
+          </Header>
           {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
         </Segment>
         <Segment>
-          <Header as="h3">sugar:</Header>
+          <Header as="h3">
+            sugar: &nbsp;
+              <span style={{ fontWeight: 'normal' }}>
+              {props.drinkOrder
+                ? props.drinkOrder.sugar
+                : null}
+            </span>
+          </Header>
           {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+        </Segment>
+        <Segment>
+          <Header as="h3">
+            Total: ${props.price}
+          </Header>
         </Segment>
         <Segment>
           <Button
@@ -99,7 +144,6 @@ const CustomizerOptions = props => {
             disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</Button>
         </Segment>
       </Segment.Group>
-
     </div>
   );
 };

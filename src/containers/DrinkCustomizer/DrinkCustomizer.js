@@ -6,6 +6,8 @@ import Drink from '../../components/Drink/Drink';
 import CustomizerOptions from '../../components/Drink/CustomizerOptions/CustomizerOptions';
 import * as actions from '../../store/actions';
 
+import { Segment } from 'semantic-ui-react';
+
 export class DrinkCustomizer extends Component {
   state = {
     placingOrder: false
@@ -28,9 +30,6 @@ export class DrinkCustomizer extends Component {
     return (
       <div>
         {this.state.placingOrder ? <Redirect to="/checkout" /> : null}
-        <Drink
-          drinkOrder={this.props.drinkOrder}
-          price={this.props.price} />
         <CustomizerOptions
           onPlaceOrder={this.handlePlaceOrder}
           drinkOrder={this.props.drinkOrder}
@@ -38,6 +37,7 @@ export class DrinkCustomizer extends Component {
           onRemoveAddOn={this.handleRemoveAddOn}
           onAddAddOn={this.props.onAddAddOn}
           onChooseIceOrSugarLevel={this.props.onChooseIceOrSugarLevel}
+          price={this.props.price}
           drinkOptions={this.props.drinkOptions} />
       </div>
     );
