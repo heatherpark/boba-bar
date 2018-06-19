@@ -9,7 +9,6 @@ const AddOn = props => (
   
       <Label.Detail
         as="a"
-        circular
         size="mini"
         onClick={() => props.onRemoveAddOn(props.value, props.price)}
         className="remove">
@@ -17,7 +16,6 @@ const AddOn = props => (
       </Label.Detail>
       <Label.Detail
         as="a"
-        circular
         size="mini"
         onClick={() => props.onAddAddOn(props.value, props.price)}
         className="add">
