@@ -39,10 +39,11 @@ class Checkout extends Component {
           <CheckoutForm
             drinkOrder={this.props.drinkOrder}
             price={this.props.price}
+            userId={this.props.userId}
+            token={this.props.token}
             checkedOut={this.props.checkedOut}
             checkingOut={this.props.checkingOut}
-            onCheckOut={this.props.onCheckOut}
-          />
+            onCheckOut={this.props.onCheckOut} />
         </Modal>
       </div>
     );
@@ -55,13 +56,14 @@ const mapStateToProps = state => {
     price: state.drinkCustomizer.price,
     checkedOut: state.orders.checkedOut,
     checkingOut: state.orders.checkingOut,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckOut: (drinkOrder) => dispatch(actions.checkOut(drinkOrder))
+    onCheckOut: (drinkOrder, token) => dispatch(actions.checkOut(drinkOrder, token))
   };
 };
 
