@@ -3,6 +3,7 @@ import React from 'react';
 import Base from '../Customization/Base/Base';
 import AddOn from '../Customization/AddOn/AddOn';
 import IceAndSugar from '../Customization/IceAndSugar/IceAndSugar';
+import styles from './CustomizerOptions.css';
 
 import { Button, Segment, List, Header } from 'semantic-ui-react';
 
@@ -85,65 +86,61 @@ const CustomizerOptions = props => {
   }
 
   return (
-    <div>
-      <Segment.Group compact>
-        <Segment>
-          <Header as="h3">
-            base: &nbsp;
+    <div className={styles.options} compact>
+      <Segment>
+        <Header as="h3">
+          Base: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-              {props.drinkOrder
-                ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
-                : null}
-            </span>
-          </Header>
-          {renderBases(props.drinkOptions.bases)}
-        </Segment>
-        <Segment>
-          <Header as="h3">
-            add-ons: &nbsp;
+            {props.drinkOrder
+              ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
+              : null}
+          </span>
+        </Header>
+        {renderBases(props.drinkOptions.bases)}
+      </Segment>
+      <Segment>
+        <Header as="h3">
+          Add-ons: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-              {props.drinkOrder
-                ? renderChosenAddOns(props.drinkOrder.addOns)
-                : null}
-            </span>
-          </Header>
-          {renderAddOns(props.drinkOptions.addOns)}
-        </Segment>
-        <Segment>
-          <Header as="h3">
-            ice: &nbsp;
+            {props.drinkOrder
+              ? renderChosenAddOns(props.drinkOrder.addOns)
+              : null}
+          </span>
+        </Header>
+        {renderAddOns(props.drinkOptions.addOns)}
+      </Segment>
+      <Segment>
+        <Header as="h3">
+          Ice: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-              {props.drinkOrder
-                ? props.drinkOrder.ice
-                : null}
-            </span>
-          </Header>
-          {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
-        </Segment>
-        <Segment>
-          <Header as="h3">
-            sugar: &nbsp;
+            {props.drinkOrder
+              ? props.drinkOrder.ice
+              : null}
+          </span>
+        </Header>
+        {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
+      </Segment>
+      <Segment>
+        <Header as="h3">
+          Sugar: &nbsp;
               <span style={{ fontWeight: 'normal' }}>
-              {props.drinkOrder
-                ? props.drinkOrder.sugar
-                : null}
-            </span>
-          </Header>
-          {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
-        </Segment>
-        <Segment>
-          <Header as="h3">
-            Total: ${props.price}
-          </Header>
-        </Segment>
-        <Segment>
-          <Button
-            primary
-            onClick={props.onPlaceOrder}
-            fluid
-            disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</Button>
-        </Segment>
-      </Segment.Group>
+            {props.drinkOrder
+              ? props.drinkOrder.sugar
+              : null}
+          </span>
+        </Header>
+        {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
+      </Segment>
+      <Segment>
+        <Header as="h3">
+          Total: ${props.price}
+        </Header>
+      </Segment>
+      <Button
+        primary
+        onClick={props.onPlaceOrder}
+        fluid
+        disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</Button>
     </div>
   );
 };

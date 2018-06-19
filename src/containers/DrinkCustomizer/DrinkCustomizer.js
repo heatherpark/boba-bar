@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Drink from '../../components/Drink/Drink';
 import CustomizerOptions from '../../components/Drink/CustomizerOptions/CustomizerOptions';
 import * as actions from '../../store/actions';
-
-import { Segment } from 'semantic-ui-react';
 
 export class DrinkCustomizer extends Component {
   state = {

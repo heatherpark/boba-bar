@@ -1,25 +1,30 @@
 import React from 'react';
 
-import { Button } from 'semantic-ui-react';
+import { Label, Icon, Button } from 'semantic-ui-react';
 
 const AddOn = props => (
-  <React.Fragment>
-    <Button
-      size="mini"
-      basic
-      compact
-      onClick={() => props.onRemoveAddOn(props.value, props.price)}
-      className="remove">-</Button>
-
-    {props.displayName} ({props.price})
-
-    <Button
-      size="mini"
-      basic
-      compact
-      onClick={() => props.onAddAddOn(props.value, props.price)}
-      className="add">+</Button>
-  </React.Fragment>
+  <div>
+    <Label size="medium">
+      {props.displayName} (${props.price})
+  
+      <Label.Detail
+        as="a"
+        circular
+        size="mini"
+        onClick={() => props.onRemoveAddOn(props.value, props.price)}
+        className="remove">
+        <Icon name="minus" />
+      </Label.Detail>
+      <Label.Detail
+        as="a"
+        circular
+        size="mini"
+        onClick={() => props.onAddAddOn(props.value, props.price)}
+        className="add">
+        <Icon name="plus" />
+      </Label.Detail>
+    </Label>
+  </div>
 );
 
 export default AddOn;
