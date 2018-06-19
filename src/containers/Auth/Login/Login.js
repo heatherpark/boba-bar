@@ -17,7 +17,7 @@ import {
 class Login extends Component {
   state = {
     loginForm: loginFormData,
-    isSignup: true,
+    isSignup: false,
     formIsValid: false
   };
 
