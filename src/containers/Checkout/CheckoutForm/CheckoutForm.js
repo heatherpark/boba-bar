@@ -3,6 +3,9 @@ import { Redirect } from 'react-router-dom';
 
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
 import checkoutFormData from './checkout-form-data';
+import styles from './CheckoutForm.css';
+
+import { Form, Button } from 'semantic-ui-react';
 
 class CheckoutForm extends Component {
   state = {
@@ -60,16 +63,16 @@ class CheckoutForm extends Component {
     const { checkoutForm } = this.state;
 
     return (
-      <div>
+      <div className={styles.checkoutForm}>
         {this.state.checkedOut ? <Redirect to="/" /> : null}
 
         <h4>Please enter your information</h4>
-        <form>
+        <Form>
           {checkoutForm ? renderFormInputs(checkoutForm, this.handleInputChange) : null}
-          <button
+          <Button
             disabled={this.props.checkingOut}
-            onClick={this.handleSubmit}>Check Out</button>
-        </form>
+            onClick={this.handleSubmit}>Check Out</Button>
+        </Form>
       </div>
     );
   }
