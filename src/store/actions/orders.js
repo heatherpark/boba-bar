@@ -1,17 +1,22 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/orders';
 
-export const checkOut = orderData => {
-  console.log('order data: ', orderData);
-  // return async function (dispatch) {
-  //   try {
-  //     await axios.post('/orders.json', drinkOrder);
-  //     dispatch(checkoutSuccess());
-  //   } catch (error) {
-  //     console.error(error);
-  //     dispatch(checkoutFail());
-  //   }
-  // };
+export const checkOut = (orderData, token) => {
+  return async function (dispatch) {
+    try {
+      await axios('/orders.json', {
+        method: 'post',
+        params: {
+          auth: token
+        },
+        data: orderData
+      });
+      dispatch(checkoutSuccess());
+    } catch (error) {
+      console.error(error);
+      dispatch(checkoutFail());
+    }
+  };
 };
 
 export const checkoutStart = () => ({
@@ -32,12 +37,12 @@ export const fetchOrders = (token, userId) => {
 
     const params = {
       auth: token,
-      orderBy: 'userId',
+      orderBy: '"' + userId + '"',
       equalTo: userId
     };
 
     try {
-      const response = await axios.get('/orders.json', { params });
+      const response = await axios.get('/orders.json' + '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"');
       const orders = [];
 
       for (let key in response.data) {
