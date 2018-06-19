@@ -15,9 +15,7 @@ class App extends Component {
   render() {
     return (
       <Container>
-        {this.props.location.pathname !== "/login"
-          ? <Navigation isAuthenticated={this.props.isAuthenticated} />
-          : null}
+        <Navigation isAuthenticated={this.props.isAuthenticated} />
         <Switch>
           <Route path="/checkout" component={Checkout} />
           <Route path="/orders" component={Orders} />

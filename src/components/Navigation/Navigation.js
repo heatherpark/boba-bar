@@ -6,7 +6,7 @@ import { Menu } from 'semantic-ui-react';
 
 const Navigation = props => {
   return (
-    <Menu>
+    <Menu secondary>
       <NavigationItem link="/" exact>Drink Customizer</NavigationItem>
       {props.isAuthenticated
         ? <NavigationItem link="/orders">My Orders</NavigationItem>
