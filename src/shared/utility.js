@@ -52,9 +52,8 @@ export const renderFormInputs = (formData, changeHandler) => {
 		const config = formData[key];
 
 		inputs.push(
-			<Form.Field>
+			<Form.Field key={key}>
 				<Input
-					key={key}
 					elementType={config.elementType}
 					elementConfig={config.elementConfig}
 					value={config.value}
