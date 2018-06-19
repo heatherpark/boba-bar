@@ -55,8 +55,8 @@ class CheckoutForm extends Component {
       customerInfo: checkoutFormData,
       userId: this.props.userId
     };
-
-    this.props.onCheckOut(order);
+    
+    this.props.onCheckOut(order, this.props.token);
   };
 
   render() {
