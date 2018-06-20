@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Order from '../../components/Order/Order';
 
+import { Segment } from 'semantic-ui-react';
+
 export class Orders extends Component {
   componentDidMount() {
     this.props.onFetchOrders(this.props.token, this.props.userId);
@@ -11,15 +13,15 @@ export class Orders extends Component {
 
   renderOrders(orders) {
     return orders.map(order => {
-      return <Order order={order} />;
+      return <Order price={order.price} order={order.drinkOrder} />;
     });
   }
 
   render() {
     return (
-      <div>
+      <Segment.Group compact>
         {this.props.orders ? this.renderOrders(this.props.orders) : null}
-      </div>
+      </Segment.Group>
     );
   }
 }
