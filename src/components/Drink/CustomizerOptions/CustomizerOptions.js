@@ -140,7 +140,9 @@ const CustomizerOptions = props => {
         primary
         onClick={props.onPlaceOrder}
         fluid
-        disabled={!drinkOrderIsValid(props.drinkOrder)}>Buy Drink</Button>
+        disabled={!drinkOrderIsValid(props.drinkOrder)}>
+        {props.isAuthenticated ? 'Buy Drink' : 'Log in to buy drink'}
+      </Button>
     </div>
   );
 };
