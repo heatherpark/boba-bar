@@ -3,9 +3,10 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import CheckoutForm from './CheckoutForm/CheckoutForm';
+import Drink from '../../components/Drink/Drink';
 import * as actions from '../../store/actions';
 
-import { Button, Modal } from 'semantic-ui-react';
+import { Segment, Button, Modal } from 'semantic-ui-react';
 
 class Checkout extends Component {
   state = {
@@ -27,14 +28,24 @@ class Checkout extends Component {
       <div>
         {this.state.checkoutCanceled ? <Redirect to="/" /> : null}
 
-        <Button 
-          primary
-          onClick={this.handleCheckoutContinued}>Check out</Button>
-        <Button 
-          secondary
-          onClick={this.handleCheckoutCanceled}>Cancel</Button>
-        
-        <Modal 
+        <Segment.Group compact>
+          <Segment>
+            <Drink
+              price={this.props.price}
+              drinkOrder={this.props.drinkOrder} />
+          </Segment>
+
+          <Segment>
+            <Button
+              primary
+              onClick={this.handleCheckoutContinued}>Check out</Button>
+            <Button
+              secondary
+              onClick={this.handleCheckoutCanceled}>Cancel</Button>
+          </Segment>
+        </Segment.Group>
+
+        <Modal
           size="tiny"
           open={this.state.checkoutConfirmed}>
           <CheckoutForm

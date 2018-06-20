@@ -42,13 +42,13 @@ const Drink = props => {
   }
 
   return (
-    <Segment compact>
+    <div>
       <Header as="h3">Your drink order:</Header>
       <List>
         {renderDrinkOrder(props.drinkOrder)}
         <p className="price">Total: ${props.price}</p>
       </List>
-    </Segment>
+    </div>
   );
 };
 
