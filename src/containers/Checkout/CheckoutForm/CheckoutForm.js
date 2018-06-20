@@ -64,8 +64,6 @@ class CheckoutForm extends Component {
 
     return (
       <div className={styles.checkoutForm}>
-        {this.state.checkedOut ? <Redirect to="/" /> : null}
-
         <h4>Please enter your information</h4>
         <Form>
           {checkoutForm ? renderFormInputs(checkoutForm, this.handleInputChange) : null}
