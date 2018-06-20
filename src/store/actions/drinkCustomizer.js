@@ -59,14 +59,16 @@ export const setDrinkOrderDefault = drinkOptions => ({
   drinkOrder: defaultDrinkOrder(drinkOptions)
 });
 
-export const initDrinkCustomizer = () => {
+export const initDrinkCustomizer = isCustomizing => {
   return async function (dispatch) {
     try {
       const response = await axios.get('/drink-options.json');
       const drinkOptions = response.data;
       
       dispatch(setDrinkOptions(drinkOptions));
-      dispatch(setDrinkOrderDefault(drinkOptions));
+      if (!isCustomizing) {
+        dispatch(setDrinkOrderDefault(drinkOptions));
+      }
     } catch (error) {
       console.error(error);
     }
