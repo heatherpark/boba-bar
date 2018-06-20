@@ -12,7 +12,9 @@ export class DrinkCustomizer extends Component {
   };
 
   componentDidMount() {
-    this.props.initDrinkCustomizer();
+    if (!this.props.isCustomizing) {
+      this.props.initDrinkCustomizer();
+    }
   }
 
   handlePlaceOrder = () => {
