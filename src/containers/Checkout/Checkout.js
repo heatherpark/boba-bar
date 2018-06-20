@@ -57,8 +57,8 @@ class Checkout extends Component {
   renderSubmitMessage(checkoutSuccessful) {
     return (
       <Message
-        negative={!checkoutSuccessful}
-        positive={checkoutSuccessful}>
+        positive={checkoutSuccessful}
+        negative={!checkoutSuccessful}>
         <Message.Header>
           {checkoutSuccessful ? 'Checkout succesful!' : 'Something went wrong!'}
         </Message.Header>
@@ -74,7 +74,7 @@ class Checkout extends Component {
       <div>
         {this.state.checkoutCanceled ? <Redirect to="/" /> : null}
 
-        {this.state.checkoutFormSubmitted ? this.renderSubmitMessage(this.props.checkedOut) : null}
+        {this.state.checkoutFormSubmitted && this.props.checkedOut ? this.renderSubmitMessage(this.props.checkedOut) : null}
 
         {!this.state.checkoutFormSubmitted ? (
           <Segment.Group compact>
@@ -85,23 +85,21 @@ class Checkout extends Component {
             </Segment>
 
             <Segment>
-              <Button
-                primary
-                onClick={this.handleCheckoutContinued}>Check out</Button>
+              <Modal
+                trigger={<Button
+                  primary
+                  onClick={this.handleCheckoutContinued}>Check out</Button>}
+                size="tiny">
+                <CheckoutForm
+                  checkingOut={this.props.checkingOut}
+                  onOrderSubmit={this.handleOrderSubmit} />
+              </Modal>
               <Button
                 secondary
                 onClick={this.handleCheckoutCanceled}>Cancel</Button>
             </Segment>
           </Segment.Group>
         ) : null}
-
-        <Modal
-          size="tiny"
-          open={this.state.checkoutConfirmed}>
-          <CheckoutForm
-            checkingOut={this.props.checkingOut}
-            onOrderSubmit={this.handleOrderSubmit} />
-        </Modal>
       </div>
     );
   }
