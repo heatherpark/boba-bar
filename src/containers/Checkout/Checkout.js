@@ -11,8 +11,15 @@ import { Segment, Button, Modal } from 'semantic-ui-react';
 class Checkout extends Component {
   state = {
     checkoutConfirmed: false,
-    checkoutCanceled: false
+    checkoutCanceled: false,
+    checkoutFormSubmitted: false
   };
+
+  componentDidUpdate() {
+    if (this.state.checkoutFormSubmitted && this.state.checkoutConfirmed) {
+      this.handleCheckoutFormSubmitted();
+    }
+  }
 
   handleCheckoutContinued = () => {
     this.setState({ checkoutConfirmed: true });
@@ -40,7 +47,22 @@ class Checkout extends Component {
     };
     
     this.props.onCheckOut(order, this.props.token);
+    this.setState({ checkoutFormSubmitted: true });
   };
+
+  handleCheckoutFormSubmitted = () => {
+    this.setState({ checkoutConfirmed: false });
+
+    if (this.props.checkedOut) {
+      this.displayMessage(true);
+    } else if (!this.props.checkedOut) {
+      this.displayMessage(false);
+    }
+  };
+
+  displayMessage(checkoutSuccessful) {
+    console.log('displaying message!', checkoutSuccessful);
+  }
 
   render() {
     return (
@@ -67,7 +89,9 @@ class Checkout extends Component {
         <Modal
           size="tiny"
           open={this.state.checkoutConfirmed}>
-          <CheckoutForm onOrderSubmit={this.handleOrderSubmit} />
+          <CheckoutForm 
+            checkingOut={this.props.checkingOut}
+            onOrderSubmit={this.handleOrderSubmit} />
         </Modal>
       </div>
     );
