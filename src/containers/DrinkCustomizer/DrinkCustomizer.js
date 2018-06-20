@@ -61,7 +61,8 @@ const mapStateToProps = state => {
     drinkOptions: state.drinkCustomizer.drinkOptions,
     drinkOrder: state.drinkCustomizer.drinkOrder,
     price: state.drinkCustomizer.price,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    isCustomizing: state.drinkCustomizer.isCustomizing
   };
 }
 
