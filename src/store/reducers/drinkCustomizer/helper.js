@@ -5,6 +5,11 @@ export const initialState = {
   isCustomizing: false
 };
 
+export const setIsCustomizing = (state, action) => ({
+  ...state,
+  isCustomizing: action.isCustomizing
+});
+
 export function addOption(state, action) {
   return {
     ...state,
@@ -83,8 +88,8 @@ export function chooseIceOrSugarLevel(state, action) {
     drinkOrder: {
       ...state.drinkOrder,
       [action.item]: action.level,
-      isCustomizing: true
-    }
+    },
+    isCustomizing: true
   };
 }
 
