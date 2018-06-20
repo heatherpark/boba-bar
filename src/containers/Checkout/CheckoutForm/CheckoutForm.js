@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
 import checkoutFormData from './checkout-form-data';
 import styles from './CheckoutForm.css';
 
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Header } from 'semantic-ui-react';
 
 class CheckoutForm extends Component {
   state = {
@@ -43,16 +42,23 @@ class CheckoutForm extends Component {
   
 
   render() {
-    const { checkoutForm } = this.state;
-
     return (
       <div className={styles.checkoutForm}>
-        <h4>Please enter your information</h4>
+        <Header as="h4">Please enter your information</Header>
         <Form>
-          {checkoutForm ? renderFormInputs(checkoutForm, this.handleInputChange) : null}
-          <Button
+          <Form.Group widths="equal">
+            <Form.Input fluid label="First name" placeholder="First name" />
+            <Form.Input fluid label="Last name" placeholder="Last name" />
+          </Form.Group>
+          <Form.Input width={16} label="Address" placeholder="Address" />
+          <Form.Group>
+            <Form.Input width={8} label="City" placeholder="City" />
+            <Form.Input width={3} label="State" placeholder="State" />
+            <Form.Input width={5} label="Zip Code" placeholder="Zip Code" />
+          </Form.Group>
+          <Form.Button
             disabled={this.props.checkingOut}
-            onClick={event => this.props.onOrderSubmit(event, this.state.checkoutForm)}>Check Out</Button>
+            onClick={event => this.props.onOrderSubmit(event, this.state.checkoutForm)}>Check Out</Form.Button>
         </Form>
       </div>
     );
