@@ -7,11 +7,12 @@ import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/ut
 import * as actions from '../../../store/actions';
 import styles from './Login.css';
 
-import { 
-  Button, 
-  Form, 
-  Header, 
-  Segment 
+import {
+  Button,
+  Form,
+  Header,
+  Segment,
+  Message
 } from 'semantic-ui-react';
 
 class Login extends Component {
@@ -66,6 +67,19 @@ class Login extends Component {
     });
   };
 
+  renderErrorMessage(error) {
+    const errors = {
+      EMAIL_EXISTS: 'This email address is already in use.',
+      INVALID_PASSWORD: 'The password you\'ve entered is incorrect.'
+    };
+
+    return (
+      <Message negative size="small">
+        {errors[error]}
+      </Message>
+    );
+  }
+
   render() {
     const { loginForm } = this.state;
 
@@ -89,6 +103,7 @@ class Login extends Component {
               {this.state.isSignup ? 'Sign Up' : 'Log In'}
             </Button>
           </Form>
+          {this.props.error ? this.renderErrorMessage(this.props.error) : null}
         </Segment>
         <Segment textAlign="center">
           <p>
@@ -96,7 +111,7 @@ class Login extends Component {
               ? 'Already have an account?'
               : 'New user?'}
             &nbsp;&nbsp;
-            <a 
+            <a
               onClick={this.handleSwitchAuthMode}
               href="#">
               {this.state.isSignup
@@ -113,7 +128,8 @@ class Login extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath
+    authRedirectPath: state.auth.authRedirectPath,
+    error: state.auth.error
   };
 };
 
