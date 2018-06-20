@@ -18,6 +18,7 @@ class Checkout extends Component {
   };
 
   handleCheckoutCanceled = () => {
+    this.props.onSetIsCustomizing(false);
     this.setState({ checkoutCanceled: true });
   };
 
