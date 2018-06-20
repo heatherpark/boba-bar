@@ -71,7 +71,7 @@ class Login extends Component {
 
     return (
       <div className={styles.Login}>
-        {this.props.isAuthenticated ? <Redirect to="/" /> : null}
+        {this.props.isAuthenticated ? <Redirect to={this.props.authRedirectPath} /> : null}
         <Header as="h2" textAlign="center">
           {this.state.isSignup
             ? 'Sign up for an account!'
