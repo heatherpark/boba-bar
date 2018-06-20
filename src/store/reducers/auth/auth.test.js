@@ -60,6 +60,7 @@ describe('auth reducer', () => {
 
     const expectedState = {
       ...initialState,
+      authRedirectPath: '/',
       token: null,
       userId: null
     };
@@ -76,7 +77,7 @@ describe('auth reducer', () => {
 
     const expectedState = {
       ...initialState,
-      path: action.path
+      authRedirectPath: action.path
     };  
 
     expect(nextState).toEqual(expectedState);
