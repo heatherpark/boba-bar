@@ -66,7 +66,8 @@ describe('drinkCustomizer reducer', () => {
           type: action.baseType
         }
       },
-      price: action.price
+      price: action.price,
+      isCustomizing: true
     };
 
     expect(nextState).toEqual(expectedState);
@@ -89,7 +90,8 @@ describe('drinkCustomizer reducer', () => {
             [action.addOn]: addOnsState[action.addOn] + 1
           }
         },
-        price: initialState.price + action.price
+        price: initialState.price + action.price,
+        isCustomizing: true
       };
 
       expect(nextState).toEqual(expectedState);
@@ -112,7 +114,8 @@ describe('drinkCustomizer reducer', () => {
             [action.addOn]: addOnsState[action.addOn] - 1
           }
         },
-        price: initialState.price - action.price
+        price: initialState.price - action.price,
+        isCustomizing: true
       };
 
       expect(nextState).toEqual(expectedState);
@@ -130,7 +133,8 @@ describe('drinkCustomizer reducer', () => {
       ...initialState,
       drinkOrder: {
         ...initialState.drinkOrder,
-        [action.item]: action.level
+        [action.item]: action.level,
+        isCustomizing: true
       }
     };
 
