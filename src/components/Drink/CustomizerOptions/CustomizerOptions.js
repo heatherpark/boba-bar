@@ -91,7 +91,7 @@ const CustomizerOptions = props => {
         <Header as="h3">
           Base: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder
+            {props.drinkOrder && props.isCustomizing
               ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
               : null}
           </span>
@@ -102,7 +102,7 @@ const CustomizerOptions = props => {
         <Header as="h3">
           Add-ons: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder
+            {props.drinkOrder && props.isCustomizing
               ? renderChosenAddOns(props.drinkOrder.addOns)
               : null}
           </span>
@@ -113,7 +113,7 @@ const CustomizerOptions = props => {
         <Header as="h3">
           Ice: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder
+            {props.drinkOrder && props.isCustomizing
               ? props.drinkOrder.ice
               : null}
           </span>
@@ -124,7 +124,7 @@ const CustomizerOptions = props => {
         <Header as="h3">
           Sugar: &nbsp;
               <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder
+            {props.drinkOrder && props.isCustomizing
               ? props.drinkOrder.sugar
               : null}
           </span>

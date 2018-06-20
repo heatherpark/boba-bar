@@ -43,6 +43,7 @@ export class DrinkCustomizer extends Component {
           onAddAddOn={this.props.onAddAddOn}
           onChooseIceOrSugarLevel={this.props.onChooseIceOrSugarLevel}
           price={this.props.price}
+          isCustomizing={this.props.isCustomizing}
           isAuthenticated={this.props.isAuthenticated}
           drinkOptions={this.props.drinkOptions} />
       </div>
