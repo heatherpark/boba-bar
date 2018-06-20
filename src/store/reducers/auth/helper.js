@@ -2,7 +2,8 @@ export const initialState = {
   token: null,
   userId: null,
   loggingIn: false,
-  error: null
+  error: null,
+  authRedirectPath: '/'
 };
 
 export const authStart = state => ({
