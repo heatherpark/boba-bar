@@ -38,7 +38,8 @@ export function chooseBase(state, action) {
         flavor: action.flavor
       },
     },
-    price: updatedDrinkPrice
+    price: updatedDrinkPrice,
+    isCustomizing: true
   };
 }
 
@@ -54,7 +55,8 @@ export function addAddOn(state, action) {
         [action.addOn]: addOns[action.addOn] + 1
       },
     },
-    price: state.price + action.price
+    price: state.price + action.price,
+    isCustomizing: true
   };
 }
 
@@ -70,7 +72,8 @@ export function removeAddOn(state, action) {
         [action.addOn]: addOns[action.addOn] - 1
       }
     },
-    price: state.price - action.price
+    price: state.price - action.price,
+    isCustomizing: true
   };
 }
 
@@ -79,7 +82,8 @@ export function chooseIceOrSugarLevel(state, action) {
     ...state,
     drinkOrder: {
       ...state.drinkOrder,
-      [action.item]: action.level
+      [action.item]: action.level,
+      isCustomizing: true
     }
   };
 }
