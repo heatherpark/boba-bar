@@ -73,7 +73,7 @@ const mapDispatchToProps = dispatch => {
     onChooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
     onRemoveAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price)),
     onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
-    initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
+    initDrinkCustomizer: isCustomizing => dispatch(actions.initDrinkCustomizer(isCustomizing))
   }
 };
 
