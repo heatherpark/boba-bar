@@ -27,8 +27,9 @@ export const checkoutSuccess = () => ({
   type: actionTypes.CHECKOUT_SUCCESS
 });
 
-export const checkoutFail = () => ({
-  type: actionTypes.CHECKOUT_FAIL
+export const checkoutFail = error => ({
+  type: actionTypes.CHECKOUT_FAIL,
+  error
 });
 
 export const fetchOrders = (token, userId) => {
@@ -54,7 +55,7 @@ export const fetchOrders = (token, userId) => {
 
       dispatch(fetchOrdersSuccess(orders));
     } catch (error) {
-      dispatch(fetchOrdersFail());
+      dispatch(fetchOrdersFail(error));
     }
   }
 };

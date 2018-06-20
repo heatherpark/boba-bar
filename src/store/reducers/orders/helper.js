@@ -2,13 +2,15 @@ export const initialState = {
   checkingOut: false,
   checkedOut: false,
   fetchingOrders: false,
-  orders: []
+  orders: [],
+  checkoutError: null
 };
 
 export const checkoutStart = state => {
   return {
     ...state,
-    checkingOut: true
+    checkingOut: true,
+    error: null
   };
 };
 
@@ -20,11 +22,12 @@ export const checkoutSuccess = state => {
   };
 };
 
-export const checkoutFail = state => {
+export const checkoutFail = (state, action) => {
   return {
     ...state,
     checkedOut: false,
-    checkingOut: false
+    checkingOut: false,
+    checkoutError: action.error
   };
 };
 

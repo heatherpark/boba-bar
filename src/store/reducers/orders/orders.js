@@ -10,7 +10,7 @@ const reducer = (state = helpers.initialState, action) => {
       return helpers.checkoutSuccess(state);
 
     case actionTypes.CHECKOUT_FAIL:
-      return helpers.checkoutFail(state);
+      return helpers.checkoutFail(state, action);
 
     case actionTypes.FETCH_ORDERS_START:
       return helpers.fetchOrdersStart(state);
