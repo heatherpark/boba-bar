@@ -14,7 +14,7 @@ export const checkOut = (orderData, token) => {
       dispatch(checkoutSuccess());
     } catch (error) {
       console.error(error);
-      dispatch(checkoutFail());
+      dispatch(checkoutFail(error));
     }
   };
 };

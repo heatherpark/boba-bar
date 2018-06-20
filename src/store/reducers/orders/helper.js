@@ -9,6 +9,7 @@ export const initialState = {
 export const checkoutStart = state => {
   return {
     ...state,
+    checkedOut: true,
     checkingOut: true,
     error: null
   };
@@ -25,7 +26,7 @@ export const checkoutSuccess = state => {
 export const checkoutFail = (state, action) => {
   return {
     ...state,
-    checkedOut: false,
+    checkedOut: true,
     checkingOut: false,
     checkoutError: action.error
   };

@@ -11,6 +11,7 @@ describe('orders reducer', () => {
 
     const expectedState = {
       ...initialState,
+      checkedOut: true,
       checkingOut: true,
       error: null
     };
@@ -48,7 +49,7 @@ describe('orders reducer', () => {
 
     const expectedState = {
       ...initialState,
-      checkedOut: false,
+      checkedOut: true,
       checkingOut: false,
       checkoutError: 'Checkout failed'
     };

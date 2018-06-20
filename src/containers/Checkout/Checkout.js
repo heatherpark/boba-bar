@@ -46,8 +46,8 @@ class Checkout extends Component {
       userId: this.props.userId
     };
 
-    this.props.onCheckOut(order, this.props.token);
     this.setState({ checkoutFormSubmitted: true });
+    this.props.onCheckOut(order, this.props.token);
   };
 
   handleCheckoutFormSubmitted = () => {
@@ -74,7 +74,7 @@ class Checkout extends Component {
       <div>
         {this.state.checkoutCanceled ? <Redirect to="/" /> : null}
 
-        {this.state.checkoutFormSubmitted && this.props.checkedOut ? this.renderSubmitMessage(this.props.checkedOut) : null}
+        {this.state.checkoutFormSubmitted && this.props.checkedOut ? this.renderSubmitMessage(!this.props.checkoutError) : null}
 
         {!this.state.checkoutFormSubmitted ? (
           <Segment.Group compact>
@@ -112,7 +112,8 @@ const mapStateToProps = state => {
     checkedOut: state.orders.checkedOut,
     checkingOut: state.orders.checkingOut,
     userId: state.auth.userId,
-    token: state.auth.token
+    token: state.auth.token,
+    checkoutError: state.orders.checkoutError
   };
 };
 
