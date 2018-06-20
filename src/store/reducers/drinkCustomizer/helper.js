@@ -1,7 +1,8 @@
 export const initialState = {
   drinkOptions: null,
   drinkOrder: null,
-  price: 0
+  price: 0,
+  isCustomizing: false
 };
 
 export function addOption(state, action) {
