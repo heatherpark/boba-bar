@@ -7,7 +7,8 @@ import * as actions from '../../store/actions';
 
 export class DrinkCustomizer extends Component {
   state = {
-    placingOrder: false
+    placingOrder: false,
+    redirectPath: '/checkout'
   };
 
   componentDidMount() {
@@ -15,6 +16,10 @@ export class DrinkCustomizer extends Component {
   }
 
   handlePlaceOrder = () => {
+    if (!this.props.isAuthenticated) {
+      this.setState({ redirectPath: '/login' });
+    }
+
     this.setState({ placingOrder: true });
   };
 
@@ -26,7 +31,7 @@ export class DrinkCustomizer extends Component {
   renderCustomizer() {
     return (
       <div>
-        {this.state.placingOrder ? <Redirect to="/checkout" /> : null}
+        {this.state.placingOrder ? <Redirect to={this.state.redirectPath} /> : null}
         <CustomizerOptions
           onPlaceOrder={this.handlePlaceOrder}
           drinkOrder={this.props.drinkOrder}
@@ -35,6 +40,7 @@ export class DrinkCustomizer extends Component {
           onAddAddOn={this.props.onAddAddOn}
           onChooseIceOrSugarLevel={this.props.onChooseIceOrSugarLevel}
           price={this.props.price}
+          isAuthenticated={this.props.isAuthenticated}
           drinkOptions={this.props.drinkOptions} />
       </div>
     );
@@ -53,7 +59,8 @@ const mapStateToProps = state => {
   return {
     drinkOptions: state.drinkCustomizer.drinkOptions,
     drinkOrder: state.drinkCustomizer.drinkOrder,
-    price: state.drinkCustomizer.price
+    price: state.drinkCustomizer.price,
+    isAuthenticated: state.auth.isAuthenticated
   };
 }
 
