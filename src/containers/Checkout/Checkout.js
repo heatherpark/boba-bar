@@ -6,7 +6,7 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import Drink from '../../components/Drink/Drink';
 import * as actions from '../../store/actions';
 
-import { Segment, Button, Modal } from 'semantic-ui-react';
+import { Segment, Button, Modal, Message } from 'semantic-ui-react';
 
 class Checkout extends Component {
   state = {
@@ -52,22 +52,29 @@ class Checkout extends Component {
 
   handleCheckoutFormSubmitted = () => {
     this.setState({ checkoutConfirmed: false });
-
-    if (this.props.checkedOut) {
-      this.displayMessage(true);
-    } else if (!this.props.checkedOut) {
-      this.displayMessage(false);
-    }
   };
 
-  displayMessage(checkoutSuccessful) {
-    console.log('displaying message!', checkoutSuccessful);
+  renderSubmitMessage(checkoutSuccessful) {
+    return (
+      <Message 
+        negative={!checkoutSuccessful}
+        positive={checkoutSuccessful}>
+        <Message.Header>
+          {checkoutSuccessful ? 'Checkout succesful!' : 'Something went wrong!'}
+        </Message.Header>
+        <p>
+          {checkoutSuccessful ? 'Your drink is on its way.' : 'Sorry, we couldn\'t process your order.'}
+        </p>
+      </Message>
+    );
   }
 
   render() {
     return (
       <div>
         {this.state.checkoutCanceled ? <Redirect to="/" /> : null}
+
+        {this.state.checkoutFormSubmitted ? this.renderSubmitMessage(this.props.checkedOut) : null}
 
         <Segment.Group compact>
           <Segment>
