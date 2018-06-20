@@ -86,7 +86,7 @@ const CustomizerOptions = props => {
   }
 
   return (
-    <div className={styles.options} compact>
+    <div className={styles.options}>
       <Segment>
         <Header as="h3">
           Base: &nbsp;
