@@ -63,7 +63,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckOut: (drinkOrder, token) => dispatch(actions.checkOut(drinkOrder, token))
+    onCheckOut: (drinkOrder, token) => dispatch(actions.checkOut(drinkOrder, token)),
+    onSetIsCustomizing: isCustomizing => dispatch(actions.setIsCustomizing(isCustomizing))
   };
 };
 
