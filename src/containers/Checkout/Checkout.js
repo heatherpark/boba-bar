@@ -23,6 +23,25 @@ class Checkout extends Component {
     this.setState({ checkoutCanceled: true });
   };
 
+  handleOrderSubmit = (event, checkoutForm) => {
+    event.preventDefault();
+
+    const checkoutFormData = {};
+
+    for (let field in checkoutForm) {
+      checkoutFormData[field] = checkoutForm[field].value;
+    }
+
+    const order = {
+      drinkOrder: this.props.drinkOrder,
+      price: this.props.price,
+      customerInfo: checkoutFormData,
+      userId: this.props.userId
+    };
+    
+    this.props.onCheckOut(order, this.props.token);
+  };
+
   render() {
     return (
       <div>
@@ -48,14 +67,7 @@ class Checkout extends Component {
         <Modal
           size="tiny"
           open={this.state.checkoutConfirmed}>
-          <CheckoutForm
-            drinkOrder={this.props.drinkOrder}
-            price={this.props.price}
-            userId={this.props.userId}
-            token={this.props.token}
-            checkedOut={this.props.checkedOut}
-            checkingOut={this.props.checkingOut}
-            onCheckOut={this.props.onCheckOut} />
+          <CheckoutForm onOrderSubmit={this.handleOrderSubmit} />
         </Modal>
       </div>
     );

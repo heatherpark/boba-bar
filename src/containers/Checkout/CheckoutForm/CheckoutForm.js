@@ -40,24 +40,7 @@ class CheckoutForm extends Component {
     );
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const checkoutFormData = {};
-
-    for (let field in this.state.checkoutForm) {
-      checkoutFormData[field] = this.state.checkoutForm[field].value;
-    }
-
-    const order = {
-      drinkOrder: this.props.drinkOrder,
-      price: this.props.price,
-      customerInfo: checkoutFormData,
-      userId: this.props.userId
-    };
-    
-    this.props.onCheckOut(order, this.props.token);
-  };
+  
 
   render() {
     const { checkoutForm } = this.state;
@@ -69,7 +52,7 @@ class CheckoutForm extends Component {
           {checkoutForm ? renderFormInputs(checkoutForm, this.handleInputChange) : null}
           <Button
             disabled={this.props.checkingOut}
-            onClick={this.handleSubmit}>Check Out</Button>
+            onClick={event => this.props.onOrderSubmit(event, this.state.checkoutForm)}>Check Out</Button>
         </Form>
       </div>
     );
