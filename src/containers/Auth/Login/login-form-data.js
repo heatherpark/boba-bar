@@ -5,7 +5,7 @@ export default {
           type: 'email',
           placeholder: 'Email Address'
       },
-      value: '',
+      value: 'test@test.com',
       validation: {
           required: true,
           isEmail: true
@@ -19,7 +19,7 @@ export default {
           type: 'password',
           placeholder: 'Password'
       },
-      value: '',
+      value: '123123',
       validation: {
           required: true,
           minLength: 6

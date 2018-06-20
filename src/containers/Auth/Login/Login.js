@@ -84,8 +84,8 @@ class Login extends Component {
             {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
             <Button
               fluid
-              primary
-              disabled={!this.state.formIsValid}>
+              // disabled={!this.state.formIsValid}
+              primary>
               {this.state.isSignup ? 'Sign Up' : 'Log In'}
             </Button>
           </Form>
