@@ -133,9 +133,24 @@ describe('drinkCustomizer reducer', () => {
       ...initialState,
       drinkOrder: {
         ...initialState.drinkOrder,
-        [action.item]: action.level,
-        isCustomizing: true
-      }
+        [action.item]: action.level
+      },
+      isCustomizing: true
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles SET_IS_CUSTOMIZING', () => {
+    const action = {
+      type: actionTypes.SET_IS_CUSTOMIZING,
+      isCustomizing: true
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      ...initialState,
+      isCustomizing: true
     };
 
     expect(nextState).toEqual(expectedState);
