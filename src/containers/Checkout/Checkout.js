@@ -45,7 +45,7 @@ class Checkout extends Component {
       customerInfo: checkoutFormData,
       userId: this.props.userId
     };
-    
+
     this.props.onCheckOut(order, this.props.token);
     this.setState({ checkoutFormSubmitted: true });
   };
@@ -56,7 +56,7 @@ class Checkout extends Component {
 
   renderSubmitMessage(checkoutSuccessful) {
     return (
-      <Message 
+      <Message
         negative={!checkoutSuccessful}
         positive={checkoutSuccessful}>
         <Message.Header>
@@ -76,27 +76,29 @@ class Checkout extends Component {
 
         {this.state.checkoutFormSubmitted ? this.renderSubmitMessage(this.props.checkedOut) : null}
 
-        <Segment.Group compact>
-          <Segment>
-            <Drink
-              price={this.props.price}
-              drinkOrder={this.props.drinkOrder} />
-          </Segment>
+        {!this.state.checkoutFormSubmitted ? (
+          <Segment.Group compact>
+            <Segment>
+              <Drink
+                price={this.props.price}
+                drinkOrder={this.props.drinkOrder} />
+            </Segment>
 
-          <Segment>
-            <Button
-              primary
-              onClick={this.handleCheckoutContinued}>Check out</Button>
-            <Button
-              secondary
-              onClick={this.handleCheckoutCanceled}>Cancel</Button>
-          </Segment>
-        </Segment.Group>
+            <Segment>
+              <Button
+                primary
+                onClick={this.handleCheckoutContinued}>Check out</Button>
+              <Button
+                secondary
+                onClick={this.handleCheckoutCanceled}>Cancel</Button>
+            </Segment>
+          </Segment.Group>
+        ) : null}
 
         <Modal
           size="tiny"
           open={this.state.checkoutConfirmed}>
-          <CheckoutForm 
+          <CheckoutForm
             checkingOut={this.props.checkingOut}
             onOrderSubmit={this.handleOrderSubmit} />
         </Modal>
