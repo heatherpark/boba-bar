@@ -30,3 +30,8 @@ export const authLogout = state => ({
   token: null,
   userId: null
 });
+
+export const setAuthRedirectPath = (state, action) => ({
+  ...state,
+  path: action.path  
+});
