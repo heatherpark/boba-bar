@@ -1,8 +1,6 @@
 import React from 'react';
 
-import styles from './Drink.css';
-
-import { List, Segment, Header } from 'semantic-ui-react';
+import { List, Header } from 'semantic-ui-react';
 
 const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
@@ -20,7 +18,7 @@ const Drink = props => {
       }
 
       let element = <List.Item key={key}>
-        {key}: {content}</List.Item>;
+        <strong>{key}</strong>: {content}</List.Item>;
 
       elements.push(element);
     }
@@ -29,16 +27,15 @@ const Drink = props => {
   }
 
   function renderAddOns(addOns) {
-    const elements = [];
+    const addOnText = [];
 
-    for (let key in addOns) {
-      const quantity = addOns[key];
-
-      elements.push(<List.Item key={key}>
-        {key} x{quantity}</List.Item>);
+    for (let addOn in addOns) {
+      if (addOns[addOn] > 0) {
+        addOnText.push(addOn + ' ' + addOns[addOn]);
+      }
     }
 
-    return <ul>{elements}</ul>;
+    return addOnText.join(', ');
   }
 
   return (
@@ -46,8 +43,9 @@ const Drink = props => {
       <Header as="h3">Your drink order:</Header>
       <List>
         {renderDrinkOrder(props.drinkOrder)}
-        <p className="price">Total: ${props.price}</p>
       </List>
+      <p><strong>Total:</strong> ${props.price}</p>
+
     </div>
   );
 };
