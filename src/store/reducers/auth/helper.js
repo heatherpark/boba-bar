@@ -28,11 +28,12 @@ export const authFail = (state, action) => ({
 
 export const authLogout = state => ({
   ...state,
+  authRedirectPath: '/',
   token: null,
   userId: null
 });
 
 export const setAuthRedirectPath = (state, action) => ({
   ...state,
-  path: action.path  
+  authRedirectPath: action.path  
 });
