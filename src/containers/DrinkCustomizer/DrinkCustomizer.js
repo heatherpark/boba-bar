@@ -17,6 +17,7 @@ export class DrinkCustomizer extends Component {
 
   handlePlaceOrder = () => {
     if (!this.props.isAuthenticated) {
+      this.props.onSetAuthRedirectPath('/checkout');
       this.setState({ redirectPath: '/login' });
     }
 
@@ -70,6 +71,7 @@ const mapDispatchToProps = dispatch => {
     onChooseBase: (baseType, base, price) => dispatch(actions.chooseBase(baseType, base, price)),
     onChooseIceOrSugarLevel: (item, level) => dispatch(actions.chooseIceOrSugarLevel(item, level)),
     onRemoveAddOn: (addOn, price) => dispatch(actions.removeAddOn(addOn, price)),
+    onSetAuthRedirectPath: path => dispatch(action.setAuthRedirectPath(path)),
     initDrinkCustomizer: () => dispatch(actions.initDrinkCustomizer())
   }
 };
