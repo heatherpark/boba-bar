@@ -3,7 +3,8 @@ export {
   addAddOn,
   removeAddOn,
   chooseIceOrSugarLevel,
-  initDrinkCustomizer
+  initDrinkCustomizer,
+  setIsCustomizing
 } from './drinkCustomizer';
 
 export { 

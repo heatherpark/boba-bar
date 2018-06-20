@@ -1,6 +1,11 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/orders';
 
+export const setIsCustomizing = isCustomizing => ({
+  type: actionTypes.SET_IS_CUSTOMIZING,
+  isCustomizing
+});
+
 export const chooseBase = (baseType, flavor, price) => ({
   type: actionTypes.CHOOSE_BASE,
   baseType,
