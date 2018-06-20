@@ -66,4 +66,19 @@ describe('auth reducer', () => {
 
     expect(nextState).toEqual(expectedState);
   });
+
+  it('should handle SET_AUTH_REDIRECT_PATH', () => {
+    const action = {
+      type: actionTypes.SET_AUTH_REDIRECT_PATH,
+      path: '/checkout'
+    };
+    const nextState = reducer(initialState, action);
+
+    const expectedState = {
+      ...initialState,
+      path: action.path
+    };  
+
+    expect(nextState).toEqual(expectedState);
+  });
 });
