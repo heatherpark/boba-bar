@@ -21,6 +21,9 @@ const reducer = (state = helpers.initialState, action) => {
     case actionTypes.SET_DRINK_ORDER_DEFAULT:
       return helpers.setDrinkOrderDefault(state, action);
 
+    case actionTypes.SET_IS_CUSTOMIZING:
+      return helpers.setIsCustomizing(state, action);
+
     default: return state;
   }
 };
