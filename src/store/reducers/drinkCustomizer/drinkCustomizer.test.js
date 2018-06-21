@@ -3,7 +3,7 @@ import { initialState } from './helper';
 import { drinkOptions } from '../../../mock-data';
 import { defaultDrinkOrder } from '../../../mock-data';
 import * as actionTypes from '../../actions/actionTypes';
-
+// TODO: Fix variables
 describe('drinkCustomizer reducer', () => {
   let initialState;
   let addOnsState;
