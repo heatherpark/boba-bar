@@ -1,10 +1,5 @@
 export default {
   email: {
-      elementType: 'input',
-      elementConfig: {
-          type: 'email',
-          placeholder: 'Email Address'
-      },
       value: 'test@test.com',
       validation: {
           required: true,
@@ -14,11 +9,6 @@ export default {
       touched: false
   },
   password: {
-      elementType: 'input',
-      elementConfig: {
-          type: 'password',
-          placeholder: 'Password'
-      },
       value: '123123',
       validation: {
           required: true,
@@ -27,4 +17,4 @@ export default {
       valid: false,
       touched: false
   }
-}
+};
