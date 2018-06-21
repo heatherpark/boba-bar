@@ -5,7 +5,7 @@ const setAuthData = (token, userId, expiresIn) => {
   const expirationDate = new Date(
     new Date().getTime() + expiresIn * 1000
   );
-  
+
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
   localStorage.setItem('expirationDate', expirationDate);
@@ -29,9 +29,15 @@ export const setAuthRedirectPath = path => ({
   path
 });
 
-export const logout = () => ({
-  type: actionTypes.AUTH_LOGOUT
-});
+export const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('expirationDate');
+  localStorage.removeItem('userId');
+
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
 
 export const checkAuthTimeout = (expirationTime) => {
   return dispatch => {
@@ -55,9 +61,9 @@ export const auth = (email, password, isSignup) => {
       const response = isSignup
         ? await axios.post('/signupNewUser', authData)
         : await axios.post('/verifyPassword', authData);
-      const { 
-        expiresIn, 
-        idToken: token, 
+      const {
+        expiresIn,
+        idToken: token,
         localId: userId,
       } = response.data;
 

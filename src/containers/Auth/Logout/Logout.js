@@ -6,6 +6,7 @@ import * as actions from '../../../store/actions';
 
 class Logout extends Component {
   componentDidMount() {
+    this.props.onSetIsCustomizing(false);
     this.props.onLogout();
   }
 
@@ -16,7 +17,8 @@ class Logout extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch(actions.logout())
+    onLogout: () => dispatch(actions.logout()),
+    onSetIsCustomizing: isCustomizing => dispatch(actions.setIsCustomizing(isCustomizing))
   };
 };
 
