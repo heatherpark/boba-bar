@@ -3,19 +3,19 @@ import { initialState } from './helper';
 import { drinkOptions } from '../../../mock-data';
 import { defaultDrinkOrder } from '../../../mock-data';
 import * as actionTypes from '../../actions/actionTypes';
-// TODO: Fix variables
+
 describe('drinkCustomizer reducer', () => {
-  let initialState;
+  let mockInitialState;
   let addOnsState;
 
   beforeEach(() => {
-    initialState = {
+    mockInitialState = {
       ...initialState,
       drinkOrder: defaultDrinkOrder,
       price: 0
     };
 
-    addOnsState = initialState.drinkOrder.addOns;
+    addOnsState = mockInitialState.drinkOrder.addOns;
   });
 
   it('handles SET_OPTIONS', () => {
@@ -23,10 +23,10 @@ describe('drinkCustomizer reducer', () => {
       type: actionTypes.SET_OPTIONS,
       drinkOptions
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(mockInitialState, action);
 
     const expectedState = {
-      ...initialState,
+      ...mockInitialState,
       drinkOptions
     };
 
@@ -38,10 +38,10 @@ describe('drinkCustomizer reducer', () => {
       type: actionTypes.SET_DRINK_ORDER_DEFAULT,
       drinkOrder: defaultDrinkOrder
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(mockInitialState, action);
 
     const expectedState = {
-      ...initialState,
+      ...mockInitialState,
       drinkOrder: defaultDrinkOrder
     };
 
@@ -55,12 +55,12 @@ describe('drinkCustomizer reducer', () => {
       flavor: 'green',
       price: 2
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(mockInitialState, action);
 
     const expectedState = {
-      ...initialState,
+      ...mockInitialState,
       drinkOrder: {
-        ...initialState.drinkOrder,
+        ...mockInitialState.drinkOrder,
         base: {
           flavor: action.flavor,
           type: action.baseType
@@ -79,18 +79,18 @@ describe('drinkCustomizer reducer', () => {
         addOn: 'eggPudding',
         price: 0.75
       };
-      const nextState = reducer(initialState, action);
+      const nextState = reducer(mockInitialState, action);
 
       const expectedState = {
-        ...initialState,
+        ...mockInitialState,
         drinkOrder: {
-          ...initialState.drinkOrder,
+          ...mockInitialState.drinkOrder,
           addOns: {
             ...addOnsState,
             [action.addOn]: addOnsState[action.addOn] + 1
           }
         },
-        price: initialState.price + action.price,
+        price: mockInitialState.price + action.price,
         isCustomizing: true
       };
 
@@ -103,18 +103,18 @@ describe('drinkCustomizer reducer', () => {
         addOn: 'eggPudding',
         price: 0.75
       };
-      const nextState = reducer(initialState, action);
+      const nextState = reducer(mockInitialState, action);
 
       const expectedState = {
-        ...initialState,
+        ...mockInitialState,
         drinkOrder: {
-          ...initialState.drinkOrder,
+          ...mockInitialState.drinkOrder,
           addOns: {
             ...addOnsState,
             [action.addOn]: addOnsState[action.addOn] - 1
           }
         },
-        price: initialState.price - action.price,
+        price: mockInitialState.price - action.price,
         isCustomizing: true
       };
 
@@ -127,12 +127,12 @@ describe('drinkCustomizer reducer', () => {
       item: 'ice',
       level: '25%'
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(mockInitialState, action);
 
     const expectedState = {
-      ...initialState,
+      ...mockInitialState,
       drinkOrder: {
-        ...initialState.drinkOrder,
+        ...mockInitialState.drinkOrder,
         [action.item]: action.level
       },
       isCustomizing: true
@@ -146,10 +146,10 @@ describe('drinkCustomizer reducer', () => {
       type: actionTypes.SET_IS_CUSTOMIZING,
       isCustomizing: true
     };
-    const nextState = reducer(initialState, action);
+    const nextState = reducer(mockInitialState, action);
 
     const expectedState = {
-      ...initialState,
+      ...mockInitialState,
       isCustomizing: true
     };
 
