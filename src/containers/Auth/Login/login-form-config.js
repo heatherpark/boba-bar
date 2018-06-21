@@ -1,6 +1,6 @@
 export default {
 	email: {
-		value: 'test@test.com',
+		value: '',
 		validation: {
 			required: true,
 			isEmail: true
@@ -9,7 +9,7 @@ export default {
 		touched: false
 	},
 	password: {
-		value: '123123',
+		value: '',
 		validation: {
 			required: true,
 			minLength: 6
@@ -18,24 +18,3 @@ export default {
 		touched: false
 	}
 };
-
-// export default {
-//     email: {
-//         value: '',
-//         validation: {
-//             required: true,
-//             isEmail: true
-//         },
-//         valid: false,
-//         touched: false
-//     },
-//     password: {
-//         value: '',
-//         validation: {
-//             required: true,
-//             minLength: 6
-//         },
-//         valid: false,
-//         touched: false
-//     }
-//   };
