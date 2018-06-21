@@ -76,6 +76,7 @@ class Login extends Component {
               fluid
               label="Email address"
               placeholder="Email address"
+              value={loginFormConfig.email.value}
               onFocus={markInputAsTouched.bind(this, loginFormKey, 'email')}
               onChange={e => handleInputChange.call(this, e.target.value, loginFormKey, 'email')}
               error={fieldIsInvalid(loginFormConfig, 'email')} />
@@ -83,6 +84,7 @@ class Login extends Component {
               fluid
               label="Password"
               placeholder="Password"
+              value={loginFormConfig.password.value}
               onFocus={markInputAsTouched.bind(this, loginFormKey, 'password')}
               onChange={e => handleInputChange.call(this, e.target.value, loginFormKey, 'password')}
               error={fieldIsInvalid(loginFormConfig, 'password')} />
