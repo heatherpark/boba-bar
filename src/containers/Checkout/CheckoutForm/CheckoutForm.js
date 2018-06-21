@@ -12,15 +12,19 @@ class CheckoutForm extends Component {
     formIsValid: false
   };
 
-  handleInputChange = (value, field) => {
+  fieldIsInvalid = (formData, fieldKey) => {
+    return formData[fieldKey].touched && !formData[fieldKey].valid;
+  };
+
+  handleInputChange = (value, fieldKey) => {
     const updateCheckoutFormState = prevState => {
-      const inputData = prevState.checkoutForm[field];
+      const inputData = prevState.checkoutForm[fieldKey];
 
       return {
         checkoutForm: {
           ...prevState.checkoutForm,
-          [field]: {
-            ...prevState.checkoutForm[field],
+          [fieldKey]: {
+            ...prevState.checkoutForm[fieldKey],
             value,
             valid: checkValidity(value, inputData.validation),
             touched: true
@@ -47,18 +51,50 @@ class CheckoutForm extends Component {
         <Header as="h4">Please enter your information</Header>
         <Form>
           <Form.Group widths="equal">
-            <Form.Input onChange={e => this.handleInputChange(e.target.value, 'firstName')} error={this.state.checkoutForm['firstName'].touched && !this.state.checkoutForm['firstName'].valid} fluid label="First name" placeholder="First name" />
-            <Form.Input onChange={e => this.handleInputChange(e.target.value, 'lastName')} error={this.state.checkoutForm['lastName'].touched && !this.state.checkoutForm['lastName'].valid} fluid label="Last name" placeholder="Last name" />
+            <Form.Input
+              fluid
+              label="First name"
+              placeholder="First name"
+              onChange={e => this.handleInputChange(e.target.value, 'firstName')}
+              error={this.fieldIsInvalid(this.state.checkoutForm, 'firstName')} />
+            <Form.Input
+              fluid
+              label="Last name"
+              placeholder="Last name"
+              onChange={e => this.handleInputChange(e.target.value, 'lastName')}
+              error={this.fieldIsInvalid(this.state.checkoutForm, 'lastName')} />
           </Form.Group>
-            <Form.Input onChange={e => this.handleInputChange(e.target.value, 'address')} error={this.state.checkoutForm['address'].touched && !this.state.checkoutForm['address'].valid} fluid label="Address" placeholder="Address" />
+          <Form.Input
+            fluid
+            label="Address"
+            placeholder="Address"
+            onChange={e => this.handleInputChange(e.target.value, 'address')}
+            error={this.fieldIsInvalid(this.state.checkoutForm, 'address')} />
           <Form.Group>
-            <Form.Input width={8} onChange={e => this.handleInputChange(e.target.value, 'city')} error={this.state.checkoutForm['city'].touched && !this.state.checkoutForm['city'].valid} fluid label="City" placeholder="City" />
-            <Form.Input width={3} onChange={e => this.handleInputChange(e.target.value, 'state')} error={this.state.checkoutForm['state'].touched && !this.state.checkoutForm['state'].valid} fluid label="State" placeholder="State" />
-            <Form.Input width={5} onChange={e => this.handleInputChange(e.target.value, 'zipCode')} error={this.state.checkoutForm['zipCode'].touched && !this.state.checkoutForm['zipCode'].valid} fluid label="Zip code" placeholder="Zip code" />
+            <Form.Input
+              width={8}
+              label="City"
+              placeholder="City"
+              onChange={e => this.handleInputChange(e.target.value, 'city')}
+              error={this.fieldIsInvalid(this.state.checkoutForm, 'city')} />
+            <Form.Input
+              width={3}
+              label="State"
+              placeholder="State"
+              onChange={e => this.handleInputChange(e.target.value, 'state')}
+              error={this.fieldIsInvalid(this.state.checkoutForm, 'state')} />
+            <Form.Input
+              wdith={5}
+              label="Zip code"
+              placeholder="Zip code"
+              onChange={e => this.handleInputChange(e.target.value, 'zipCode')}
+              error={this.fieldIsInvalid(this.state.checkoutForm, 'zipCode')} />
           </Form.Group>
           <Form.Button
-            disabled={this.props.checkingOut}
-            onClick={event => this.props.onOrderSubmit(event, this.state.checkoutForm)}>Check Out</Form.Button>
+            disabled={!this.state.formIsValid}
+            onClick={event => this.props.onOrderSubmit(event, this.state.checkoutForm)}>
+            Complete order
+          </Form.Button>
         </Form>
       </div>
     );

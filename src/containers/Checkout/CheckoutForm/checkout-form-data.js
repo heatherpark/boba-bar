@@ -70,13 +70,11 @@ export default {
   city: {
     elementType: 'input',
     elementConfig: {
-      type: 'email',
       placeholder: 'Your E-Mail'
     },
     value: '',
     validation: {
       required: true,
-      isEmail: true
     },
     valid: false,
     touched: false
