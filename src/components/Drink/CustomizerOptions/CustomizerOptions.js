@@ -83,51 +83,59 @@ const CustomizerOptions = props => {
     );
 
     return <List horizontal>{elements}</List>;
-  }
+  };
+  
+  const renderChosenOption = (drinkOrder, isCustomizing, optionType) => {
+    if (!drinkOrder || !isCustomizing) return null;
+
+    let content;
+
+    if (optionType === 'base') {
+      content = drinkOrder.base.flavor;
+    }
+
+    if (optionType === 'addOn') {
+      content = renderChosenAddOns(drinkOrder.addOns);
+    }
+
+    if (optionType === 'ice' || optionType === 'sugar') {
+      content = drinkOrder[optionType];
+    }
+
+    return (
+      <span style={{ fontWeight: 'normal' }}> 
+        {content}
+      </span>
+    );
+  };
 
   return (
     <div className={styles.options}>
       <Segment>
         <Header as="h3">
           Base: &nbsp;
-            <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder && props.isCustomizing
-              ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
-              : null}
-          </span>
+          {renderChosenOption(props.drinkOrder, props.isCustomizing, 'base')}
         </Header>
         {renderBases(props.drinkOptions.bases)}
       </Segment>
       <Segment>
         <Header as="h3">
           Add-ons: &nbsp;
-            <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder && props.isCustomizing
-              ? renderChosenAddOns(props.drinkOrder.addOns)
-              : null}
-          </span>
+          {renderChosenOption(props.drinkOrder, props.isCustomizing, 'addOn')}
         </Header>
         {renderAddOns(props.drinkOptions.addOns)}
       </Segment>
       <Segment>
         <Header as="h3">
           Ice: &nbsp;
-            <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder && props.isCustomizing
-              ? props.drinkOrder.ice
-              : null}
-          </span>
+          {renderChosenOption(props.drinkOrder, props.isCustomizing, 'ice')}
         </Header>
         {renderIceAndSugarLevels('ice', props.drinkOptions.ice)}
       </Segment>
       <Segment>
         <Header as="h3">
           Sugar: &nbsp;
-              <span style={{ fontWeight: 'normal' }}>
-            {props.drinkOrder && props.isCustomizing
-              ? props.drinkOrder.sugar
-              : null}
-          </span>
+          {renderChosenOption(props.drinkOrder, props.isCustomizing, 'sugar')}
         </Header>
         {renderIceAndSugarLevels('sugar', props.drinkOptions.sugar)}
       </Segment>
