@@ -12,7 +12,20 @@ export default {
     valid: false,
     touched: false
   },
-  street: {
+  lastName: {
+    elementType: 'input',
+    elementConfig: {
+      type: 'text',
+      placeholder: 'Your Name'
+    },
+    value: '',
+    validation: {
+      required: true
+    },
+    valid: false,
+    touched: false
+  },
+  address: {
     elementType: 'input',
     elementConfig: {
       type: 'text',
@@ -41,7 +54,7 @@ export default {
     valid: false,
     touched: false
   },
-  country: {
+  state: {
     elementType: 'input',
     elementConfig: {
       type: 'text',
@@ -54,7 +67,7 @@ export default {
     valid: false,
     touched: false
   },
-  email: {
+  city: {
     elementType: 'input',
     elementConfig: {
       type: 'email',
@@ -67,17 +80,5 @@ export default {
     },
     valid: false,
     touched: false
-  },
-  deliveryMethod: {
-    elementType: 'select',
-    elementConfig: {
-      options: [
-        { value: 'fastest', displayValue: 'Fastest' },
-        { value: 'cheapest', displayValue: 'Cheapest' }
-      ]
-    },
-    value: 'fastest',
-    validation: {},
-    valid: true
   }
 };

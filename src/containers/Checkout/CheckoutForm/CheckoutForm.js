@@ -48,13 +48,13 @@ class CheckoutForm extends Component {
         <Form>
           <Form.Group widths="equal">
             <Form.Input onChange={e => this.handleInputChange(e.target.value, 'firstName')} error={this.state.checkoutForm['firstName'].touched && !this.state.checkoutForm['firstName'].valid} fluid label="First name" placeholder="First name" />
-            {/* <Form.Input error={!this.state.checkoutForm['firstName'].valid} fluid label="Last name" placeholder="Last name" /> */}
+            <Form.Input onChange={e => this.handleInputChange(e.target.value, 'lastName')} error={this.state.checkoutForm['lastName'].touched && !this.state.checkoutForm['lastName'].valid} fluid label="Last name" placeholder="Last name" />
           </Form.Group>
-          {/* <Form.Input width={16} label="Address" placeholder="Address" /> */}
+            <Form.Input onChange={e => this.handleInputChange(e.target.value, 'address')} error={this.state.checkoutForm['address'].touched && !this.state.checkoutForm['address'].valid} fluid label="Address" placeholder="Address" />
           <Form.Group>
-            {/* <Form.Input error={this.state.checkoutForm['firstName'].valid} width={8} label="City" placeholder="City" /> */}
-            {/* <Form.Input error={this.state.checkoutForm['firstName'].valid} width={3} label="State" placeholder="State" /> */}
-            {/* <Form.Input error={this.state.checkoutForm['firstName'].valid} width={5} label="Zip Code" placeholder="Zip Code" /> */}
+            <Form.Input width={8} onChange={e => this.handleInputChange(e.target.value, 'city')} error={this.state.checkoutForm['city'].touched && !this.state.checkoutForm['city'].valid} fluid label="City" placeholder="City" />
+            <Form.Input width={3} onChange={e => this.handleInputChange(e.target.value, 'state')} error={this.state.checkoutForm['state'].touched && !this.state.checkoutForm['state'].valid} fluid label="State" placeholder="State" />
+            <Form.Input width={5} onChange={e => this.handleInputChange(e.target.value, 'zipCode')} error={this.state.checkoutForm['zipCode'].touched && !this.state.checkoutForm['zipCode'].valid} fluid label="Zip code" placeholder="Zip code" />
           </Form.Group>
           <Form.Button
             disabled={this.props.checkingOut}
