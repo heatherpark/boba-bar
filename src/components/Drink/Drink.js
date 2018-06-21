@@ -5,20 +5,25 @@ import { List, Header } from 'semantic-ui-react';
 const Drink = props => {
   function renderDrinkOrder(drinkOrder) {
     const elements = [];
+    let element;
 
     for (let key in drinkOrder) {
-      let content = drinkOrder[key];
-
       if (key === 'base') {
-        content = drinkOrder[key].flavor;
+        element = <List.Item key={key}>
+          <strong>Base:</strong> {drinkOrder[key].flavor}</List.Item>;
       }
 
       if (key === 'addOns') {
-        content = renderAddOns(drinkOrder[key]);
+        element = <List.Item key={key}>
+          <strong>Add-ons:</strong> {renderAddOns(drinkOrder[key])}
+        </List.Item>;
       }
 
-      let element = <List.Item key={key}>
-        <strong>{key}</strong>: {content}</List.Item>;
+      if (key === 'ice' || key === 'sugar') {
+        element = <List.Item key={key}>
+          <strong style={{ textTransform: 'capitalize' }}>{key}:</strong> {drinkOrder[key]}
+        </List.Item>;
+      }
 
       elements.push(element);
     }
