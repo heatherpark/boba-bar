@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import loginFormData from './login-form-data';
+import loginFormData from './login-form-config';
 import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
 import * as actions from '../../../store/actions';
 import styles from './Login.css';
