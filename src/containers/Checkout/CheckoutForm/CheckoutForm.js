@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Header } from 'semantic-ui-react';
 
-import {fieldIsInvalid, handleInputChange, markInputAsTouched } from '../../../shared/form-utility';
+import {
+  fieldIsInvalid, 
+  handleInputChange, 
+  markInputAsTouched 
+} from '../../../shared/form-utility';
 import checkoutFormConfig from './checkout-form-config';
 
 class CheckoutForm extends Component {
