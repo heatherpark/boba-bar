@@ -1,10 +1,5 @@
 export default {
   firstName: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'text',
-      placeholder: 'Your Name'
-    },
     value: '',
     validation: {
       required: true
@@ -13,11 +8,6 @@ export default {
     touched: false
   },
   lastName: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'text',
-      placeholder: 'Your Name'
-    },
     value: '',
     validation: {
       required: true
@@ -26,11 +16,6 @@ export default {
     touched: false
   },
   address: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'text',
-      placeholder: 'Street'
-    },
     value: '',
     validation: {
       required: true
@@ -39,11 +24,6 @@ export default {
     touched: false
   },
   zipCode: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'text',
-      placeholder: 'ZIP Code'
-    },
     value: '',
     validation: {
       required: true,
@@ -55,11 +35,6 @@ export default {
     touched: false
   },
   state: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'text',
-      placeholder: 'Country'
-    },
     value: '',
     validation: {
       required: true
@@ -68,10 +43,6 @@ export default {
     touched: false
   },
   city: {
-    elementType: 'input',
-    elementConfig: {
-      placeholder: 'Your E-Mail'
-    },
     value: '',
     validation: {
       required: true,
