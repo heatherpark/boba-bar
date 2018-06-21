@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import loginFormData from './login-form-config';
-import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
+import {
+  fieldIsInvalid, 
+  handleInputChange, 
+  markInputAsTouched 
+} from '../../../shared/form-utility';
 import * as actions from '../../../store/actions';
 import styles from './Login.css';
 
 import {
-  Button,
   Form,
   Header,
   Segment,
@@ -20,33 +23,6 @@ class Login extends Component {
     loginForm: loginFormData,
     isSignup: false,
     formIsValid: false
-  };
-
-  handleInputChange = (value, field) => {
-    const updateLoginFormState = prevState => {
-      const inputData = prevState.loginForm[field];
-
-      return {
-        loginForm: {
-          ...prevState.loginForm,
-          [field]: {
-            ...prevState.loginForm[field],
-            value,
-            valid: checkValidity(value, inputData.validation),
-            touched: true
-          }
-        }
-      };
-    };
-
-    const updateFormIsValidState = prevState => ({
-      formIsValid: formIsValid(prevState.loginForm)
-    });
-
-    this.setState(
-      prevState => updateLoginFormState(prevState),
-      () => this.setState(prevState => updateFormIsValidState(prevState))
-    );
   };
 
   handleLogin = event => {
@@ -81,7 +57,8 @@ class Login extends Component {
   }
 
   render() {
-    const { loginForm } = this.state;
+    const loginFormKey = 'loginForm';
+    const loginFormConfig = this.state.loginForm;
 
     return (
       <div className={styles.Login}>
@@ -95,13 +72,26 @@ class Login extends Component {
           <Form
             className={styles.LoginForm}
             onSubmit={this.handleLogin}>
-            {loginForm ? renderFormInputs(loginForm, this.handleInputChange) : null}
-            <Button
+            <Form.Input
               fluid
-              // disabled={!this.state.formIsValid}
+              label="Email address"
+              placeholder="Email address"
+              onFocus={markInputAsTouched.bind(this, loginFormKey, 'email')}
+              onChange={e => handleInputChange.call(this, e.target.value, loginFormKey, 'email')}
+              error={fieldIsInvalid(loginFormConfig, 'email')} />
+            <Form.Input
+              fluid
+              label="Password"
+              placeholder="Password"
+              onFocus={markInputAsTouched.bind(this, loginFormKey, 'password')}
+              onChange={e => handleInputChange.call(this, e.target.value, loginFormKey, 'password')}
+              error={fieldIsInvalid(loginFormConfig, 'password')} />
+            <Form.Button
+              fluid
+              disabled={!this.state.formIsValid}
               primary>
               {this.state.isSignup ? 'Sign Up' : 'Log In'}
-            </Button>
+            </Form.Button>
           </Form>
           {this.props.error ? this.renderErrorMessage(this.props.error) : null}
         </Segment>
