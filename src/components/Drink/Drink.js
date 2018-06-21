@@ -35,8 +35,10 @@ const Drink = props => {
     const addOnText = [];
 
     for (let addOn in addOns) {
-      if (addOns[addOn] > 0) {
-        addOnText.push(addOn + ' ' + addOns[addOn]);
+      const quantity = addOns[addOn];
+
+      if (quantity > 0) {
+        addOnText.push(`${addOn} (${quantity})`);
       }
     }
 
