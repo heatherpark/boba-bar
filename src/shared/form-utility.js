@@ -16,9 +16,9 @@ export function fieldIsInvalid(formConfig, fieldKey) {
 }
 
 export function handleInputChange(value, formConfigKey, fieldKey) {
-	const updateCheckoutFormState = prevState => {
+	const updateFormState = prevState => {
 		const formConfig = prevState[formConfigKey];
-		const inputConfig = formConfig[fieldKey];
+		const fieldConfig = formConfig[fieldKey];
 
 		return {
 			[formConfigKey]: {
@@ -26,7 +26,7 @@ export function handleInputChange(value, formConfigKey, fieldKey) {
 				[fieldKey]: {
 					...formConfig[fieldKey],
 					value,
-					valid: checkValidity(value, inputConfig.validation)
+					valid: isValid(value, fieldConfig.validation)
 				}
 			}
 		};
@@ -37,12 +37,12 @@ export function handleInputChange(value, formConfigKey, fieldKey) {
 	});
 
 	this.setState(
-		prevState => updateCheckoutFormState(prevState),
+		prevState => updateFormState(prevState),
 		() => this.setState(prevState => updateFormIsValidState(prevState))
 	);
 };
 
-export function checkValidity(value, rules) {
+export function isValid(value, rules) {
 	let isValid = true;
 	if (!rules) {
 		return true;
