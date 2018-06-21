@@ -12,10 +12,9 @@ import Navigation from './components/Navigation/Navigation';
 import { Container } from 'semantic-ui-react';
 
 class App extends Component {
-  render() {
-    return (
-      <Container>
-        <Navigation isAuthenticated={this.props.isAuthenticated} />
+  determineRoutes(isAuthenticated) {
+    if (isAuthenticated) {
+      return (
         <Switch>
           <Route path="/checkout" component={Checkout} />
           <Route path="/orders" component={Orders} />
@@ -24,6 +23,23 @@ class App extends Component {
           <Route path="/" component={DrinkCustomizer} />
           <Redirect to="/" />
         </Switch>
+      );
+    } else {
+      return (
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/" component={DrinkCustomizer} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <Container>
+        <Navigation isAuthenticated={this.props.isAuthenticated} />
+        {this.determineRoutes(this.props.isAuthenticated)}
       </Container>
     );
   }
