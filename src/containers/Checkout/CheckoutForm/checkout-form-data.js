@@ -1,5 +1,5 @@
 export default {
-  name: {
+  firstName: {
     elementType: 'input',
     elementConfig: {
       type: 'text',
