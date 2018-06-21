@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-import App from './App';
+import App from './containers/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import drinkCustomizerReducer from './store/reducers/drinkCustomizer/drinkCustomizer';
 import ordersReducer from './store/reducers/orders/orders';

@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import DrinkCustomizer from './containers/DrinkCustomizer/DrinkCustomizer';
-import Checkout from './containers/Checkout/Checkout';
-import Orders from './containers/Orders/Orders';
-import Login from './containers/Auth/Login/Login';
-import Logout from './containers/Auth/Logout/Logout';
-import Navigation from './components/Navigation/Navigation';
-
+import DrinkCustomizer from '../DrinkCustomizer/DrinkCustomizer';
+import Checkout from '../Checkout/Checkout';
+import Orders from '../Orders/Orders';
+import Login from '../Auth/Login/Login';
+import Logout from '../Auth/Logout/Logout';
+import Navigation from '../../components/Navigation/Navigation';
 import { Container } from 'semantic-ui-react';
 
 class App extends Component {
@@ -51,4 +50,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+export default connect(mapStateToProps)(App);
