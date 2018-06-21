@@ -10,7 +10,6 @@ import {
 } from '../../../shared/form-utility';
 import * as actions from '../../../store/actions';
 import styles from './Login.css';
-
 import {
   Form,
   Header,
@@ -21,8 +20,8 @@ import {
 class Login extends Component {
   state = {
     loginForm: loginFormData,
-    isSignup: false,
-    formIsValid: false
+    formIsValid: false,
+    isSignup: false
   };
 
   handleLogin = event => {
@@ -63,11 +62,13 @@ class Login extends Component {
     return (
       <div className={styles.Login}>
         {this.props.isAuthenticated ? <Redirect to={this.props.authRedirectPath} /> : null}
+
         <Header as="h2" textAlign="center">
           {this.state.isSignup
             ? 'Sign up for an account!'
             : 'Log in to Boba Bar!'}
         </Header>
+
         <Segment>
           <Form
             className={styles.LoginForm}
@@ -95,8 +96,10 @@ class Login extends Component {
               {this.state.isSignup ? 'Sign Up' : 'Log In'}
             </Form.Button>
           </Form>
+
           {this.props.error ? this.renderErrorMessage(this.props.error) : null}
         </Segment>
+
         <Segment textAlign="center">
           <p>
             {this.state.isSignup
@@ -117,18 +120,14 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath,
-    error: state.auth.error
-  };
-};
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.token !== null,
+  authRedirectPath: state.auth.authRedirectPath,
+  error: state.auth.error
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
