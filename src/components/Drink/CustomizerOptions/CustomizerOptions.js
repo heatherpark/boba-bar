@@ -15,7 +15,7 @@ const CustomizerOptions = props => {
       baseTypes.push(
         <List.Item key={type}>
           <Header as="h4">
-            {type} ${bases[type].price}
+            {bases[type].displayName} ${bases[type].price}
           </Header>
           {renderBaseFlavors(type, bases[type])}
         </List.Item>
@@ -92,7 +92,7 @@ const CustomizerOptions = props => {
           Base: &nbsp;
             <span style={{ fontWeight: 'normal' }}>
             {props.drinkOrder && props.isCustomizing
-              ? props.drinkOrder.base.flavor + ' ' + props.drinkOrder.base.type
+              ? props.drinkOrder.base.flavor + ' ' + props.drinkOptions.bases[props.drinkOrder.base.type].displayName
               : null}
           </span>
         </Header>
