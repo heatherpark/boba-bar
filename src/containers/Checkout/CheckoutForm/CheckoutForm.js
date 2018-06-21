@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { checkValidity, formIsValid, renderFormInputs } from '../../../shared/utility';
+import { checkValidity, formIsValid } from '../../../shared/utility';
 import checkoutFormData from './checkout-form-data';
 import styles from './CheckoutForm.css';
 
