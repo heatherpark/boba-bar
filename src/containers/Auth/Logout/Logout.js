@@ -15,11 +15,9 @@ class Logout extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(actions.logout()),
-    onSetIsCustomizing: isCustomizing => dispatch(actions.setIsCustomizing(isCustomizing))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(actions.logout()),
+  onSetIsCustomizing: isCustomizing => dispatch(actions.setIsCustomizing(isCustomizing))
+});
 
 export default connect(null, mapDispatchToProps)(Logout);

@@ -34,7 +34,6 @@ export class DrinkCustomizer extends Component {
   renderCustomizer() {
     return (
       <div>
-        {this.state.placingOrder ? <Redirect to={this.state.redirectPath} /> : null}
         <CustomizerOptions
           onPlaceOrder={this.handlePlaceOrder}
           drinkOrder={this.props.drinkOrder}
@@ -53,6 +52,7 @@ export class DrinkCustomizer extends Component {
   render() {
     return (
       <div>
+        {this.state.placingOrder ? <Redirect to={this.state.redirectPath} /> : null}
         {this.props.drinkOptions ? this.renderCustomizer() : 'Loading options'}
       </div>
     );
