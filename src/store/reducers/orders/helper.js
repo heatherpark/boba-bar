@@ -6,50 +6,38 @@ export const initialState = {
   checkoutError: null
 };
 
-export const checkoutStart = state => {
-  return {
-    ...state,
-    checkedOut: true,
-    checkingOut: true,
-    error: null
-  };
-};
+export const checkoutStart = state => ({
+  ...state,
+  checkedOut: true,
+  checkingOut: true,
+  error: null
+});
 
-export const checkoutSuccess = state => {
-  return {
-    ...state,
-    checkedOut: true,
-    checkingOut: false
-  };
-};
+export const checkoutSuccess = state => ({
+  ...state,
+  checkedOut: true,
+  checkingOut: false
+});
 
-export const checkoutFail = (state, action) => {
-  return {
-    ...state,
-    checkedOut: true,
-    checkingOut: false,
-    checkoutError: action.error
-  };
-};
+export const checkoutFail = (state, action) => ({
+  ...state,
+  checkedOut: true,
+  checkingOut: false,
+  checkoutError: action.error
+});
 
-export const fetchOrdersStart = state => {
-  return {
-    ...state,
-    fetchingOrders: true
-  };
-};
+export const fetchOrdersStart = state => ({
+  ...state,
+  fetchingOrders: true
+});
 
-export const fetchOrdersSuccess = (state, action) => {
-  return {
-    ...state,
-    fetchingOrders: false,
-    orders: action.orders
-  };
-};
+export const fetchOrdersSuccess = (state, action) => ({
+  ...state,
+  fetchingOrders: false,
+  orders: action.orders
+});
 
-export const fetchOrdersFail = state => {
-  return {
-    ...state,
-    fetchingOrders: false
-  };
-};
+export const fetchOrdersFail = state => ({
+  ...state,
+  fetchingOrders: false
+})

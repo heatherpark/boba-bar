@@ -66,7 +66,7 @@ export const fetchOrdersStart = () => {
   };
 };
 
-export const fetchOrdersSuccess = (orders) => ({
+export const fetchOrdersSuccess = orders => ({
   type: actionTypes.FETCH_ORDERS_SUCCESS,
   orders
 });
