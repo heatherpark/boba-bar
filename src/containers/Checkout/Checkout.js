@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 import Drink from '../../components/Drink/Drink';
 import * as actions from '../../store/actions';
-
 import { Segment, Button, Modal, Message } from 'semantic-ui-react';
 
 class Checkout extends Component {
@@ -16,7 +15,8 @@ class Checkout extends Component {
   };
 
   componentDidUpdate() {
-    if (this.state.checkoutFormSubmitted && this.state.checkoutConfirmed) {
+    if (this.state.checkoutFormSubmitted 
+      && this.state.checkoutConfirmed) {
       this.handleCheckoutFormSubmitted();
     }
   }
@@ -74,7 +74,9 @@ class Checkout extends Component {
       <div>
         {this.state.checkoutCanceled ? <Redirect to="/" /> : null}
 
-        {this.state.checkoutFormSubmitted && this.props.checkedOut ? this.renderSubmitMessage(!this.props.checkoutError) : null}
+        {this.state.checkoutFormSubmitted 
+          && this.props.checkedOut 
+          ? this.renderSubmitMessage(!this.props.checkoutError) : null}
 
         {!this.state.checkoutFormSubmitted ? (
           <Segment.Group compact>
