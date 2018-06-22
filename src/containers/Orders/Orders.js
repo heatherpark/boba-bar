@@ -11,16 +11,11 @@ export class Orders extends Component {
     this.props.onFetchOrders(this.props.token, this.props.userId);
   }
 
-  renderOrders(orders) {
-    return orders.map(order => {
-      return <Order price={order.price} order={order.drinkOrder} />;
-    });
-  }
-
   render() {
     return (
       <Segment.Group compact>
-        {this.props.orders ? this.renderOrders(this.props.orders) : null}
+        {this.props.orders && this.props.orders.map(order => 
+          <Order price={order.price} order={order.drinkOrder} />)}
       </Segment.Group>
     );
   }
