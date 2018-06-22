@@ -7,12 +7,14 @@ const Order = ({ order }) => {
     const elements = [];
 
     for (let addOn in addOns) {
-      if (addOns[addOn] > 0) {
+      const quantity = addOns[addOn];
+
+      if (quantity > 0) {
         elements.push((
           <Label>
             {addOn}
             <Label.Detail>
-              {addOns[addOn]}
+              {quantity}
             </Label.Detail>
           </Label>
         ));
@@ -21,21 +23,16 @@ const Order = ({ order }) => {
 
     return elements;
   };
-
-  const renderOrder = order => {
-    return (
-      <Segment>
-        <Label>{order.base.flavor + ' ' + order.base.type}</Label>
-        {renderAddOns(order.addOns)}
-        <Label>ice: <Label.Detail>{order.ice}</Label.Detail></Label>
-        <Label>sugar: <Label.Detail>{order.sugar}</Label.Detail></Label>
-      </Segment>
-    );
-  };
-
+  
   return (
     <div>
-      {order ? renderOrder(order) : null}
+      {order &&
+        <Segment>
+          <Label>{order.base.flavor + ' ' + order.base.type}</Label>
+          {renderAddOns(order.addOns)}
+          <Label>ice: <Label.Detail>{order.ice}</Label.Detail></Label>
+          <Label>sugar: <Label.Detail>{order.sugar}</Label.Detail></Label>
+        </Segment>}
     </div>
   );
 };

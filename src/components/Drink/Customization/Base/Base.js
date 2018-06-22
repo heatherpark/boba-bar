@@ -4,7 +4,7 @@ import utilityStyles from '../../../../css/utility.css';
 
 const Base = props => (
   <span
-    className={`base-options ${utilityStyles['u-cursor']}`}
+    style={{ cursor: 'pointer' }}
     onClick={() => props.onChooseBase(
       props.type, 
       props.children, 
