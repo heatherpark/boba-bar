@@ -1,7 +1,5 @@
 import React from 'react';
 
-import utilityStyles from '../../../../css/utility.css';
-
 const Base = props => (
   <span
     style={{ cursor: 'pointer' }}
