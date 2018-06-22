@@ -77,3 +77,21 @@ export const auth = (email, password, isSignup) => {
     }
   }
 };
+
+export const authCheckState = () => {
+  return dispatch => {
+    const token = localStorage.getItem('token');
+    let expirationDate = localStorage.getItem('expirationDate');
+    expirationDate = new Date(expirationDate);
+
+    if (!token || expirationDate <= new Date()) {
+      dispatch(logout());
+      return;
+    }
+
+    const userId = localStorage.getItem('userId');
+
+    dispatch(authSuccess(token, userId));
+    dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+  };
+};

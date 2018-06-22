@@ -9,8 +9,13 @@ import Login from '../Auth/Login/Login';
 import Logout from '../Auth/Logout/Logout';
 import Navigation from '../../components/Navigation/Navigation';
 import { Container } from 'semantic-ui-react';
+import * as actions from '../../store/actions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onAutoLogin();
+  }
+
   determineRoutes(isAuthenticated) {
     if (isAuthenticated) {
       return (
@@ -44,10 +49,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  };
-};
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.token !== null
+});
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => ({
+  onAutoLogin: () => dispatch(actions.authCheckState())
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
