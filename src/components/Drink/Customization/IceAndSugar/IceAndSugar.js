@@ -4,7 +4,7 @@ import utilityStyles from '../../../../css/utility.css';
 
 const IceAndSugar = props => (
   <span
-    className={utilityStyles['u-cursor']}
+    style={{ cursor: 'pointer' }}
     onClick={() => props.onChooseIceOrSugarLevel(
       props.item,
       props.level)}>

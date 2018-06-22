@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Label, Icon, Button } from 'semantic-ui-react';
+import { Label, Icon } from 'semantic-ui-react';
 
 const AddOn = props => (
   <div>

@@ -8,7 +8,8 @@ import styles from './CustomizerOptions.css';
 import { Button, Segment, List, Header } from 'semantic-ui-react';
 
 const CustomizerOptions = props => {
-  const drinkOrderIsValid = drinkOrder => drinkOrder && drinkOrder.base.flavor;
+  const drinkOrderIsValid = drinkOrder => drinkOrder 
+    && drinkOrder.base.flavor;
 
   const renderBases = bases => {
     const baseTypes = [];
@@ -45,7 +46,7 @@ const CustomizerOptions = props => {
   };
 
   const renderIceAndSugarLevels = (item, levels) => {
-    const levelElements = levels.map(level =>
+    const elements = levels.map(level =>
       <List.Item key={`${item}-${level}`}>
         <IceAndSugar
           onChooseIceOrSugarLevel={props.onChooseIceOrSugarLevel}
@@ -54,15 +55,17 @@ const CustomizerOptions = props => {
       </List.Item>
     );
 
-    return <List horizontal>{levelElements}</List>;
+    return <List horizontal>{elements}</List>;
   };
 
   const renderChosenAddOns = addOns => {
     const addOnText = [];
 
     for (let addOn in addOns) {
-      if (addOns[addOn] > 0) {
-        addOnText.push(addOn + ': ' + addOns[addOn]);
+      const quantity = addOns[addOn];
+
+      if (quantity > 0) {
+        addOnText.push(addOn + ': ' + quantity);
       }
     }
 
@@ -79,7 +82,7 @@ const CustomizerOptions = props => {
           value={addOn.value}
           price={addOn.price} />
       </List.Item>
-    )
+      )
     );
 
     return <List horizontal>{elements}</List>;
